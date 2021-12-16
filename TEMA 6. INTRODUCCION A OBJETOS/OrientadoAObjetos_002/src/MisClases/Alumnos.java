@@ -8,15 +8,20 @@ public class Alumnos {
     String domicilio;
     String telefono;
 
+    /*CONSTRUCTORES*/
+
+    /*Constructor con todos los datos*/
     public Alumnos(int codigo, String nombre, String domicilio, String telefono) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
-
+    /*Constructor vacio*/
     public Alumnos() {
     }
+
+    /*GET Y SET de cada atributo*/
 
     public int getCodigo() {
         return codigo;
@@ -50,10 +55,15 @@ public class Alumnos {
         this.telefono = telefono;
     }
 
+
+    /*Funcion que mostrará el mensaje*/
+
     public String mostrarDatos(){
         String mensaje = "";
-        mensaje = JOptionPane.showMessageDialog("Nombre: " + nombre + " ");
-
+        mensaje = "Nombre: " + nombre + " "+ "\n "+
+                    "Codigo: " + codigo + "\n"+
+                     "Domicilio: " + domicilio + "\n" +
+                        "Telefono: " + telefono;
         return mensaje;
     }
 
