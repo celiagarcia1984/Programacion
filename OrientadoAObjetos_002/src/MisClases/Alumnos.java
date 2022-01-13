@@ -52,7 +52,7 @@ public class Alumnos {
 
     public String mostrarDatos(){
         String mensaje = "";
-        mensaje = JOptionPane.showMessageDialog("Nombre: " + nombre + " ");
+        mensaje = JOptionPane.showMessageDialog(null,"Nombre: " + nombre + " ");
 
         return mensaje;
     }
