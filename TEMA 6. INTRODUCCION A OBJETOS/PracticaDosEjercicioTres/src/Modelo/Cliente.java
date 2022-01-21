@@ -16,5 +16,11 @@ public class Cliente extends Persona{
         this.telefono = telefono;
     }
 
-
+    @Override
+    public String toString() {
+        return  "Cliente: " +
+                "Nombre='" + nombre + "\n" +
+                "Edad=" + edad + "\n" +
+                "Telefono='" + telefono + "\n" ;
+    }
 }

@@ -55,4 +55,11 @@ public class Empresa {
     public void setCliente(Cliente e){
         listaClientes.add(e);
     }
+
+    @Override
+    public String toString() {
+        return "Nombre de la Empresa: " + nombre + " \n " +
+                " Estos son sus empleados : " + listaEmpleados + " \n "+
+                " y estos son sus clientes: " + listaClientes;
+    }
 }

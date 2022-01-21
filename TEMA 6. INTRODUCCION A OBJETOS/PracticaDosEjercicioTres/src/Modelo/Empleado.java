@@ -20,7 +20,12 @@ public class Empleado extends Persona{
         this.sueldoBruto = sueldoBruto;
     }
 
-
     public void calcularSalario(){}
 
+    @Override
+    public String toString() {
+        return  "Nombre='" + nombre + "\n" +
+                "Edad=" + edad +
+                "SueldoBruto=" + sueldoBruto + "\n";
+    }
 }

@@ -53,5 +53,13 @@ public class Directivo extends Empleado{
         listaEmpleados.add(p);
     }
 
-
+    @Override
+    public String toString() {
+        return  "Directivo" +
+                "Nombre: " + nombre + "\n" +
+                "Edad: " + edad + "\n" +
+                "Categoria: " + categoria + "\n" +
+                "ListaEmpleados: " + listaEmpleados + "\n" +
+                "SueldoBruto: " + sueldoBruto ;
+    }
 }
