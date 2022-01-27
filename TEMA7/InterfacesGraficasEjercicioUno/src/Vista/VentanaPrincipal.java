@@ -35,6 +35,7 @@ public class VentanaPrincipal {
                     tnombre.setText("");
                     tApellido.setText("");
                     tDni.setText("");
+                    tnombre.requestFocus();
 
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -46,6 +47,7 @@ public class VentanaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,listaPersonas.toString());
+                System.exit(0);
             }
         });
     }

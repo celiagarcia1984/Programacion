@@ -1,2 +1,4 @@
-package MODELO;public class Cursos {
+package MODELO;
+
+public class Cursos {
 }
