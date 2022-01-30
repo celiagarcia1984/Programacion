@@ -37,7 +37,8 @@ public class Cursos {
     public String toString() {
         return "Cursos{" +
                 "codigoCurso='" + codigoCurso + '\'' +
-                ", listaAlumnos=" + listaAlumnos +
+                ", listaAlumnos=" +
                 '}';
     }
+
 }
