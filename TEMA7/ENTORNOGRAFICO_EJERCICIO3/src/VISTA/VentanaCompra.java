@@ -59,16 +59,13 @@ public class VentanaCompra {
                 super.focusLost(e);
                 validarProducto();
                 Main.comprobarProducto(tProducto.getText());
+                if(!Main.comprobarProducto(tProducto.getText())){
+                    tProducto.setEditable(true);
+                    tProducto.setText("");
+                }
             }
         });
-        tUnidades.addFocusListener(new FocusAdapter() {/*Cuando escriban las unidades que se van a comprar. Se suma al
-        stock de ese producto*/
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                /*Se actualiza la cantidad*/
-            }
-        });
+
     }
     public void validarProducto(){
         try{

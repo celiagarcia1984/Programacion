@@ -1,4 +1,4 @@
 package MisExcepciones;
 
-public class DatoNoValido {
+public class DatoNoValido extends Exception{
 }

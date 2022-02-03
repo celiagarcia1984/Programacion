@@ -6,7 +6,9 @@ import VISTA.VentanaOpciones;
 import VISTA.VentanaVenta;
 
 import javax.swing.*;
+import javax.swing.text.NumberFormatter;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class Main {
@@ -73,25 +75,25 @@ public class Main {
 
         return A;
     }
-    public static void comprobarProducto(String tProducto){
+    public static boolean comprobarProducto(String tProducto){
         int i=0;
         for(i=0; i<listaProductos.size()&&!listaProductos.get(i).getNombre().equalsIgnoreCase(tProducto);i++){}//Para de
         //cuando lo encuentra.
         System.out.println(tProducto);
         if(i<listaProductos.size()){
-            productoEncontrado=true;
+            productoEncontrado = true;
             System.out.println("Funcion comprobarProductos. Ha entrado en a encontrado el producto" + productoEncontrado
                     + "el producto está en la posicion de i: "+ i );
             posicionDelProducto = i; /*Me guardo la posicion del producto para cargar la informacion del importe en la ventana
         ventas y no tener que marcarlo*/
         }
         else{
-            productoEncontrado=false;
+            productoEncontrado = false;
             System.out.println("Funcion comprobarProductos. Ha entrado en no a encontrado el producto" + productoEncontrado
                     + "i vale: "+ i );
         }
-
-    }/*Esta funcion busca si existe el producto en el arrray*/
+      return productoEncontrado;
+    } /*Esta funcion busca si existe el producto en el arrray*/
     public static void ventas(){/*Tiene el main de la ventanaVenta. Se llama en el listener Ventas*/
         JFrame frame = new JFrame("VentanaVenta");
         frame.setContentPane(new VentanaVenta().getPanelPrincipal());
