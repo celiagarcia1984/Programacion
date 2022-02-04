@@ -1,6 +1,7 @@
 package VISTA;
 
 import MODELO.Productos;
+import MisExcepciones.DatoNoValido;
 import com.company.Main;
 
 import javax.swing.*;
@@ -86,6 +87,9 @@ public class VentanaVenta {
                 System.out.println("El campo unidades esta vacio");
                 throw new Exception("El campo esta vacio");
             }
+            if(tUnidades.getText().length()>3){
+                throw new Exception();
+            }
             else if(Integer.parseInt(tUnidades.getText())>prodcutoSeleccionado.getUnidades()){
                 JOptionPane.showMessageDialog(null, "No disponemos de tantas " + tProducto.getText()+
                         "Lo maximo que puedes vender es: " + prodcutoSeleccionado.getUnidades());
@@ -94,7 +98,10 @@ public class VentanaVenta {
             else{
                 validado =true;
             }
-        }catch (Exception e){
+        }catch (DatoNoValido a){
+            System.out.println("El dato no es valido");
+        }
+        catch (Exception e){
             System.out.println(e.getClass());
         }
         return validado;
