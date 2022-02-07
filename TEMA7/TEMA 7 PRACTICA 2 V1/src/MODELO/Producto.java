@@ -1,5 +1,7 @@
 package MODELO;
 
+import java.util.ArrayList;
+
 public class Producto {
      String nombre;
      int stockDisponible;
@@ -10,6 +12,7 @@ public class Producto {
         this.nombre = nombre;
         this.stockDisponible = stockDisponible;
         this.precioVenta = precioVenta;
+        this.proveedor = proveedor;
     }
 
     public Proveedor getProveedor() {
@@ -51,7 +54,7 @@ public class Producto {
                 "nombre='" + nombre + '\'' +
                 ", stockDisponible=" + stockDisponible +
                 ", precioVenta=" + precioVenta +
-                ", proveedor=" +
-                '}';
+                ", proveedor=" ;
+
     }
 }

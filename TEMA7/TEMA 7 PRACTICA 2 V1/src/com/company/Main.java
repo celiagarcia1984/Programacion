@@ -1,5 +1,7 @@
 package com.company;
 
+import EXCEPCIONES.DatoNoValido;
+import MODELO.Cliente;
 import MODELO.Producto;
 import MODELO.Proveedor;
 import VISTA.VentanaPrincipal;
@@ -13,6 +15,7 @@ public class Main {
     /*Creo un arrayList de proveedores*/
     static boolean productoEncontrado=false;
     static ArrayList<Producto> listaProductos = new ArrayList<>();
+    static ArrayList<Cliente> listaClientes = new ArrayList<>();
     static Proveedor Mercadona ;
     static Proveedor Carrefour;
     static Proveedor Lidl;
@@ -21,12 +24,74 @@ public class Main {
     static int posicionDelProducto;
 
 
+
     public static void main(String[] args) {
+
 	llenarListaProductos();
-	crearProveedores();
+
 	/*Una vez creados los datos. Se abre la ventana Principal*/
         ventanaPrincipal();
 
+    }
+    public static boolean comprobarPrecioCompra(float precioCompra)throws Exception{
+        boolean precioCompraCorrecto=false;
+        try{
+            if(precioCompra>0){
+                precioCompraCorrecto=true;
+            }
+            else{
+                throw new DatoNoValido();
+            }
+
+        }catch (DatoNoValido e){
+            System.out.println(e.getClass()+ "El precio no puede estar vacio");
+        }
+
+        return precioCompraCorrecto;
+    }
+    public static String llenarProveedores(){
+        String proveedor="";
+        try{
+            System.out.println(posicionDelProducto+ "posicion del producto");
+           proveedor=listaProductos.get(posicionDelProducto).getProveedor().getNombreProveedor() ;
+           System.out.println("FUNCION LLENAR PROVEEDORES: el proveedor es :" + proveedor);
+
+        }catch (Exception e ){
+            System.out.println(e.getClass()+"Tengo un error");
+        }
+        return proveedor;
+    }
+
+    public static String mostrarPrecioVenta(){
+        float precioVenta=0f;
+        String sprecioVenta="";
+        precioVenta = listaProductos.get(posicionDelProducto).getPrecioVenta();
+         sprecioVenta=String.valueOf(precioVenta);
+        return sprecioVenta;
+    }
+    public static void mostrarConfirmacionDeCompra(String producto, int cantidadComprada, float precioCompra){
+
+            JOptionPane.showMessageDialog(null,"El stock actual de: "+producto+"\n"+
+                            " es de: " + listaProductos.get(posicionDelProducto).getStockDisponible() + "\n"+
+                    " el precio de venta del producto es ahora: "+ listaProductos.get(posicionDelProducto).getPrecioVenta(),
+                    "CONFIRMACION DE COMPRA",JOptionPane.INFORMATION_MESSAGE);
+
+
+    }
+    public static void actualizarStockDespuesDeUnaCompra(int cantidadComprada, float precioCompra){
+        float valorStockActual = 0f;
+        valorStockActual= listaProductos.get(posicionDelProducto).getStockDisponible()*listaProductos.get(posicionDelProducto).getPrecioVenta();
+        System.out.println("funcion actualizarStockDespuesDeUnaCompra: El Valor del stock del almacen es: "+ valorStockActual);
+        float valorStockComprado = 0f;
+        valorStockComprado = cantidadComprada*(precioCompra*2);
+        System.out.println("funcion actualizarStockDespuesDeUnaCompra: El Valor del stock comprado es: "+ valorStockComprado);
+        int StockTotal = listaProductos.get(posicionDelProducto).getStockDisponible()+cantidadComprada;
+        float precioActualizado = 0f;
+        precioActualizado= (valorStockActual+valorStockComprado)/StockTotal;
+        System.out.println("funcion actualizarStockDespuesDeUnaCompra: El precio Unitario Actualizado es: "+ valorStockActual);
+        listaProductos.get(posicionDelProducto).setStockDisponible(StockTotal);
+        listaProductos.get(posicionDelProducto).setPrecioVenta(precioActualizado);
+        System.out.println(listaProductos.toString());
     }
     public static boolean comprobarCantidad(int cantidadIntroducida){
         boolean cantidadCorrecta = false;
@@ -73,29 +138,25 @@ public class Main {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
     }
-    static void crearProveedores(){
-       Mercadona  = new Proveedor("Mercadona");
-       Carrefour = new Proveedor("Carrefour");
-       Lidl = new Proveedor("Lidl");
-       Aldi = new Proveedor("Aldi");
-       listaProveedores = new Proveedor[]{Mercadona, Carrefour,Lidl,Aldi};
-       for(int i=0; i<listaProveedores.length;i++ ){
-           String mensaje ="funcion crearProveedores: imprimo el array: ";
-           mensaje += listaProductos.get(i).getNombre();
-           System.out.println(mensaje);
-       }
-    }
-    static void llenarListaProductos(){
-        listaProductos.add(new Producto("Manzanas",50,3.5f,Mercadona));
-        listaProductos.add(new Producto("Peras",150,1.5f,Carrefour));
-        listaProductos.add(new Producto("Atun",50,3.5f,Lidl));
-        listaProductos.add(new Producto("Kiwi",150,1.5f,Aldi));
-        listaProductos.add(new Producto("Platanos",50,3.5f,Mercadona ));
-        listaProductos.add(new Producto("Mango",150,1.5f,Carrefour));
-        listaProductos.add(new Producto("Zanahoria",50,3.5f,Lidl));
-        listaProductos.add(new Producto("Patatas",150,1.5f,Mercadona));
 
-        System.out.println("funcion llenarListaProductos: imprimo el arraylist de productos: " + listaProductos.toString());
+    static void llenarListaProductos(){
+        try{
+            listaProductos.add(new Producto("Manzanas",50,3.5f,new Proveedor("Mercadona")));
+            listaProductos.add(new Producto("Peras",150,1.5f,new Proveedor("Carrefour")));
+            listaProductos.add(new Producto("Atun",50,3.5f,new Proveedor("Lidl")));
+            listaProductos.add(new Producto("Kiwi",150,1.5f,new Proveedor("Aldi")));
+            listaProductos.add(new Producto("Platanos",50,3.5f,new Proveedor("Mercadona")));
+            listaProductos.add(new Producto("Mango",150,1.5f,new Proveedor("Carrefour")));
+            listaProductos.add(new Producto("Zanahoria",50,3.5f,new Proveedor("Lidl")));
+            listaProductos.add(new Producto("Patatas",150,1.5f,new Proveedor("Mercadona")));
+
+            System.out.println("funcion llenarListaProductos: imprimo el arraylist de productos: " + listaProductos.toString());
+            System.out.println(listaProductos.get(0).getProveedor().getNombreProveedor());
+
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+
     }
 
 
