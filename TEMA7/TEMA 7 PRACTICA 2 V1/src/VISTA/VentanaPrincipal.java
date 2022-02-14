@@ -34,9 +34,13 @@ public class VentanaPrincipal {
     private JButton bCancelar;
     private JPanel jpProducto;
     private JComboBox<String> cbProveedores;
+    private JPanel jpImporte;
+    private JLabel limporteVenta;
+    private JTextField tImporteVenta;
     private boolean productoEncontrado=false;
     private boolean unidadesCorrectas=false;
     private String proveedor="";
+    private float importeVenta=0f;
     public VentanaPrincipal() {
         /*ACTIONLISTENER DE PRODUCTO*/
 
@@ -145,22 +149,87 @@ public class VentanaPrincipal {
                    jpDatosVenta.setVisible(true);
                    jpDescuentos.setVisible(true);
                    tPrecioVenta.setEditable(true);
+                   tFOperacion.setVisible(true);
                    tPrecioVenta.setText("");
                 }
-                else{
-                    /*Aqui la venta*/
-                }
+                else
+                if(rbVenta.isSelected()){
+                    float importeTotal;
+                    importeVenta = (Float.parseFloat(tPrecioVenta.getText())*Integer.parseInt(tUnidades.getText()));
 
+                    if(cbProntoPago.isSelected()&& cbVolumen.isSelected()){
+                        importeTotal = (importeVenta-(importeVenta*0.02f))-(importeVenta*0.3f);
+
+                    }
+
+                    if(cbVolumen.isSelected()){
+                        importeTotal = importeVenta - (importeVenta*0.02f);
+
+
+                    }
+                    else if(cbProntoPago.isSelected()){
+                        importeTotal= importeVenta -(importeVenta*0.3f);
+                        
+                    }
+
+                    else{
+                        importeTotal = importeVenta;
+
+                    }
+                    tImporteVenta.setText(String.valueOf(importeTotal));
+                    /*FALTA LO QUE TIENE QUE HACER CUANDO SE COMPRA*/
+                    /*Lo que tiene que hacer*/
+                    tProducto.setText("");
+                    tUnidades.setText("");
+                    tProducto.setEditable(true);
+                    tUnidades.setEditable(true);
+                    tImporteCompra.setText("");
+                    jpDatosCompra.setVisible(true);
+                    bAceptar.setEnabled(false);
+                    jpDatosVenta.setVisible(true);
+                    jpDescuentos.setVisible(true);
+                    tPrecioVenta.setEditable(true);
+                    tFOperacion.setVisible(true);
+                    tPrecioVenta.setText("");
+                    tCliente.setText("");
+                    cbVolumen.setSelected(false);
+                    cbProntoPago.setSelected(false);
+                    tImporteVenta.setText("");
+                }
             }
         });
+
 
         tCliente.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
+                if(tCliente.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null,"El campo es obligatorio","ERROR",JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        bCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                    tProducto.setText("");
+                    tUnidades.setText("");
+                    tProducto.setEditable(true);
+                    tUnidades.setEditable(true);
+                    tImporteCompra.setText("");
+                    jpDatosCompra.setVisible(true);
+                    bAceptar.setEnabled(false);
+                    jpDatosVenta.setVisible(true);
+                    jpDescuentos.setVisible(true);
+                    tPrecioVenta.setEditable(true);
+                    tFOperacion.setVisible(true);
+                    tPrecioVenta.setText("");
+                    tCliente.setText("");
 
             }
         });
+
     }
 
 
