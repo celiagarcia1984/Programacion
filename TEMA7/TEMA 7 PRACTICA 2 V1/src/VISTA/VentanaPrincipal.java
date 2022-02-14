@@ -41,6 +41,10 @@ public class VentanaPrincipal {
     private boolean unidadesCorrectas=false;
     private String proveedor="";
     private float importeVenta=0f;
+    private int DescProntoPago = 3;
+    private int DescVolumen = 2;
+
+     
     public VentanaPrincipal() {
         /*ACTIONLISTENER DE PRODUCTO*/
 
@@ -52,7 +56,7 @@ public class VentanaPrincipal {
                 /*En el momento que quitamos el cursor de PRODUCTO, llamamos a una funcion que se llama comprobarProducto
                 * y que está en el MAIN*/
 
-                productoEncontrado =Main.comprobarProducto(tProducto.getText());
+                productoEncontrado = Main.comprobarProducto(tProducto.getText());
                 if(productoEncontrado){
                     tProducto.setEditable(false);
                     productoEncontrado=true;
@@ -71,6 +75,9 @@ public class VentanaPrincipal {
                 super.focusLost(e);
                 /*Cuando quitamos el cursor de unidades. llamamos a la funcion comprobarCantidad que está en el main*/
                 if(productoEncontrado){
+                    if(tUnidades.getText().isEmpty()){
+                        tUnidades.setText("0");
+                    }
                     unidadesCorrectas = Main.comprobarCantidad(Integer.parseInt(tUnidades.getText()));
                 }
                 if(unidadesCorrectas){
@@ -97,7 +104,14 @@ public class VentanaPrincipal {
         rbVenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                try {
+                    if(!Main.comprobarCantidadVenta(Integer.parseInt (tUnidades.getText()))){
+                        tUnidades.setEditable(true);
+                        tUnidades.setText("");
+                    }
+                } catch (Exception a) {
+                    System.out.println(a.getClass());
+                }
                 jpDatosVenta.setVisible(true);
                 String precioVenta = Main.mostrarPrecioVenta();/*Carga el precio de venta*/
                 tPrecioVenta.setText(precioVenta);
@@ -226,10 +240,28 @@ public class VentanaPrincipal {
                     tFOperacion.setVisible(true);
                     tPrecioVenta.setText("");
                     tCliente.setText("");
+                    tPrecioVenta.setText("");
+                    cbProveedores.setSelectedIndex(-1);
+                    tCliente.setEditable(true);
+                    tCliente.setText("");
 
             }
         });
 
+        tCliente.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                try {
+                    if(Main.comprobarCliente(tCliente.getText())){
+                        tCliente.setEditable(false);
+                    }
+
+                } catch (Exception z) {
+                    System.out.println(z.getClass());
+                }
+            }
+        });
     }
 
 

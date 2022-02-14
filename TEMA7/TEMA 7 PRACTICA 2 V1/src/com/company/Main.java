@@ -40,7 +40,9 @@ public class Main {
                 precioCompraCorrecto=true;
             }
             else{
+                JOptionPane.showMessageDialog(null,"El campo es obligatorio","ERROR",JOptionPane.WARNING_MESSAGE);
                 throw new DatoNoValido();
+
             }
 
         }catch (DatoNoValido e){
@@ -61,7 +63,24 @@ public class Main {
         }
         return proveedor;
     }
-
+    public static boolean comprobarCliente(String tCliente)throws Exception{
+        boolean nombreClienteCorrecto =false;
+        int i=0;
+        for(i=0;i<listaClientes.size()&& !listaClientes.get(i).getNombreCliente().equalsIgnoreCase(tCliente);i++){}
+        if(i==listaClientes.size()){
+            listaClientes.add(new Cliente(tCliente));
+            nombreClienteCorrecto =true;
+        }
+        else{
+            nombreClienteCorrecto =true;
+            System.out.println("Se ha encontrado al cliente");
+        }
+        if(tCliente.isEmpty()){
+            JOptionPane.showMessageDialog(null,"El nombre es un campo obligatorio");
+            nombreClienteCorrecto=false;
+        }
+       return nombreClienteCorrecto;
+    }
     public static String mostrarPrecioVenta(){
         float precioVenta=0f;
         String sprecioVenta="";
@@ -93,19 +112,31 @@ public class Main {
         listaProductos.get(posicionDelProducto).setPrecioVenta(precioActualizado);
         System.out.println(listaProductos.toString());
     }
+    public static boolean comprobarCantidadVenta(int cantidadIntroducida)throws Exception{
+        boolean cantidadCorrecta = false;
+
+            if(listaProductos.get(posicionDelProducto).getStockDisponible()<cantidadIntroducida){
+                /*Si hay menos stock hay que mostrar un mensaje de error*/
+                /*PARA CUANDO SE REALICE UNA VENTA:*/
+                JOptionPane.showMessageDialog(null, "La cantidad supera el stock", "ATENCION",JOptionPane.WARNING_MESSAGE);
+            }
+            else{
+                cantidadCorrecta = true;
+            }
+
+        return cantidadCorrecta;
+    }
     public static boolean comprobarCantidad(int cantidadIntroducida){
         boolean cantidadCorrecta = false;
         try{
             int i=0;
-            for(i=0; i<listaProductos.size();i++){
-                if(listaProductos.get(i).getStockDisponible()<cantidadIntroducida){
-                    /*Si hay menos stock hay que mostrar un mensaje de error*/
-
+                if(cantidadIntroducida==0){
+                    JOptionPane.showMessageDialog(null,"El campo es obligatorio", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
                 else{
-                    cantidadCorrecta = true;
+                    cantidadCorrecta =true;
                 }
-            }
+
         }catch (Exception e){
             System.out.println(e.getClass());
         }
@@ -117,13 +148,17 @@ public class Main {
             int i=0;
             for(i=0; i<listaProductos.size()&& !listaProductos.get(i).getNombre().equalsIgnoreCase(tproduto); i++ ){}
             if(i<listaProductos.size()){
-                posicionDelProducto =i;
+                posicionDelProducto = i;
                 productoEncontrado = true;
                 System.out.println("Estoy en la funcion ComprobarProducto y e encontrado  el producto. La variable producto encontrado esta: "+ productoEncontrado);
             }
             else{
                 System.out.println("Estoy en la funcion ComprobarProducto y no e econtrado el producto. La variable está " + productoEncontrado);
                 /*Mostrar cuadro de dialogo de error*/
+                JOptionPane.showMessageDialog(null,"El producto no existe","Error", JOptionPane.ERROR_MESSAGE);
+            }
+            if(tproduto.isEmpty()){
+                JOptionPane.showMessageDialog(null,"El campo es obligatorio","Error", JOptionPane.ERROR_MESSAGE);
             }
         }catch (Exception e ){
             System.out.println(e.getClass());
