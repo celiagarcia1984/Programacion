@@ -104,28 +104,19 @@ public class VentanaPrincipal {
         rbVenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    if(!Main.comprobarCantidadVenta(Integer.parseInt (tUnidades.getText()))){
-                        tUnidades.setEditable(true);
-                        tUnidades.setText("");
-                    }
-                } catch (Exception a) {
-                    System.out.println(a.getClass());
-                }
+
+                validarCantidadVenta();/*COMPRUEBA QUE EL STOCK ES SUFICIENTE*/
+
                 jpDatosVenta.setVisible(true);
                 String precioVenta = Main.mostrarPrecioVenta();/*Carga el precio de venta*/
                 tPrecioVenta.setText(precioVenta);
+
+
                 jpDatosCompra.setVisible(false);
                 jpDescuentos.setVisible(true);
             }
         });
-        tCliente.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                jpDescuentos.setVisible(true);
-            }
-        });
+
             /*Cuando el precio es correcto, se inhabilita la ediccion. Se calcula el nuevo precio de venta en una funcion en el MAIN*/
         tPrecioCompra.addFocusListener(new FocusAdapter() {
             @Override
@@ -134,16 +125,11 @@ public class VentanaPrincipal {
                 try {
                     if(Main.comprobarPrecioCompra(Float.parseFloat (tPrecioCompra.getText()))){
                         tPrecioCompra.setEditable(false);
-                        float importeCompra=0f;
-                        importeCompra = Float.parseFloat(tPrecioCompra.getText()) * Float.parseFloat(tUnidades.getText());
-                        String sImporteCompra = String.valueOf( importeCompra );
-                        tImporteCompra.setText(sImporteCompra);
-                        tImporteCompra.setEditable(false);
-                        bAceptar.setEnabled(true);
-                        tFOperacion.setVisible(false);
+                        calcularImporteCompra();
+
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                } catch (Exception x) {
+                    System.out.println(x.getClass());
                 }
             }
         });
@@ -151,102 +137,39 @@ public class VentanaPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(rbCompra.isSelected()){
-                    Main.actualizarStockDespuesDeUnaCompra(Integer.parseInt(tUnidades.getText()),Float.parseFloat(tPrecioCompra.getText()));
+                   Main.actualizarStockDespuesDeUnaCompra(Integer.parseInt(tUnidades.getText()),Float.parseFloat(tPrecioCompra.getText()));
                    Main.mostrarConfirmacionDeCompra(tProducto.getText(),Integer.parseInt(tUnidades.getText()),Float.parseFloat(tPrecioCompra.getText()));
-                   tProducto.setText("");
-                   tUnidades.setText("");
-                   tProducto.setEditable(true);
-                   tUnidades.setEditable(true);
-                   tImporteCompra.setText("");
-                   jpDatosCompra.setVisible(true);
-                   bAceptar.setEnabled(false);
-                   jpDatosVenta.setVisible(true);
-                   jpDescuentos.setVisible(true);
-                   tPrecioVenta.setEditable(true);
-                   tFOperacion.setVisible(true);
-                   tPrecioVenta.setText("");
+                   reiniciarVentanaDespuesDeCompra();
+
                 }
                 else
                 if(rbVenta.isSelected()){
-                    float importeTotal;
-                    importeVenta = (Float.parseFloat(tPrecioVenta.getText())*Integer.parseInt(tUnidades.getText()));
+                    prepararVentanaParaVenta();
 
-                    if(cbProntoPago.isSelected()&& cbVolumen.isSelected()){
-                        importeTotal = (importeVenta-(importeVenta*0.02f))-(importeVenta*0.3f);
-
-                    }
-
-                    if(cbVolumen.isSelected()){
-                        importeTotal = importeVenta - (importeVenta*0.02f);
-
-
-                    }
-                    else if(cbProntoPago.isSelected()){
-                        importeTotal= importeVenta -(importeVenta*0.3f);
-                        
-                    }
-
-                    else{
-                        importeTotal = importeVenta;
-
-                    }
-                    tImporteVenta.setText(String.valueOf(importeTotal));
-                    /*FALTA LO QUE TIENE QUE HACER CUANDO SE COMPRA*/
-                    /*Lo que tiene que hacer*/
-                    tProducto.setText("");
-                    tUnidades.setText("");
-                    tProducto.setEditable(true);
-                    tUnidades.setEditable(true);
-                    tImporteCompra.setText("");
-                    jpDatosCompra.setVisible(true);
-                    bAceptar.setEnabled(false);
-                    jpDatosVenta.setVisible(true);
-                    jpDescuentos.setVisible(true);
-                    tPrecioVenta.setEditable(true);
-                    tFOperacion.setVisible(true);
-                    tPrecioVenta.setText("");
-                    tCliente.setText("");
-                    cbVolumen.setSelected(false);
-                    cbProntoPago.setSelected(false);
-                    tImporteVenta.setText("");
                 }
             }
         });
-
 
         tCliente.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                if(tCliente.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null,"El campo es obligatorio","ERROR",JOptionPane.WARNING_MESSAGE);
+                try{
+                    if(tCliente.getText().isEmpty()){
+                        JOptionPane.showMessageDialog(null,"El campo es obligatorio","ERROR",JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    Main.comprobarCliente(tCliente.getText());
+                    System.out.println("focusLost de cliente,despues de comprobar cliente");
+                    calcularImporteVenta();
                 }
-            }
-        });
-        bCancelar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                    tProducto.setText("");
-                    tUnidades.setText("");
-                    tProducto.setEditable(true);
-                    tUnidades.setEditable(true);
-                    tImporteCompra.setText("");
-                    jpDatosCompra.setVisible(true);
-                    bAceptar.setEnabled(false);
-                    jpDatosVenta.setVisible(true);
-                    jpDescuentos.setVisible(true);
-                    tPrecioVenta.setEditable(true);
-                    tFOperacion.setVisible(true);
-                    tPrecioVenta.setText("");
-                    tCliente.setText("");
-                    tPrecioVenta.setText("");
-                    cbProveedores.setSelectedIndex(-1);
-                    tCliente.setEditable(true);
-                    tCliente.setText("");
+                catch (Exception y){
+                    System.out.println(y.getClass());
+                }
 
             }
         });
+
 
         tCliente.addFocusListener(new FocusAdapter() {
             @Override
@@ -260,6 +183,45 @@ public class VentanaPrincipal {
                 } catch (Exception z) {
                     System.out.println(z.getClass());
                 }
+            }
+        });
+
+        cbVolumen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                calcularImporteVenta();
+            }
+        });
+        cbProntoPago.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               calcularImporteVenta();
+            }
+        });
+
+        /*FIN DEL PROGRAMA. REINICIA TODO EL FORMULARIO*/
+        bCancelar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                tProducto.setText("");
+                tUnidades.setText("");
+                tProducto.setEditable(true);
+                tUnidades.setEditable(true);
+                tImporteCompra.setText("");
+                jpDatosCompra.setVisible(true);
+                bAceptar.setEnabled(false);
+                jpDatosVenta.setVisible(true);
+                jpDescuentos.setVisible(true);
+                tPrecioVenta.setEditable(true);
+                tFOperacion.setVisible(true);
+                tPrecioVenta.setText("");
+                tCliente.setText("");
+                tPrecioVenta.setText("");
+                cbProveedores.setSelectedIndex(-1);
+                tCliente.setEditable(true);
+                tCliente.setText("");
+
             }
         });
     }
@@ -277,5 +239,87 @@ public class VentanaPrincipal {
         return PanelPrincipal;
     }
 
+    public void validarCantidadVenta(){
+        try{
+            if(!Main.comprobarCantidadVenta(Integer.parseInt (tUnidades.getText()))){
+                tUnidades.setEditable(true);
+                tUnidades.setText("");
+                System.out.println("rbVenta comprobarCantidadVenta.");
+            }
+        }catch (Exception f){
+            System.out.println(f.getClass());
+        }
+    }
 
+    public void calcularImporteCompra(){
+        try{
+            float importeCompra=0f;
+            importeCompra = Float.parseFloat(tPrecioCompra.getText()) * Float.parseFloat(tUnidades.getText());
+            String sImporteCompra = String.valueOf( importeCompra );
+            tImporteCompra.setText(sImporteCompra);
+            tImporteCompra.setEditable(false);
+            bAceptar.setEnabled(true);
+            tFOperacion.setVisible(false);
+
+        }catch (Exception g){
+            System.out.println(g.getClass());
+        }
+    }
+
+    public void prepararVentanaParaVenta(){
+        tProducto.setText("");
+        tUnidades.setText("");
+        tProducto.setEditable(true);
+        tUnidades.setEditable(true);
+        tImporteCompra.setText("");
+        jpDatosCompra.setVisible(true);
+        bAceptar.setEnabled(false);
+        jpDatosVenta.setVisible(true);
+        jpDescuentos.setVisible(true);
+        tPrecioVenta.setEditable(true);
+        tFOperacion.setVisible(true);
+        tPrecioVenta.setText("");
+        tCliente.setText("");
+        cbVolumen.setSelected(false);
+        cbProntoPago.setSelected(false);
+        tImporteVenta.setText("");
+    }
+
+    public void calcularImporteVenta(){
+        try{
+            int descuento=1;
+            importeVenta= Float.parseFloat (tPrecioVenta.getText())* Float.parseFloat(tUnidades.getText());
+            if(cbProntoPago.isSelected()){
+                descuento=DescProntoPago;
+                System.out.println("el descuento es ppp");
+            }
+            if(cbVolumen.isSelected()){
+                descuento=+DescVolumen;
+                System.out.println("el descuento es por volumen" );
+            }
+            System.out.println("el importe de la venta es:" + importeVenta);
+            importeVenta = (importeVenta-importeVenta*descuento/100);
+            System.out.println("despues de ");
+            tImporteVenta.setText(String.valueOf(importeVenta));
+
+        }catch (Exception s){
+            System.out.println(s.getClass());
+        }
+
+    }
+
+    public void reiniciarVentanaDespuesDeCompra(){
+        tProducto.setText("");
+        tUnidades.setText("");
+        tProducto.setEditable(true);
+        tUnidades.setEditable(true);
+        tImporteCompra.setText("");
+        jpDatosCompra.setVisible(true);
+        bAceptar.setEnabled(false);
+        jpDatosVenta.setVisible(true);
+        jpDescuentos.setVisible(true);
+        tPrecioVenta.setEditable(true);
+        tFOperacion.setVisible(true);
+        tPrecioVenta.setText("");
+    }
 }
