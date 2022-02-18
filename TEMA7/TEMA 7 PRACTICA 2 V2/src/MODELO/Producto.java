@@ -1,25 +1,15 @@
 package MODELO;
 
-import java.util.ArrayList;
-
 public class Producto {
-     String nombre;
-     int stockDisponible;
-     float precioVenta;
-     Proveedor proveedor;
+    String nombre;
+    int stockDisponible;
+    float precioVenta;
+    Proveedor proveedor;
 
     public Producto(String nombre, int stockDisponible, float precioVenta, Proveedor proveedor) {
         this.nombre = nombre;
         this.stockDisponible = stockDisponible;
         this.precioVenta = precioVenta;
-        this.proveedor = proveedor;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
     }
 
@@ -47,6 +37,13 @@ public class Producto {
         this.precioVenta = precioVenta;
     }
 
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
 
     @Override
     public String toString() {
@@ -54,7 +51,7 @@ public class Producto {
                 "nombre='" + nombre + '\'' +
                 ", stockDisponible=" + stockDisponible +
                 ", precioVenta=" + precioVenta +
-                ", proveedor=" ;
-
+                ", proveedor=" + proveedor +
+                '}';
     }
 }

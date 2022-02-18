@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="435b3113-dc46-40b3-9588-80b519071e50" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TEMA 7 PRACTICA 2 V1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/EXCEPCIONES/DatoNoValido.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/MODELO/Cliente.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/MODELO/Producto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/MODELO/Proveedor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/company/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EXCEPCIONES/DatoNoValido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EXCEPCIONES/DatoNoValido.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MODELO/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MODELO/Cliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MODELO/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MODELO/Producto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="25CZgyiHIO2DcBRS8Ii9MB0QJpk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled104" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled104" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled104" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled104" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="untitled104" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="company" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="121" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="com.company.Main" />
+      <module name="untitled104" />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="435b3113-dc46-40b3-9588-80b519071e50" name="Changes" comment="" />
+      <created>1645033145560</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1645033145560</updated>
+    </task>
+    <servers />
+  </component>
+</project>

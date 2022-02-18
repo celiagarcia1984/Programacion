@@ -3,7 +3,6 @@ package MODELO;
 public class Cliente {
     String nombreCliente;
 
-
     public Cliente(String nombreCliente) {
         this.nombreCliente = nombreCliente;
     }
