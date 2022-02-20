@@ -31,12 +31,86 @@ public class ventanaAceeso extends JDialog {
     private String[] numerosAleatorios;
     private boolean clienteEncontrado;
     private boolean claveValida;
+    private String claveMarcada="";
 
     public ventanaAceeso() throws Exception {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         etiquetarBotones();
+        /*TENGO QUE HACER QUE LA CLAVE SOLO SE PUEDA MARCAR DESDE LA BOTONERA*/
+       // marcarClave();
+
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b1.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b2.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b3.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b4.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b5.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b6.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b7.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b7.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b8.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b9.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b9.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
+        b0.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                claveMarcada = claveMarcada + b0.getText();
+                tClave.setText(claveMarcada);
+            }
+        });
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -51,8 +125,10 @@ public class ventanaAceeso extends JDialog {
                     if(claveValida){
                        // Main.mostrarVentanaOperaciones();
                     }
-
-
+                    if(!claveValida){
+                        claveMarcada="";
+                        tClave.setText("");
+                    }
                 } catch (Exception ex) {
                    System.out.println (ex.getClass());
                 }
@@ -80,6 +156,8 @@ public class ventanaAceeso extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+
+
     }
 
     private void onOK() {
@@ -98,7 +176,11 @@ public class ventanaAceeso extends JDialog {
         dialog.setVisible(true);
         System.exit(0);
 
+    }
+    private void marcarClave()throws Exception{
+        while (claveMarcada.length()<=6){
 
+        }
     }
     private void etiquetarBotones()throws Exception{
         numerosAleatorios = new String[10];
