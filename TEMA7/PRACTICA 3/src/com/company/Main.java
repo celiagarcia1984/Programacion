@@ -59,10 +59,17 @@ public class Main {
     }
     public static boolean validarNIF(String nif)throws Exception{
         boolean nifValido=false;
-        Pattern patronDni = Pattern.compile("^[0-9]{8}[A-Z]{1}$"); /*8 numeros entre 0 y 9 seguido
+        /*Validar que el dni introducido cumple con el formato*/
+        Pattern patronDni = Pattern.compile("^[0-9]{8}[A-Z]{1}$"); /*8 numeros entre 0 y 9, seguido
         de una letra entre la A-Z*/
         Matcher mat = patronDni.matcher(nif) ;
         if(mat.matches()){
+            /*Validar que la letra del dni introducido es correcto*/
+            nifValido = comprobarLetraDNI(nif);
+
+
+
+
             nifValido =true;
         }
         else {
@@ -70,6 +77,20 @@ public class Main {
         }
 
         return nifValido;
+    }
+    public static boolean comprobarLetraDNI(String nif)throws Exception{
+        boolean letraCorrecta=false;
+        String letrasDni[] = {"t","r","w","a","g","m","y","f","p","d","x","b","n","j","z","s","q","v","h","l","c","k","e"};
+        /*Creo un array para guardar la cadena de letras donde comprobar la
+            letra introducida*/
+         String sDniSinLetra = nif.substring(0,8);
+         System.out.println(sDniSinLetra);
+         int iDni = Integer.parseInt(sDniSinLetra);
+         System.out.println(iDni);
+
+
+
+        return letraCorrecta;
     }
     public static boolean validarClave(String clave) throws datoNoValido {
         System.out.println("Estoy en la funcion validar clave");

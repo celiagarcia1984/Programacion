@@ -156,8 +156,6 @@ public class ventanaAceeso extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-
-
     }
 
     private void onOK() {
@@ -177,11 +175,7 @@ public class ventanaAceeso extends JDialog {
         System.exit(0);
 
     }
-    private void marcarClave()throws Exception{
-        while (claveMarcada.length()<=6){
 
-        }
-    }
     private void etiquetarBotones()throws Exception{
         numerosAleatorios = new String[10];
         numerosAleatorios= Main.generarNumeroAleatorio();
