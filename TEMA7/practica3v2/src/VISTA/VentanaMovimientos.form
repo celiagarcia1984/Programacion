@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="VISTA.VentanaMovimientos">
-  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="jpPrincipal" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="614" height="400"/>
+      <xy x="20" y="20" width="1084" height="508"/>
     </constraints>
     <properties>
+      <enabled value="false"/>
       <preferredSize width="700" height="700"/>
+      <visible value="true"/>
     </properties>
     <border type="none"/>
     <children>
       <vspacer id="86b51">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
-      <grid id="8a2c7" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="8a2c7" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -118,13 +120,13 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="c6ac3" class="javax.swing.JMenuItem">
+                  <component id="c6ac3" class="javax.swing.JMenuItem" binding="miConsulta">
                     <constraints/>
                     <properties>
                       <text value="Consulta"/>
                     </properties>
                   </component>
-                  <component id="69d3a" class="javax.swing.JMenuItem">
+                  <component id="69d3a" class="javax.swing.JMenuItem" binding="miMovimiento">
                     <constraints/>
                     <properties>
                       <text value="Movimientos"/>
@@ -134,8 +136,184 @@
               </grid>
             </children>
           </grid>
+          <toolbar id="c1c29">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="20"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="6b35d" class="javax.swing.JButton" binding="bConsulta">
+                <constraints/>
+                <properties>
+                  <icon value="VISTA/Iconos/consultas.png"/>
+                  <text value=""/>
+                  <toolTipText value="consultas"/>
+                </properties>
+              </component>
+              <component id="b9627" class="javax.swing.JButton" binding="bMovimientos">
+                <constraints/>
+                <properties>
+                  <icon value="VISTA/Iconos/movimientos2.png"/>
+                  <preferredSize width="125" height="151"/>
+                  <requestFocusEnabled value="false"/>
+                  <text value=""/>
+                  <toolTipText value="movimientos"/>
+                </properties>
+              </component>
+              <component id="7f1d1" class="javax.swing.JButton" binding="button3" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Button"/>
+                </properties>
+              </component>
+              <component id="1c732" class="javax.swing.JButton" binding="button4" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Button"/>
+                </properties>
+              </component>
+              <component id="5234c" class="javax.swing.JButton" binding="button5" default-binding="true">
+                <constraints/>
+                <properties>
+                  <text value="Button"/>
+                </properties>
+              </component>
+            </children>
+          </toolbar>
+          <grid id="ca1c0" binding="jpCuentas" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                <preferred-size width="520" height="120"/>
+              </grid>
+            </constraints>
+            <properties>
+              <visible value="true"/>
+            </properties>
+            <border type="line" title="Cuentas">
+              <color color="-14991429"/>
+            </border>
+            <children>
+              <component id="42146" class="javax.swing.JRadioButton" binding="rbCuenta1">
+                <constraints border-constraint="North"/>
+                <properties>
+                  <horizontalTextPosition value="11"/>
+                  <margin top="2" left="10" bottom="2" right="2"/>
+                  <text value="Cuenta 1"/>
+                </properties>
+              </component>
+              <component id="76af6" class="javax.swing.JRadioButton" binding="rbCuenta2">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <background color="-986385"/>
+                  <contentAreaFilled value="false"/>
+                  <label value="Cuenta 2"/>
+                  <margin top="2" left="10" bottom="2" right="2"/>
+                  <text value="Cuenta 2"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="d3d1f" binding="jpMovimientos" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false">
+            <preferred-size width="520" height="120"/>
+          </grid>
+        </constraints>
+        <properties>
+          <visible value="false"/>
+        </properties>
+        <border type="line" title="Movimientos">
+          <color color="-14991429"/>
+        </border>
+        <children>
+          <component id="4dcf0" class="javax.swing.JTextField" binding="tfMovimiento1">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <editable value="true"/>
+              <enabled value="false"/>
+            </properties>
+          </component>
+          <component id="5927" class="javax.swing.JTextField" binding="tfMovimiento2">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <editable value="true"/>
+              <enabled value="false"/>
+            </properties>
+          </component>
+          <component id="7442d" class="javax.swing.JTextField" binding="tfMovimiento3">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <editable value="true"/>
+              <enabled value="false"/>
+            </properties>
+          </component>
+          <component id="f0517" class="javax.swing.JTextField" binding="tfMovimiento4">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <editable value="true"/>
+              <enabled value="false"/>
+            </properties>
+          </component>
+          <component id="ed479" class="javax.swing.JTextField" binding="tfMovimiento5">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <editable value="true"/>
+              <enabled value="false"/>
+            </properties>
+          </component>
+          <component id="adda1" class="javax.swing.JTextField" binding="tfSaldoTotal">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-855310"/>
+              <editable value="true"/>
+              <enabled value="false"/>
+              <font name="Fira Code" size="20" style="1"/>
+              <text value="Saldo Total"/>
+            </properties>
+          </component>
         </children>
       </grid>
     </children>
   </grid>
+  <buttonGroups>
+    <group name="cuentas">
+      <member id="42146"/>
+      <member id="76af6"/>
+    </group>
+  </buttonGroups>
 </form>

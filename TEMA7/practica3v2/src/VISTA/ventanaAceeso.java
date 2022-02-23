@@ -34,13 +34,13 @@ public class ventanaAceeso extends JDialog {
     private boolean claveValida;
     private String claveMarcada="";
 
+
     public ventanaAceeso() throws Exception {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         etiquetarBotones();
         /*TENGO QUE HACER QUE LA CLAVE SOLO SE PUEDA MARCAR DESDE LA BOTONERA*/
-       // marcarClave();
 
         b1.addActionListener(new ActionListener() {
             @Override
@@ -113,43 +113,6 @@ public class ventanaAceeso extends JDialog {
             }
         });
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-                try {
-                    if(validarNif()){
-                         clienteEncontrado = Main.comprobarCliente(tNif.getText());
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "El formato de DNI no es correcto");
-                    }
-                    if(clienteEncontrado){
-                        claveValida = validarClave();
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Cliente no encontrado");
-                    }
-                    if(claveValida){
-                       // Main.mostrarVentanaOperaciones();
-                        dispose();
-                    }
-                    if(!claveValida){
-                        claveMarcada="";
-                        tClave.setText("");
-                        JOptionPane.showMessageDialog(null, "La clave es incorrecta",
-                                "ERROR",JOptionPane.ERROR_MESSAGE);
-                    }
-
-                }catch (datoNoValido z){
-                    System.out.println( "El campo no es correcto");
-                    tClave.setText("");
-                }
-                catch (Exception ex) {
-                   System.out.println (ex.getClass());
-                }
-            }
-        });
-
         buttonCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -171,11 +134,47 @@ public class ventanaAceeso extends JDialog {
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+        buttonOK.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    if(validarNif()){
+                        clienteEncontrado = Main.comprobarCliente(tNif.getText());
+                        if(clienteEncontrado){
+                            claveValida = validarClave();
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Cliente no encontrado");
+                        }
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "El formato de DNI no es correcto");
+                    }
+
+                    if(claveValida){
+                        Main.ventanaMovimientos();
+
+                    }
+                    if(!claveValida){
+                        claveMarcada="";
+                        tClave.setText("");
+                        JOptionPane.showMessageDialog(null, "La clave es incorrecta",
+                                "ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }catch (datoNoValido z){
+                    System.out.println( "El campo no es correcto");
+                    tClave.setText("");
+                }
+                catch (Exception ex) {
+                    System.out.println (ex.getClass());
+                }
+            }
+        });
     }
 
     private void onOK() {
-        // add your code here
-       // dispose();
+       dispose();
     }
 
     private void onCancel() {

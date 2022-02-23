@@ -4,6 +4,7 @@ import EXCEPCIONES.datoNoValido;
 import MODELO.Cliente;
 import MODELO.Cuenta;
 import MODELO.Movimiento;
+import VISTA.VentanaMovimientos;
 import VISTA.VentanaPrincipal;
 import VISTA.ventanaAceeso;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -30,12 +31,10 @@ public class Main {
             System.out.println("Ahora llamo a la ventana Principal");
             ventanaPrincipal();
 
-
         }
         catch (Exception e ){
             System.out.println(e.getClass());
         }
-
     }
     /*Creo una lista de clientes con los clientes y sus cuentas*/
     public static boolean comprobarCliente(String nif)throws Exception{
@@ -219,11 +218,18 @@ public class Main {
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
-        dialog.getLocationOnScreen();
         dialog.setLocationRelativeTo(null);
+
     }
-    public static void ventanaOperaciones()throws Exception{
+    public static void ventanaMovimientos()throws Exception{
+        System.out.println("FUNCION VENTANAMOVIMIENTOS");
         /*AQUI EL MAIN DE LA VENTANA*/
+        JFrame frame = new JFrame("VentanaMovimientos");
+        frame.setContentPane(new VentanaMovimientos().getJpPrincipal());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
     /*FUNCION PARA GENERAR UN Nº ALEATORIO.*/
     public static String[] generarNumeroAleatorio()throws Exception {

@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="435b3113-dc46-40b3-9588-80b519071e50" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TEMA 7 PRACTICA 2 V1.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/EXCEPCIONES/DatoNoValido.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/MODELO/Cliente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/MODELO/Producto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/MODELO/Proveedor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/VISTA/VentanaPrincipal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/company/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/AbstractLayout.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/DimensionInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/GridConstraints.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/GridLayoutManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/HorizontalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/LayoutState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/Spacer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/SupportCode$TextWithMnemonic.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/SupportCode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TEMA 7 PRACTICA 2 V1/com/intellij/uiDesigner/core/VerticalInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EXCEPCIONES/DatoNoValido.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EXCEPCIONES/DatoNoValido.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MODELO/Cliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MODELO/Cliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MODELO/Producto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MODELO/Producto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/VISTA/VentanaPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="435b3113-dc46-40b3-9588-80b519071e50" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,6 +86,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="121" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
