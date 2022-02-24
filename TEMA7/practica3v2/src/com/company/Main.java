@@ -224,7 +224,7 @@ public class Main {
     }
     public static void ventanaMovimientos()throws Exception{
         System.out.println("FUNCION VENTANAMOVIMIENTOS");
-        System.out.println(listaClientes.get(posicionCliente).getListaCuentas().g);
+        System.out.println(listaClientes.get(posicionCliente).getListaCuentas()[0].);
         /*AQUI EL MAIN DE LA VENTANA*/
         JFrame frame = new JFrame("VentanaMovimientos");
         frame.setContentPane(new VentanaMovimientos().getJpPrincipal());
