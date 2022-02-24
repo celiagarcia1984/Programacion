@@ -23,6 +23,7 @@ public class Main {
      static int posicionCliente;
 
 
+
     public static void main(String[] args) {
 	/*Esta creado el modelo.*/
         try{
@@ -193,9 +194,10 @@ public class Main {
         listaMovimientos.add(mov);
 
         /*Cuentas Cliente 2*/
-        listaCuentas = new Cuenta[2];
+        listaCuentas = new Cuenta[3];
         listaCuentas[0]= new Cuenta("0101010103",listaMovimientos);
         listaCuentas[1] = new Cuenta("0202020203",listaMovimientos);
+        listaCuentas[2] = new Cuenta("0202020204",listaMovimientos);
         System.out.println(listaCuentas);
 
         claveSinEncriptar = "987321";
@@ -216,13 +218,13 @@ public class Main {
     public static void ventanaAcceso()throws Exception{
         ventanaAceeso dialog = new ventanaAceeso();
         dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
         dialog.setLocationRelativeTo(null);
-
+        dialog.setModal(true);
+        dialog.setVisible(true);
     }
     public static void ventanaMovimientos()throws Exception{
         System.out.println("FUNCION VENTANAMOVIMIENTOS");
+        System.out.println(listaClientes.get(posicionCliente).getListaCuentas().g);
         /*AQUI EL MAIN DE LA VENTANA*/
         JFrame frame = new JFrame("VentanaMovimientos");
         frame.setContentPane(new VentanaMovimientos().getJpPrincipal());
@@ -230,6 +232,14 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
+        cargarCuentas();
+    }
+    public static ArrayList<String> cargarCuentas(){
+        ArrayList<String> cuentasDelCliente=new ArrayList<>();
+        /*devuelve el array con las cuentas del cliente del que tengo guardada la posicion*/
+
+
+        return cuentasDelCliente;
     }
     /*FUNCION PARA GENERAR UN Nº ALEATORIO.*/
     public static String[] generarNumeroAleatorio()throws Exception {

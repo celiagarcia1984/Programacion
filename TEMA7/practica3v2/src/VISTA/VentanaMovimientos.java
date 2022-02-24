@@ -25,13 +25,24 @@ public class VentanaMovimientos {
     private JRadioButton rbCuenta2;
     private JPanel jpCuentas;
     private JPanel jpMovimientos;
-    private JTextField tfMovimiento1;
-    private JTextField tfMovimiento2;
-    private JTextField tfMovimiento3;
-    private JTextField tfMovimiento4;
-    private JTextField tfMovimiento5;
-    private JTextField tfSaldoTotal;
     private JPanel jpPrincipal;
+    private JLabel Lfecha1;
+    private JLabel lFecha2;
+    private JLabel lFecha3;
+    private JLabel lFecha4;
+    private JLabel lFecha5;
+    private JLabel lDescripcion1;
+    private JLabel lDescripcion2;
+    private JLabel lDescripcion3;
+    private JLabel lDescripcion4;
+    private JLabel lDescripcion5;
+    private JLabel lImporte1;
+    private JLabel lImporte2;
+    private JLabel lImporte3;
+    private JLabel lImporte4;
+    private JLabel lImporte5;
+    private JButton bAceptar;
+    private JButton bCancelar;
 
     public VentanaMovimientos() {
     }
@@ -47,4 +58,6 @@ public class VentanaMovimientos {
         frame.pack();
         frame.setVisible(true);
     }
+
+
 }

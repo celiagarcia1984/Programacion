@@ -153,6 +153,7 @@ public class ventanaAceeso extends JDialog {
 
                     if(claveValida){
                         Main.ventanaMovimientos();
+                        dispose();
 
                     }
                     if(!claveValida){
