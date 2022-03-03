@@ -1,12 +1,13 @@
 package MODELO;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cliente {
     String nombre;
     String dni;
     String clave;
-    Cuenta[] listaCuentas = new Cuenta[2];
+    ArrayList<Cuenta> listaCuentas = new ArrayList<>();
 
     public Cliente(String nombre, String dni, String clave) {
         this.nombre = nombre;
@@ -14,21 +15,20 @@ public class Cliente {
         this.clave = clave;
     }
 
-    public Cliente(String nombre, String dni, String clave, Cuenta[] listaCuentas) {
+
+    public Cliente(String nombre, String dni, String clave, ArrayList<Cuenta> listaCuentas) {
         this.nombre = nombre;
         this.dni = dni;
         this.clave = clave;
         this.listaCuentas = listaCuentas;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "nombre='" + nombre + '\'' +
-                ", dni='" + dni + '\'' +
-                ", clave='" + clave + '\'' +
-                ", listaCuentas=" + Arrays.toString(listaCuentas) +
-                '}';
+    public ArrayList<Cuenta> getListaCuentas() {
+        return listaCuentas;
+    }
+
+    public void setListaCuentas(ArrayList<Cuenta> listaCuentas) {
+        this.listaCuentas = listaCuentas;
     }
 
     public String getNombre() {
@@ -55,11 +55,5 @@ public class Cliente {
         this.clave = clave;
     }
 
-    public Cuenta[] getListaCuentas() {
-        return listaCuentas;
-    }
 
-    public void setListaCuentas(Cuenta[] listaCuentas) {
-        this.listaCuentas = listaCuentas;
-    }
 }

@@ -16,11 +16,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
-     static Cuenta[] listaCuentas ;
+     static ArrayList<Cuenta> listaCuentas ;
      static ArrayList<Cliente> listaClientes;
      static ArrayList<Movimiento> listaMovimientos;
      static String[] numerosAleatorio;
      static int posicionCliente;
+     static ArrayList<String> cuentasDelCliente = new ArrayList<>();
 
 
 
@@ -152,9 +153,9 @@ public class Main {
         listaMovimientos.add(mov);
 
         /*Cuentas Cliente 1*/
-        listaCuentas = new Cuenta[2];
-        listaCuentas[0]= new Cuenta("0101010101",listaMovimientos);
-        listaCuentas[1] = new Cuenta("0202020202",listaMovimientos);
+        listaCuentas = new ArrayList<>();
+        listaCuentas.add(new Cuenta("0101010101",listaMovimientos));
+        listaCuentas.add(new Cuenta("0202020202",listaMovimientos));
         System.out.println(listaCuentas);
 
         listaClientes=new ArrayList<>();
@@ -194,13 +195,13 @@ public class Main {
         listaMovimientos.add(mov);
 
         /*Cuentas Cliente 2*/
-        listaCuentas = new Cuenta[3];
-        listaCuentas[0]= new Cuenta("0101010103",listaMovimientos);
-        listaCuentas[1] = new Cuenta("0202020203",listaMovimientos);
-        listaCuentas[2] = new Cuenta("0202020204",listaMovimientos);
+        listaCuentas = new ArrayList<>();
+        listaCuentas.add(new Cuenta("0101010103",listaMovimientos));
+        listaCuentas.add(new Cuenta("0202020203",listaMovimientos));
+        listaCuentas.add(new Cuenta("0202020204",listaMovimientos));
         System.out.println(listaCuentas);
 
-        claveSinEncriptar = "987321";
+        claveSinEncriptar = "234567";
         claveEncriptada = DigestUtils.md5Hex(claveSinEncriptar);
         listaClientes.add(new Cliente("Celia", "72738006T", claveEncriptada, listaCuentas));
 
@@ -222,23 +223,25 @@ public class Main {
         dialog.setModal(true);
         dialog.setVisible(true);
     }
-    public static void ventanaMovimientos()throws Exception{
-        System.out.println("FUNCION VENTANAMOVIMIENTOS");
-        System.out.println(listaClientes.get(posicionCliente).getListaCuentas()[0].);
+    public static void AbrirventanaMovimientos()throws Exception{
         /*AQUI EL MAIN DE LA VENTANA*/
         JFrame frame = new JFrame("VentanaMovimientos");
         frame.setContentPane(new VentanaMovimientos().getJpPrincipal());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null);
-        cargarCuentas();
+        System.out.println("FUNCION VENTANAMOVIMIENTOS");
+        System.out.println(listaClientes.get(posicionCliente).getListaCuentas().get(0).getNumeroCuenta());
+
     }
     public static ArrayList<String> cargarCuentas(){
-        ArrayList<String> cuentasDelCliente=new ArrayList<>();
+        System.out.println("Estoy en la funcion cargarCuentas");
+
+        for(int i=0; i<listaClientes.get(posicionCliente).getListaCuentas().size();i++){
+            cuentasDelCliente.add(listaClientes.get(posicionCliente).getListaCuentas().get(i).getNumeroCuenta());
+        }
+        System.out.println("Este es el arrayList que devuelve la funcion"+cuentasDelCliente.toString());
         /*devuelve el array con las cuentas del cliente del que tengo guardada la posicion*/
-
-
         return cuentasDelCliente;
     }
     /*FUNCION PARA GENERAR UN Nº ALEATORIO.*/

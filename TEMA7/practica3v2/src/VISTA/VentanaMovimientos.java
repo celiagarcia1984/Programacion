@@ -1,8 +1,12 @@
 package VISTA;
 
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 
 public class VentanaMovimientos {
     private JMenuBar jmbMenu;
@@ -21,8 +25,6 @@ public class VentanaMovimientos {
     private JButton button3;
     private JButton button4;
     private JButton button5;
-    private JRadioButton rbCuenta1;
-    private JRadioButton rbCuenta2;
     private JPanel jpCuentas;
     private JPanel jpMovimientos;
     private JPanel jpPrincipal;
@@ -43,8 +45,14 @@ public class VentanaMovimientos {
     private JLabel lImporte5;
     private JButton bAceptar;
     private JButton bCancelar;
+    private JRadioButton rbCuenta1;
+    private JRadioButton rbCuenta2;
 
     public VentanaMovimientos() {
+        ArrayList<String> cuentasParaCargar =new ArrayList<>();
+        cuentasParaCargar = Main.cargarCuentas();
+        System.out.println("VentanaMovimiento. El contenido del array CuentasParaCargar "+ cuentasParaCargar.toString());
+
     }
 
     public JPanel getJpPrincipal() {
