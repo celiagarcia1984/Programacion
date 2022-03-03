@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class VentanaMovimientos {
@@ -68,6 +69,7 @@ public class VentanaMovimientos {
             public void actionPerformed(ActionEvent e) {
                 if(!cuentasCargadas){
                     mostrarCuentas();
+
                 }
             }
         });
@@ -76,6 +78,8 @@ public class VentanaMovimientos {
             public void actionPerformed(ActionEvent e) {
                 if(!cuentasCargadas){
                     mostrarCuentas();
+
+
                 }
             }
         });
@@ -93,17 +97,8 @@ public class VentanaMovimientos {
         ArrayList<String> cuentasParaCargar =new ArrayList<>();
         cuentasParaCargar = Main.cargarCuentas();
         System.out.println("VentanaMovimiento. El contenido del array CuentasParaCargar "+ cuentasParaCargar.toString());
-        ArrayList<JRadioButton>listaBotones = new ArrayList<>();
-        listaBotones.add(rb1);
-        listaBotones.add(rb2);
-        listaBotones.add(rb3);
-        listaBotones.add(rb4);
-        listaBotones.add(rb5);
-        listaBotones.add(rb6);
-        listaBotones.add(rb7);
-        listaBotones.add(rb8);
-        listaBotones.add(rb9);
-        listaBotones.add(rb10);
+        ArrayList<JRadioButton>listaBotones = new ArrayList<>(Arrays.asList(rb1,rb2,rb3,rb4,rb4,rb6,rb7,rb8,rb9,rb10));
+       
         for(int i=0;i<cuentasParaCargar.size();i++){
             listaBotones.get(i).setText(cuentasParaCargar.get(i));
             listaBotones.get(i).setVisible(true);

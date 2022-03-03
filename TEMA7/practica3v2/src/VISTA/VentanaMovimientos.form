@@ -10,7 +10,7 @@
       <preferredSize width="700" height="700"/>
       <visible value="true"/>
     </properties>
-    <border type="line" title="Movimientos">
+    <border type="none">
       <color color="-13620549"/>
     </border>
     <children>
@@ -209,7 +209,7 @@
                 </constraints>
                 <properties>
                   <text value="RadioButton"/>
-                  <visible value="false"/>
+                  <visible value="true"/>
                 </properties>
               </component>
               <component id="7402a" class="javax.swing.JRadioButton" binding="rb3">
