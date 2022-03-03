@@ -22,7 +22,7 @@ public class Main {
      static String[] numerosAleatorio;
      static int posicionCliente;
      static ArrayList<String> cuentasDelCliente = new ArrayList<>();
-
+     static ArrayList<Movimiento>movimientosCuentaSeleccionada= new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -234,7 +234,7 @@ public class Main {
         System.out.println(listaClientes.get(posicionCliente).getListaCuentas().get(0).getNumeroCuenta());
 
     }
-    public static ArrayList<String> cargarCuentas(){
+    public static ArrayList<String> cargarCuentas()throws Exception{
         System.out.println("Estoy en la funcion cargarCuentas");
 
         for(int i=0; i<listaClientes.get(posicionCliente).getListaCuentas().size();i++){
@@ -282,5 +282,16 @@ public class Main {
             System.out.println(numerosAleatorio[i]);
         }
         return numerosAleatorio;
+    }
+    public static ArrayList<Movimiento>cargarMovimientos(String cuenta){
+
+        /*Tengo que coger la posicion de la cuenta elegida. Buscar en la lista de cuenta la cuenta que coincida*/
+        int i=0;
+        for(i=0;i<listaCuentas.size()&&listaCuentas.get(i).getNumeroCuenta().equalsIgnoreCase(cuenta);i++){}
+        int posicionCuenta = i;
+        System.out.println("la posicion de la cuenta es: "+ posicionCuenta);
+        System.out.println(listaClientes.get(posicionCliente).getListaCuentas().get(posicionCuenta).getListaMovimientos().toString());
+        System.out.println("funcion cargarMovimientos: Los movimientos de la cuenta seleccionada son: "+ movimientosCuentaSeleccionada.toString());
+        return movimientosCuentaSeleccionada;
     }
 }

@@ -142,6 +142,7 @@ public class ventanaAceeso extends JDialog {
                         clienteEncontrado = Main.comprobarCliente(tNif.getText());
                         if(clienteEncontrado){
                             claveValida = validarClave();
+
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "Cliente no encontrado");
@@ -154,18 +155,20 @@ public class ventanaAceeso extends JDialog {
                     if(claveValida){
                         Main.AbrirventanaMovimientos();
                         dispose();
-
                     }
+
+                }catch (datoNoValido z){
                     if(!claveValida){
                         claveMarcada="";
                         tClave.setText("");
                         JOptionPane.showMessageDialog(null, "La clave es incorrecta",
                                 "ERROR",JOptionPane.ERROR_MESSAGE);
                     }
-
-                }catch (datoNoValido z){
-                    System.out.println( "El campo no es correcto");
-                    tClave.setText("");
+                    else{
+                        System.out.println( "El campo no es correcto");
+                        JOptionPane.showMessageDialog(null, "El campo no es correcto");
+                        tClave.setText("");
+                    }
                 }
                 catch (Exception ex) {
                     System.out.println (ex.getClass());

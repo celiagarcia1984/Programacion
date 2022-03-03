@@ -13,6 +13,15 @@ public class Movimiento {
         this.descripcion = descripcion;
     }
 
+    @Override
+    public String toString() {
+        return "Movimiento{" +
+                "fecha=" + fecha +
+                ", importe=" + importe +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
+    }
+
     public LocalDate getFecha() {
         return fecha;
     }
