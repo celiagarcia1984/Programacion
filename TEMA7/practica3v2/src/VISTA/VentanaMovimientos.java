@@ -68,7 +68,7 @@ public class VentanaMovimientos {
     public void mostrarCuentas(){
     try{
         /*Primero vaciar el panel Cuentas*/
-       //jpCuentas.removeAll();
+       jpCuentas.removeAll();
         cuentasParaCargar = Main.cargarCuentas();
         /*Se inicia el arraylist de botones y se crea un buttonGroup para meter tambien ahi los botones*/
 
@@ -85,9 +85,10 @@ public class VentanaMovimientos {
                 }
             });
             jpCuentas.add(rb);
+
         }
         cuentasCargadas = true;
-
+        jpCuentas.updateUI();
 
 
        /* System.out.println("VentanaMovimiento. El contenido del array CuentasParaCargar "+ cuentasParaCargar.toString());
