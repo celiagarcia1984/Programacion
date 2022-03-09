@@ -141,7 +141,7 @@ public class ventanaAceeso extends JDialog {
                     if(validarNif()){
                         clienteEncontrado = Main.comprobarCliente(tNif.getText());
                         if(clienteEncontrado){
-                            claveValida = validarClave();
+                            claveValida = validarFormatoClave();
 
                         }
                         else{
@@ -217,10 +217,11 @@ public class ventanaAceeso extends JDialog {
         }
         return nifValido;
     }
-   private boolean validarClave()throws Exception{
+   private boolean validarFormatoClave()throws Exception{
+        System.out.println("Estoy en la funcion validarFormatoClave");
         boolean claveValida=false;
         String sClave= String.valueOf(tClave.getPassword());
-        claveValida =Main.validarClave(sClave);
+        claveValida = Main.validarClave(sClave);
         if(!claveValida){
             tClave.setText("");
         }

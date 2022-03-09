@@ -2,6 +2,7 @@ package VISTA;
 
 import MODELO.Movimiento;
 import com.company.Main;
+import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -48,62 +49,56 @@ public class VentanaMovimientos {
     private JLabel lImporte5;
     private JButton bAceptar;
     private JButton bCancelar;
-    private JRadioButton rb1;
-    private JRadioButton rb2;
-    private JRadioButton rb3;
-    private JRadioButton rb4;
-    private JRadioButton rb5;
-    private JRadioButton rb6;
-    private JRadioButton rb7;
-    private JRadioButton rb8;
-    private JRadioButton rb9;
-    private JRadioButton rb10;
     private JLabel lSaldoTotal;
     private JLabel lSaldo;
     static boolean cuentasCargadas=false;
+    static ArrayList<String> cuentasParaCargar = new ArrayList<>();
+    ArrayList<JRadioButton>listaBotones = new ArrayList<>();
 
     public VentanaMovimientos() {
 
         bConsulta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!cuentasCargadas){
-                    mostrarCuentas();
-
-                }
-            }
-        });
-        miConsulta.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!cuentasCargadas){
-                    mostrarCuentas();
-
-
-                }
-            }
-        });
-        rb1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ArrayList<Movimiento>movimientosCuentaSeleccionada = new ArrayList<>();
-               movimientosCuentaSeleccionada = Main.cargarMovimientos(rb1.getText());
+                mostrarCuentas();
             }
         });
     }
 
     public void mostrarCuentas(){
     try{
-        ArrayList<String> cuentasParaCargar =new ArrayList<>();
+        /*Primero vaciar el panel Cuentas*/
+       jpCuentas.removeAll();
         cuentasParaCargar = Main.cargarCuentas();
-        System.out.println("VentanaMovimiento. El contenido del array CuentasParaCargar "+ cuentasParaCargar.toString());
+        /*Se inicia el arraylist de botones y se crea un buttonGroup para meter tambien ahi los botones*/
+
+        ButtonGroup grupoBotones = new ButtonGroup();
+        for (int s=0; s<cuentasParaCargar.size();s++) {
+            JRadioButton rb = new JRadioButton(cuentasParaCargar.get(s));
+            listaBotones.add(rb);
+            grupoBotones.add(rb);
+            /*En este mismo for, se añade el listener de cada boton*/
+            rb.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    /*Cuando se  marca tiene que mostrar los movimientos*/
+                }
+            });
+            jpCuentas.add(rb);
+
+        }
+        cuentasCargadas = true;
+        jpCuentas.updateUI();
+
+
+       /* System.out.println("VentanaMovimiento. El contenido del array CuentasParaCargar "+ cuentasParaCargar.toString());
         ArrayList<JRadioButton>listaBotones = new ArrayList<>(Arrays.asList(rb1,rb2,rb3,rb4,rb4,rb6,rb7,rb8,rb9,rb10));
        
         for(int i=0;i<cuentasParaCargar.size();i++){
             listaBotones.get(i).setText(cuentasParaCargar.get(i));
             listaBotones.get(i).setVisible(true);
         }
-        cuentasCargadas =true;
+        cuentasCargadas =true;*/
     }catch (Exception s){
         System.out.println(s.getClass());
     }

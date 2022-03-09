@@ -107,7 +107,7 @@ public class Main {
         if(clave.length()!=6){
             throw new datoNoValido();
         }
-        String claveIntroducidaSinEncriptar= clave;
+        String claveIntroducidaSinEncriptar = clave;
         String claveIntroducidaEncriptada = DigestUtils.md5Hex(clave);
         if(listaClientes.get(posicionCliente).getClave().equalsIgnoreCase(claveIntroducidaEncriptada)){
             claveValida=true;
@@ -224,6 +224,7 @@ public class Main {
         dialog.setVisible(true);
     }
     public static void AbrirventanaMovimientos()throws Exception{
+        System.out.println("Funcion abrirVentanaMovimientos");
         /*AQUI EL MAIN DE LA VENTANA*/
         JFrame frame = new JFrame("VentanaMovimientos");
         frame.setContentPane(new VentanaMovimientos().getJpPrincipal());
@@ -231,7 +232,7 @@ public class Main {
         frame.pack();
         frame.setVisible(true);
         System.out.println("FUNCION VENTANAMOVIMIENTOS");
-        System.out.println(listaClientes.get(posicionCliente).getListaCuentas().get(0).getNumeroCuenta());
+        //System.out.println(listaClientes.get(posicionCliente).getListaCuentas().get(0).getNumeroCuenta());
 
     }
     public static ArrayList<String> cargarCuentas()throws Exception{
