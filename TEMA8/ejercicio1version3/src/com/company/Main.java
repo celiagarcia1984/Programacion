@@ -31,6 +31,7 @@ public class Main {
 
         /*Ahora Abro ventana Opciones*/
         abrirVentanaOpciones();
+        bd.cerrarConexion();
 
     }
    /*Estas funciones son para sacar todas las personas. Necesito un arrayList*/

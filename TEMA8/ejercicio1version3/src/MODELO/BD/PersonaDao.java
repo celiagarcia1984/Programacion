@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class PersonaDao {
     /*Necesito un atributo Connection*/
     private Connection conexion;
+    /*Estos atributos son para las operaciones sql*/
     private int n;
     private Persona persona = null;
     private ArrayList<Persona> listaPersonas;
@@ -34,11 +35,6 @@ public class PersonaDao {
         }catch (Exception e){
             System.out.println(e.getClass());
         }
-
-
-
-
-
 
         return listaPersonas;
     }
