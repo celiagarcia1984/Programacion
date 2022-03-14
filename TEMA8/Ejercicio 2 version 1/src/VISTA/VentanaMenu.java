@@ -23,9 +23,15 @@ public class VentanaMenu {
     private JMenu jmCalendario;
     private JMenu jmPersonal;
     private JMenu jmClientes;
+    private JButton bAnadirEv;
+    private JButton bCancelarEv;
+    private JButton bModificarEv;
+    private JButton button4;
+    private JButton button5;
+    private JButton button6;
 
     public VentanaMenu() {
-
+        /*PARTE DEL INSERT*/
         jmiAnadirEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,7 +39,22 @@ public class VentanaMenu {
                 Main.ventanaAñadirEvento();
             }
         });
+        bAnadirEv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventanaAñadirEvento();
+            }
+        });
+        /*PARTE DEL DELETE*/
+        bCancelarEv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirVentanaEliminarModificar();
+
+            }
+        });
     }
+
 
     public JPanel getJpPrincipal() {
         return jpPrincipal;

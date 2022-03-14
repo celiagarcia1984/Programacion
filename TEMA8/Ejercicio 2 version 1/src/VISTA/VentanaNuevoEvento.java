@@ -32,7 +32,7 @@ public class VentanaNuevoEvento extends JDialog {
     private JTextField tfAforoDisponible;
     private JPanel jpTitutlo;
     private JLabel lTitulo;
-    private LocalDate fecha;
+    private LocalDate fecha=null;
     private LocalTime horaFin = null;
     private LocalTime horaInicio =null;
 
@@ -48,6 +48,10 @@ public class VentanaNuevoEvento extends JDialog {
                 if(validarDatos()){
                     Main.getDatos(tfNombre.getText(),String.valueOf(cbLugar.getSelectedItem()) ,fecha,horaInicio,
                             horaFin,Integer.parseInt(tfAforo.getText()),Integer.parseInt(tfAforoDisponible.getText()));
+                    if(Main.getConfirmacion()){
+                        JOptionPane.showMessageDialog(null, "Evento añadido");
+                        dispose();
+                    }
                 }
 
                // onOK();
@@ -74,7 +78,8 @@ public class VentanaNuevoEvento extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,
+                0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
 
@@ -117,7 +122,7 @@ public class VentanaNuevoEvento extends JDialog {
                     /*FechaInicio*/
                     if(!tfFecha.getText().isEmpty()){
                         DateTimeFormatter patron = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        LocalDate fecha = LocalDate.parse(tfFecha.getText(),patron);
+                        fecha = LocalDate.parse(tfFecha.getText(),patron);
                         System.out.println("He hecho la conversion a local date. "+fecha );
                     }
                     else{

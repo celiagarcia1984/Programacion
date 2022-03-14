@@ -30,14 +30,29 @@ public class Main {
     }
     public static Evento getDatos(String nombre, String lugar, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin,
                                   int aforo, int aforoDisponible){
+        boolean filaInsertada;
         try{
             evento = new Evento(nombre, lugar, fecha, horaInicio,horaFin,aforo,aforoDisponible);
-            evenDao.insertEvento(evento);
+            System.out.println(evento + " Estoy en la funcion get datos para comprobar si la fecha es null" );
+
+           filaInsertada =  evenDao.insertEvento(evento);
+           if(filaInsertada){
+               getConfirmacion();
+           }
 
         }catch (Exception e){
             System.out.println(e.getClass());
         }
         return evento;
+    }
+    public static boolean getConfirmacion(){
+        boolean insertado = false;
+        try{
+            insertado =true;
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return insertado;
     }
     public static void abrirVentanaPrincipal(){
         try{
@@ -65,4 +80,5 @@ public class Main {
             System.out.println(e.getClass());
         }
     }
+    public static void abrirVentanaEliminarModificar(){}
 }
