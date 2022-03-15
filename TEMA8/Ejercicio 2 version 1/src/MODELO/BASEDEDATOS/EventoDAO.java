@@ -9,6 +9,7 @@ import java.time.LocalTime;
 public class EventoDAO {
 
     private Connection conexion;
+    private Evento ev=null;
 
     /*constructor con conexion*/
 
@@ -41,17 +42,70 @@ public class EventoDAO {
             ps.setInt(6,evento.getAforo());
             ps.setInt(7,evento.getAforoDisponible());
 
-            ps.executeUpdate();
-            filaInsertada=true;
-
-            System.out.println("Fila insertada");
-
+            int res = ps.executeUpdate();
+            if(res>=1){
+                filaInsertada=true;
+                System.out.println("Fila insertada");
+            }
+            else{
+                System.out.println("No se ha hecho el insert");
+            }
 
         } catch (Exception e) {
+            filaInsertada =false;
             System.out.println(e.getClass());
         }
 
         return filaInsertada;
+    }
+    /*Segundo Metodo. Select nombre*/
+    public Evento selectNombre(String nombre){
+        try{
+            System.out.println("Estoy en la funcion SelectNombre.");
+            String plantilla = "select * from evento where nombre = ?";
+            PreparedStatement ps = conexion.prepareStatement(plantilla);
+            ps.setString(1,nombre);
+            ResultSet resultado;
+            resultado = ps.executeQuery();
+            if(resultado.next()){
+                String n = resultado.getString("nombre");
+                String l = resultado.getString("lugar");
+                Date fecha = resultado.getDate("fecha");
+                LocalDate lFecha = fecha.toLocalDate();
+                Time horaIn = resultado.getTime("HoraInicio");
+                LocalTime horaInicio = horaIn.toLocalTime();
+                Time horaF =resultado.getTime("HoraFin");
+                LocalTime horaFin = horaF.toLocalTime();
+                int af = resultado.getInt("aforo");
+                int afD =resultado.getInt("aforoDisponible");
+                ev = new Evento(n,l,lFecha,horaInicio,horaFin,af,afD);
+                System.out.println("He creado un objeto evento " + ev.toString());
+            }else{
+                System.out.println("No se ha seleccionado ningun evento");
+            }
+
+        }catch (Exception a){System.out.println(a.getClass());}
+        return ev;
+    }
+    /*Tercer Metodo. Delete evento*/
+    public boolean deleteEvento(Evento evento){
+        boolean borrado=false;
+        try{
+            System.out.println("Estoy en la funcion deleteEvento");
+            String plantilla = "delete from evento where nombre = ?";
+            PreparedStatement ps = conexion.prepareStatement(plantilla);
+            ps.setString(1, evento.getNombre());
+            int rs = ps.executeUpdate();
+            if(rs == 1){
+                borrado =true;
+            }
+            else{
+                System.out.println("No se ha borrado nada");
+            }
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return borrado;
     }
 
 

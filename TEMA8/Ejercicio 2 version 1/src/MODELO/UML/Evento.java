@@ -94,14 +94,12 @@ public class Evento {
 
     @Override
     public String toString() {
-        return "Evento{" +
-                "nombre='" + nombre + '\'' +
-                ", lugar='" + lugar + '\'' +
-                ", fecha=" + fecha +
-                ", horaInicio=" + horaInicio +
-                ", horaFin=" + horaFin +
-                ", aforo=" + aforo +
-                ", aforoDisponible=" + aforoDisponible +
-                '}';
+        return "Evento: " + nombre + "\n" +
+                "Lugar: " + lugar + "\n" +
+                "Fecha: " + fecha +"\n"+
+                "HoraInicio: " + horaInicio + "\n"+
+                "HoraFin: " + horaFin + "\n"+
+                "Aforo: " + aforo + "\n"+
+                "Aforo disponible: " + aforoDisponible;
     }
 }

@@ -49,7 +49,7 @@ public class VentanaMenu {
         bCancelarEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaEliminarModificar();
+                Main.abrirVentanaEliminarEvento();
 
             }
         });

@@ -3,10 +3,13 @@ package com.company;
 import MODELO.BASEDEDATOS.BD;
 import MODELO.BASEDEDATOS.EventoDAO;
 import MODELO.UML.Evento;
+import VISTA.VentanaConfirmacion;
+import VISTA.VentanaEliminarEvento;
 import VISTA.VentanaMenu;
 import VISTA.VentanaNuevoEvento;
 
 import javax.swing.*;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -17,13 +20,14 @@ public class Main {
     /**/
     static JFrame vp;
     static Evento evento;
+    static Dialog dgEl;
 
     public static void main(String[] args) {
     /*Abro la conexion iniciando los dos objetos de la conexion*/
         bd = new BD();
         bd.abrirConexion();
     /*Objeto eventoDao*/
-        evenDao =new EventoDAO(bd.getCon()); /*No entiendo muy bien el porque de esto*/
+        evenDao = new EventoDAO(bd.getCon()); /*No entiendo muy bien el porque de esto*/
     /*Ahora tengo que abrir la ventanaMenu*/
         abrirVentanaPrincipal();
 
@@ -45,6 +49,30 @@ public class Main {
         }
         return evento;
     }
+    public static String getNombre(String tfnombre){
+        String nombre="";
+        try{
+            nombre = tfnombre;
+            evento = evenDao.selectNombre(nombre);
+            System.out.println("Estoy en get nombre. selectNombre me a devuelto este objeto "+ evento.toString());
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return nombre;
+    }
+    public static boolean deleteEvento(Evento evento){
+        boolean borrado =false;
+        try{
+           borrado =  evenDao.deleteEvento(evento);
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+
+        return borrado;
+    }
+    public static Evento eventoSeleccionado(){
+        return evento;
+    }
     public static boolean getConfirmacion(){
         boolean insertado = false;
         try{
@@ -53,6 +81,16 @@ public class Main {
             System.out.println(e.getClass());
         }
         return insertado;
+    }
+    public static void abrirVentanaConfirmacion(){
+        try{
+            dgEl.dispose();
+            VentanaConfirmacion dialog = new VentanaConfirmacion();
+            dialog.pack();
+            dialog.setVisible(true);
+        }catch (Exception  e){
+            System.out.println(e.getClass());
+        }
     }
     public static void abrirVentanaPrincipal(){
         try{
@@ -80,5 +118,9 @@ public class Main {
             System.out.println(e.getClass());
         }
     }
-    public static void abrirVentanaEliminarModificar(){}
+    public static void abrirVentanaEliminarEvento(){
+        dgEl = new VentanaEliminarEvento();
+        dgEl.pack();
+        dgEl.setVisible(true);
+    }
 }

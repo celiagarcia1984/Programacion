@@ -1,24 +1,28 @@
 package VISTA;
 
+import MODELO.UML.Evento;
+import com.company.Main;
+
 import javax.swing.*;
 import java.awt.event.*;
 
-public class VentanaEliminarModificarEv extends JDialog {
+public class VentanaConfirmacion extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JPanel jpBotones;
-    private JPanel jpPanelInferior;
     private JPanel jpContenido;
-    private JPanel jpOpciones;
-    private JLabel lTitulo;
-    private JRadioButton rbCancelar;
-    private JRadioButton rbModificar;
+    private JPanel jpInferior;
+    private JPanel jpBotones;
+    private JPanel jpTitulo;
+    private JTextArea taEvento;
+    private Evento evento;
 
-    public VentanaEliminarModificarEv() {
+    public VentanaConfirmacion() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
+        evento= Main.eventoSeleccionado();
+        taEvento.setText(evento.toString());
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -49,11 +53,12 @@ public class VentanaEliminarModificarEv extends JDialog {
     }
 
     private void onOK() {
-        /*Cuando doy a ok, miro que radioButton esta seleccionado*/
-        if(rbCancelar.isSelected()){
-
+        /*Aqui empieza el delete*/
+        if(Main.deleteEvento(evento)){
+            JOptionPane.showMessageDialog(null,"El evento se ha eliminado");
         }
-        //dispose();
+
+        dispose();
     }
 
     private void onCancel() {
@@ -62,7 +67,7 @@ public class VentanaEliminarModificarEv extends JDialog {
     }
 
     public static void main(String[] args) {
-        VentanaEliminarModificarEv dialog = new VentanaEliminarModificarEv();
+        VentanaConfirmacion dialog = new VentanaConfirmacion();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
