@@ -5,11 +5,13 @@ import java.sql.Date;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class EventoDAO {
 
     private Connection conexion;
     private Evento ev=null;
+    private boolean confirmarSelect = false;
 
     /*constructor con conexion*/
 
@@ -82,9 +84,12 @@ public class EventoDAO {
                 System.out.println("He creado un objeto evento " + ev.toString());
             }else{
                 System.out.println("No se ha seleccionado ningun evento");
+                confirmarSelect = false;
             }
 
-        }catch (Exception a){System.out.println(a.getClass());}
+        }catch (Exception a){
+
+            System.out.println(a.getClass());}
         return ev;
     }
     /*Tercer Metodo. Delete evento*/
@@ -106,6 +111,29 @@ public class EventoDAO {
             System.out.println(e.getClass());
         }
         return borrado;
+    }
+    /*Cuarto Metodo. Select todos los nombres*/
+    public ArrayList<String> selectNombres(){
+        ArrayList<String>listaEventos=new ArrayList<>();
+        try{
+            String plantilla = "select nombre from evento";
+            Statement st = conexion.createStatement();
+            ResultSet rs;
+            rs = st.executeQuery(plantilla);
+            while(rs.next()){
+                listaEventos.add(rs.getString("nombre"));
+                System.out.println(rs.getString("nombre")+ " Estoy guardando este nombre en el array");
+            }
+            System.out.println("No hay mas eventos");
+
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return listaEventos;
+    }
+    public boolean confirmarSelect(){
+
+        return confirmarSelect;
     }
 
 

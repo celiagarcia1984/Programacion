@@ -3,15 +3,13 @@ package com.company;
 import MODELO.BASEDEDATOS.BD;
 import MODELO.BASEDEDATOS.EventoDAO;
 import MODELO.UML.Evento;
-import VISTA.VentanaConfirmacion;
-import VISTA.VentanaEliminarEvento;
-import VISTA.VentanaMenu;
-import VISTA.VentanaNuevoEvento;
+import VISTA.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Main {
     /*Lo que necesito para establecer la conexion*/
@@ -21,6 +19,9 @@ public class Main {
     static JFrame vp;
     static Evento evento;
     static Dialog dgEl;
+    private static ArrayList<String>listaEventos = new ArrayList<>();
+    static boolean eventoEncontrado =false;
+
 
     public static void main(String[] args) {
     /*Abro la conexion iniciando los dos objetos de la conexion*/
@@ -71,7 +72,13 @@ public class Main {
         return borrado;
     }
     public static Evento eventoSeleccionado(){
+        if(!evenDao.confirmarSelect()){
+            eventoEncontrado =false;
+        }
         return evento;
+    }
+    public static boolean eventoNoEncontrado(){
+        return eventoEncontrado;
     }
     public static boolean getConfirmacion(){
         boolean insertado = false;
@@ -123,5 +130,18 @@ public class Main {
         dgEl = new VentanaEliminarEvento();
         dgEl.pack();
         dgEl.setVisible(true);
+    }
+    public static void ventanaModificar(){
+        System.out.println("abro ventana modificar");
+        VentanaModificar dialog = new VentanaModificar();
+        dialog.pack();
+        dialog.setVisible(true);
+    }
+    public static ArrayList<String> dameNombresDeEventos(){
+        try{
+        listaEventos = evenDao.selectNombres();
+        }catch (Exception e){
+        }
+        return listaEventos;
     }
 }

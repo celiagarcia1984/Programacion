@@ -30,10 +30,9 @@ public class VentanaMenu {
     private JButton button4;
     private JButton button5;
     private JButton button6;
-    private boolean estoyModificando = false;
+
 
     public VentanaMenu() {
-
         /*PARTE DEL INSERT*/
         jmiAnadirEv.addActionListener(new ActionListener() {
             @Override
@@ -56,19 +55,13 @@ public class VentanaMenu {
             }
         });
 
+
         bModificarEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                estoyModificando = true;
-                System.out.println("e pulsado modificar "+ estoyModificando);
-                if(estoyModificando){
-
-                    Main.ventanaAñadirEvento();
-                }
+                Main.ventanaModificar();
             }
         });
-        /*PARTE DEL UPDATE*/
-
     }
 
     public JPanel getJpPrincipal() {

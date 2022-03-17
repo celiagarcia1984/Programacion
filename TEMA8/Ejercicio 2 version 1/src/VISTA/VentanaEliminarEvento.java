@@ -59,8 +59,13 @@ public class VentanaEliminarEvento extends JDialog {
                 super.focusLost(e);
                if(validarNombre() ) {
                   Main.getNombre(tfNombre.getText());
+
+               /*   if(!Main.eventoNoEncontrado()){
+                      JOptionPane.showMessageDialog(null,"Evento no encontrado","Error",JOptionPane.ERROR_MESSAGE);
+                  }*/
+
                }
-               buttonOK.setEnabled(true);
+
                 Main.abrirVentanaConfirmacion();
             }
         });
@@ -69,7 +74,7 @@ public class VentanaEliminarEvento extends JDialog {
 
     private void onOK() {
         // add your code here
-        dispose();
+        //dispose();
     }
 
     private void onCancel() {
@@ -81,7 +86,7 @@ public class VentanaEliminarEvento extends JDialog {
         VentanaEliminarEvento dialog = new VentanaEliminarEvento();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+
 
     }
     public boolean validarNombre () {

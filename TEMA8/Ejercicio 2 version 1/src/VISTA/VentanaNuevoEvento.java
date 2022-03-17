@@ -36,7 +36,7 @@ public class VentanaNuevoEvento extends JDialog {
     private LocalDate fecha = null;
     private LocalTime horaFin = null;
     private LocalTime horaInicio = null;
-    private static boolean estoyModificando;
+
 
     public VentanaNuevoEvento() {
         /*Llenar ComboBox*/
@@ -44,7 +44,7 @@ public class VentanaNuevoEvento extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-
+        /*Tengo que traerme la booleana modificando*/
 
 
         /*Esta parte es para añadir evento*/
@@ -83,27 +83,25 @@ public class VentanaNuevoEvento extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,
                 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
+
     }
 
-    private void onOK() {
+     private void onOK() {
         // add your code here
         dispose();
     }
-
-    private void onCancel() {
+     private void onCancel() {
         // add your code here if necessary
         dispose();
     }
-
-    public void main(String[] args) {
+     public void main(String[] args) {
 
         VentanaNuevoEvento dialog = new VentanaNuevoEvento();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
     }
-
-    private void llenarComboBox() {
+     private void llenarComboBox() {
         try {
             cbLugar.addItem("Artium");
             cbLugar.addItem("Europa");
@@ -115,8 +113,7 @@ public class VentanaNuevoEvento extends JDialog {
             System.out.println(e.getClass());
         }
     }
-
-    private boolean validarDatos() {
+     private boolean validarDatos() {
         boolean datosValidos = false;
 
         try {
@@ -132,7 +129,6 @@ public class VentanaNuevoEvento extends JDialog {
         }
         return datosValidos;
     }
-
      public boolean validarAforoDisponible() {
         boolean aforoDispValido = false;
         try {
@@ -155,7 +151,7 @@ public class VentanaNuevoEvento extends JDialog {
             }
             return aforoDispValido;
         }
-        public boolean validarAforo () {
+     public boolean validarAforo () {
             boolean aforoValido = false;
             try {
                 if (!tfAforo.getText().isEmpty()) {
@@ -178,7 +174,7 @@ public class VentanaNuevoEvento extends JDialog {
             }
             return aforoValido;
         }
-        public boolean validarHoraFin () {
+     public boolean validarHoraFin () {
             boolean horaFinValida = false;
             try {
                 if (!tfHoraFin.getText().isEmpty()) {
@@ -211,7 +207,7 @@ public class VentanaNuevoEvento extends JDialog {
             }
             return horaFinValida;
         }
-        public boolean validarHoraInicio () {
+     public boolean validarHoraInicio () {
             boolean horaInValida = false;
             try {
                 if (!tfHoraInicio.getText().isEmpty()) {
@@ -237,7 +233,7 @@ public class VentanaNuevoEvento extends JDialog {
             }
             return horaInValida;
         }
-        public boolean validarFecha () {
+     public boolean validarFecha () {
             boolean fechaValida = false;
             try {
                 if (!tfFecha.getText().isEmpty()) {
@@ -257,7 +253,7 @@ public class VentanaNuevoEvento extends JDialog {
             }
             return fechaValida;
         }
-        public boolean validarNombre () {
+     public boolean validarNombre () {
             boolean nombreValido = false;
             try {
                 do {
