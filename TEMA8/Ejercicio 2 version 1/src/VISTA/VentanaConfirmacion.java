@@ -65,7 +65,6 @@ public class VentanaConfirmacion extends JDialog {
         // add your code here if necessary
         dispose();
     }
-
     public static void main(String[] args) {
         VentanaConfirmacion dialog = new VentanaConfirmacion();
         dialog.pack();
