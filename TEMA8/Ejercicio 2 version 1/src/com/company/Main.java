@@ -114,6 +114,7 @@ public class Main {
             dialog.setVisible(true);
             dialog.setLocationRelativeTo(null);
             vp.dispose();
+
         }catch (Exception e){
             System.out.println(e.getClass());
         }

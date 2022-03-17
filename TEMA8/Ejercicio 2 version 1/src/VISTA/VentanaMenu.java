@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class VentanaMenu {
+
     private JPanel jpPrincipal;
     private JPanel jpMenu;
     private JMenuBar jmbMenu;
@@ -29,8 +30,10 @@ public class VentanaMenu {
     private JButton button4;
     private JButton button5;
     private JButton button6;
+    private boolean estoyModificando = false;
 
     public VentanaMenu() {
+
         /*PARTE DEL INSERT*/
         jmiAnadirEv.addActionListener(new ActionListener() {
             @Override
@@ -50,11 +53,23 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.abrirVentanaEliminarEvento();
-
             }
         });
-    }
 
+        bModificarEv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                estoyModificando = true;
+                System.out.println("e pulsado modificar "+ estoyModificando);
+                if(estoyModificando){
+
+                    Main.ventanaAñadirEvento();
+                }
+            }
+        });
+        /*PARTE DEL UPDATE*/
+
+    }
 
     public JPanel getJpPrincipal() {
         return jpPrincipal;

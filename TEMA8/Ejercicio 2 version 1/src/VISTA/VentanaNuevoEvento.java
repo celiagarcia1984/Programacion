@@ -36,6 +36,7 @@ public class VentanaNuevoEvento extends JDialog {
     private LocalDate fecha = null;
     private LocalTime horaFin = null;
     private LocalTime horaInicio = null;
+    private static boolean estoyModificando;
 
     public VentanaNuevoEvento() {
         /*Llenar ComboBox*/
@@ -44,6 +45,9 @@ public class VentanaNuevoEvento extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
+
+
+        /*Esta parte es para añadir evento*/
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (validarDatos()) {
