@@ -19,7 +19,7 @@ public class Main {
     static JFrame vp;
     static Evento evento;
     static Dialog dgEl;
-    private static ArrayList<String>listaEventos = new ArrayList<>();
+    private static ArrayList<Evento>listaEventos = new ArrayList<>();
     static boolean eventoEncontrado =false;
 
 
@@ -37,14 +37,16 @@ public class Main {
                                   int aforo, int aforoDisponible){
         boolean filaInsertada;
         try{
+            System.out.println("Estoy en el Main en la funcion getDatos");
             evento = new Evento(nombre, lugar, fecha, horaInicio,horaFin,aforo,aforoDisponible);
-            System.out.println(evento + " Estoy en la funcion get datos para comprobar si la fecha es null" );
-
+            System.out.println(evento + " Estos son los datos que se han guardado en evento" );
+            System.out.println("Llamo a la funcion evenDao.insertEvento. Me voy a EventoDAO");
            filaInsertada =  evenDao.insertEvento(evento);
            if(filaInsertada){
+               System.out.println("Estoy en el Main.Recibo la confirmacion de fila insertada. Llamo a la funcion getConfirmacion de esta clase");
                getConfirmacion();
            }
-
+            System.out.println("Me voy a la ventanaNuevo evento pasandole la confirmacion del insert");
         }catch (Exception e){
             System.out.println(e.getClass());
         }
@@ -53,9 +55,11 @@ public class Main {
     public static String getNombre(String tfnombre){
         String nombre="";
         try{
+            System.out.println("Estoy en get nombre. Le doy el nombre de un evento para que me saque datos. Me voy a la funcion eventodao.selectnOMBRE");
             nombre = tfnombre;
             evento = evenDao.selectNombre(nombre);
             System.out.println("Estoy en get nombre. selectNombre me a devuelto este objeto "+ evento.toString());
+            System.out.println("dE AQUI VOY A LA FUNCION EVENTO SELECCIONADO. EN LA VENTANA MODIFICAR");
         }catch (Exception e){
             System.out.println(e.getClass());
         }
@@ -83,6 +87,7 @@ public class Main {
     public static boolean getConfirmacion(){
         boolean insertado = false;
         try{
+            System.out.println("MAIN. funcion getConfirmacion. Devuelvo confirmacion");
             insertado =true;
         }catch (Exception e){
             System.out.println(e.getClass());
@@ -101,7 +106,8 @@ public class Main {
     }
     public static void abrirVentanaPrincipal(){
         try{
-            System.out.println("Abro la ventana Principal");
+
+            System.out.println("Abro la ventana Principal. Esta funcion esta en el Main");
             JFrame vp = new JFrame("VentanaMenu");
             vp.setContentPane(new VentanaMenu().getJpPrincipal());
             vp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,6 +122,7 @@ public class Main {
     public static void ventanaAñadirEvento(){
         try{
             /*Main de la ventana Añadir Evento*/
+            System.out.println("Estoy en la funcion ventanaAñadir Evento. En el Main. Me voy a la ventanaNuevoEvento");
             VentanaNuevoEvento dialog = new VentanaNuevoEvento();
             dialog.pack();
             dialog.setVisible(true);
@@ -137,11 +144,12 @@ public class Main {
         dialog.pack();
         dialog.setVisible(true);
     }
-    public static ArrayList<String> dameNombresDeEventos(){
+    public static void obtenerDatosParaLaVentanaModificar(){
         try{
-        listaEventos = evenDao.selectNombres();
+            listaEventos = evenDao.selectTodos();
         }catch (Exception e){
+            System.out.println(e.getClass());
         }
-        return listaEventos;
     }
+
 }

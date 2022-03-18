@@ -57,7 +57,7 @@ public class EventoDAO {
             filaInsertada =false;
             System.out.println(e.getClass());
         }
-
+        System.out.println("Devuelvo la confirmacion de si se ha insertado una fila. Me voy a la funcion Main.getDatos");
         return filaInsertada;
     }
     /*Segundo Metodo. Select nombre*/
@@ -81,7 +81,7 @@ public class EventoDAO {
                 int af = resultado.getInt("aforo");
                 int afD =resultado.getInt("aforoDisponible");
                 ev = new Evento(n,l,lFecha,horaInicio,horaFin,af,afD);
-                System.out.println("He creado un objeto evento " + ev.toString());
+                System.out.println("He creado un objeto evento " + ev.toString()+ "lO DEVUELVO AL MAIN");
             }else{
                 System.out.println("No se ha seleccionado ningun evento");
                 confirmarSelect = false;
@@ -112,25 +112,23 @@ public class EventoDAO {
         }
         return borrado;
     }
-    /*Cuarto Metodo. Select todos los nombres*/
-    public ArrayList<String> selectNombres(){
-        ArrayList<String>listaEventos=new ArrayList<>();
+    /*Cuarto Metodo. Select todos los los eventos*/
+    public ArrayList<Evento> selectTodos(){
+        ArrayList<Evento>listaEventos = new ArrayList<>();
         try{
-            String plantilla = "select nombre from evento";
-            Statement st = conexion.createStatement();
-            ResultSet rs;
-            rs = st.executeQuery(plantilla);
-            while(rs.next()){
-                listaEventos.add(rs.getString("nombre"));
-                System.out.println(rs.getString("nombre")+ " Estoy guardando este nombre en el array");
+            /*Tengo que hacer un select de todos los eventos e ir creando objetos evento y guardandolos en el array*/
+            String plantilla = "Select * from evento";
+            PreparedStatement ps = conexion.prepareStatement(plantilla);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                S
             }
-            System.out.println("No hay mas eventos");
-
         }catch (Exception e){
             System.out.println(e.getClass());
         }
-        return listaEventos;
+       return listaEventos;
     }
+
     public boolean confirmarSelect(){
 
         return confirmarSelect;

@@ -40,19 +40,22 @@ public class VentanaNuevoEvento extends JDialog {
 
     public VentanaNuevoEvento() {
         /*Llenar ComboBox*/
+        System.out.println("llamo a la funcion llenarCombobox de esta misma clase");
         llenarComboBox();
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        /*Tengo que traerme la booleana modificando*/
+
 
 
         /*Esta parte es para añadir evento*/
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("E pulsado el boton Ok. Si los datos son validos Llamo a la funcion del Main.getDatos. Me voy al Main");
                 if (validarDatos()) {
                     Main.getDatos(tfNombre.getText(), String.valueOf(cbLugar.getSelectedItem()), fecha, horaInicio,
                             horaFin, Integer.parseInt(tfAforo.getText()), Integer.parseInt(tfAforoDisponible.getText()));
+                    System.out.println("La funcion Main.getDatos me ha devuelto la confirmacion del insert");
                     if (Main.getConfirmacion()) {
                         JOptionPane.showMessageDialog(null, "Evento añadido");
                         dispose();
@@ -103,14 +106,17 @@ public class VentanaNuevoEvento extends JDialog {
     }
      private void llenarComboBox() {
         try {
+            System.out.println("Estoy en la funcion llenar ComboBox.");
             cbLugar.addItem("Artium");
             cbLugar.addItem("Europa");
             cbLugar.addItem("Canciller");
             cbLugar.addItem("Giralda");
             cbLugar.addItem("Florida");
             cbLugar.addItem("Plaza");
+            System.out.println("Aqui termino de llenar el combo");
         } catch (Exception e) {
-            System.out.println(e.getClass());
+            System.out.println("Hay un problema al llenar el combo"+e.getClass());
+
         }
     }
      private boolean validarDatos() {

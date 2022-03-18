@@ -92,7 +92,7 @@ public class Evento {
         this.aforoDisponible = aforoDisponible;
     }
 
-    @Override
+    @Override /*Este es el texto que sale cuando se confirman los datos de borrado*/
     public String toString() {
         return "Evento: " + nombre + "\n" +
                 "Lugar: " + lugar + "\n" +

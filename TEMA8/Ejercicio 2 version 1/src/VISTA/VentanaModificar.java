@@ -6,6 +6,9 @@ import com.company.Main;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class VentanaModificar extends JDialog {
@@ -26,17 +29,22 @@ public class VentanaModificar extends JDialog {
     private JTextField tfAforo;
     private JTextField tfAforoDisp;
     private JTextField tfLugar;
-    private static ArrayList<String>listaEventos = new ArrayList<>();
+
+
 
     public VentanaModificar() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        llenarCombo();
+        /*Llenar ComboBox. No puedo traerme un objeto Evento.*/
+        llenarComboBox();
 
+
+
+       /* *************************AQUI EMPIEZAN LOS LISTENERS*****************************************/
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();/*en esta funcion tengo que poner la confirmacion del cambio*/
+                onOK();
             }
         });
 
@@ -62,20 +70,19 @@ public class VentanaModificar extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
         cbEventos.addMouseMotionListener(new MouseMotionAdapter() {
         });
-        cbEventos.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                String nombre = cbEventos.getSelectedItem().toString();
-                Main.getNombre(nombre);
-                Evento evento;
-                evento = Main.eventoSeleccionado();
-                llenarDatos(evento);
-            }
-        });
+
+
+    }
+/* ********************************AQUI EMPIEZAN LAS FUNCIONES ************************************************/
+    private void llenarComboBox(){
+        try{
+            /*Llamo a una funcion del Main que me va a dar los datos para llenarlo. Lo tengo que llenar en el MAIN con funciones que llamo aqui*/
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
     }
 
     private void onOK() {
-        // add your code here
         dispose();
     }
 
@@ -83,15 +90,7 @@ public class VentanaModificar extends JDialog {
         // add your code here if necessary
         dispose();
     }
-    private void llenarCombo(){
-        /*Tengo que hacer un select que me saque los nombres de todos los eventos
-        * esos nombres los tengo que guardar en un array*/
-        listaEventos = Main.dameNombresDeEventos();
-        System.out.println("Estoy en llenar combo. tamaño del array "+ listaEventos.size());
-        for(int i=0; i<listaEventos.size();i++){
-            cbEventos.addItem(listaEventos.get(i));
-        }
-    }
+
 
     public static void main(String[] args) {
         VentanaModificar dialog = new VentanaModificar();
@@ -99,16 +98,6 @@ public class VentanaModificar extends JDialog {
         dialog.setVisible(true);
         System.exit(0);
     }
-    private void llenarDatos(Evento evento){
-        try{
-            tfLugar.setText(evento.getLugar());
-            tfFecha.setText(evento.getFecha().toString());
-            tfHoraIn.setText(evento.getHoraInicio().toString());
-            tfHoraFin.setText(evento.getHoraFin().toString());
-            tfAforoDisp.setText(String.valueOf(evento.getAforoDisponible()));
-            tfAforo.setText(String.valueOf(evento.getAforo()));
-        }catch (Exception e){
-            System.out.println(e.getClass());
-        }
-    }
+
+
 }
