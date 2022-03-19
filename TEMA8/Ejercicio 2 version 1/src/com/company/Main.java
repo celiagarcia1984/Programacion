@@ -7,8 +7,10 @@ import VISTA.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Main {
@@ -147,9 +149,90 @@ public class Main {
     public static void obtenerDatosParaLaVentanaModificar(){
         try{
             listaEventos = evenDao.selectTodos();
+            System.out.println("Ya tengo el array con la lista de eventos");
         }catch (Exception e){
             System.out.println(e.getClass());
         }
     }
+    public static ArrayList<String> llenaCombo(){
+        ArrayList<String>listaNombres= new ArrayList<>();
+        String nombre="";
+        try{
+            System.out.println("Esoy en la funcion llenaCombo en el main");
+            for (int i=0;i<listaEventos.size();i++){
+               listaNombres.add(listaEventos.get(i).getNombre());
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return listaNombres;
+    }
+    /*Recoge el evento que se ha seleccionado*/
+    public static void eventoElegidoEnElCombo(int posicion){
+        evento = listaEventos.get(posicion);
+    }
+    public static String getLugar(){
+        String lugar="";
+        try{
+           lugar = evento.getLugar();
+        }catch (Exception e){System.out.println(e.getClass());}
 
+        return lugar;
+    }
+    public static String getFecha(){
+        String fecha ="";
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try{
+            LocalDate ldFecha = evento.getFecha();
+
+        }catch (Exception e){System.out.println(e.getClass());}
+        return evento.getFecha().format(formato);
+    }
+    public static String getHoraInicio(){
+        String horaInicio ="";
+        try{
+            horaInicio = evento.getHoraInicio().toString();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return horaInicio;
+    }
+    public static String getHoraFin(){
+        String horaFin ="";
+        try{
+            horaFin = evento.getHoraFin().toString();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return horaFin;
+    }
+    public static String getAforo(){
+        String aforo ="";
+        try{
+            aforo = String.valueOf(evento.getAforo());
+        }catch (Exception e){System.out.println(e.getClass());}
+        return aforo;
+    }
+    public static String getAforoDisponible(){
+        String aforoDisponible ="";
+        try{
+            aforoDisponible = String.valueOf(evento.getAforoDisponible());
+        }catch (Exception e){System.out.println(e.getClass());}
+        return aforoDisponible;
+    }
+    public static boolean tenNuevoEvento(String sNombre, String lugar, LocalDate fecha, LocalTime horaInicio,
+                                         LocalTime horaFin, int aforo, int aforoDisponible){
+        boolean updateHecho =false;
+        try{
+
+            System.out.println("Estoy creando un nuevo objeto para modificar la base de datos. el nombre es: " +sNombre);
+
+            evento = new Evento(sNombre,lugar,fecha,horaInicio,horaFin,aforo,aforoDisponible);
+            updateHecho= evenDao.updateEvento(evento);
+        }catch (Exception e){System.out.println(e.getClass());}
+        return updateHecho;
+    }
+    public static boolean HacerUpdate(){
+        boolean updateHecho=false;
+        try{
+            updateHecho= evenDao.updateEvento(evento);
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return updateHecho;
+}
 }

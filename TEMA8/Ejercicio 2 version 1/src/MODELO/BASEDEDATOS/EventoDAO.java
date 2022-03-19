@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class EventoDAO {
@@ -112,19 +113,56 @@ public class EventoDAO {
         }
         return borrado;
     }
+    public boolean updateEvento(Evento evento){
+        boolean updateHecho=false;
+        try{
+            String plantilla= "update evento set lugar = ?,fecha=? ,horaInicio = ?, horaFin=?, aforo=?,aforoDisponible=? where nombre=?";
+            PreparedStatement ps = conexion.prepareStatement(plantilla);
+            ps.setString(1,evento.getLugar());
+            ps.setDate(2,Date.valueOf(evento.getFecha()));
+            ps.setTime(3,Time.valueOf(evento.getHoraInicio()));
+            ps.setTime(4,Time.valueOf(evento.getHoraFin()));
+            ps.setInt(5,evento.getAforo());
+            ps.setInt(6,evento.getAforoDisponible());
+            ps.setString(7,evento.getNombre());
+
+            int filasActualizadas = ps.executeUpdate();
+
+            if(filasActualizadas==1){
+                System.out.println("Se ha hecho el update");
+                updateHecho =true;
+            }
+
+        }catch (Exception e){System.out.println(e.getClass()+" Problemas en el update");}
+        return updateHecho;
+    }
     /*Cuarto Metodo. Select todos los los eventos*/
     public ArrayList<Evento> selectTodos(){
         ArrayList<Evento>listaEventos = new ArrayList<>();
         try{
+            System.out.println("Estoy en el metodo select Todos en la ventana EventoDao. llamado del main");
             /*Tengo que hacer un select de todos los eventos e ir creando objetos evento y guardandolos en el array*/
             String plantilla = "Select * from evento";
             PreparedStatement ps = conexion.prepareStatement(plantilla);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                S
+                String nombre= rs.getString("nombre");
+                String lugar = rs.getString("lugar");
+                Date fecha = rs.getDate("fecha");
+                LocalDate ldFecha = fecha.toLocalDate();
+                Time horaInicio = rs.getTime("horaInicio");
+                LocalTime ltHoraInicio = horaInicio.toLocalTime();
+                Time horaFin = rs.getTime("horaFin");
+                LocalTime ltHoraFin= horaFin.toLocalTime();
+                int aforo =rs.getInt("aforo");
+                int aforoDisponible = rs.getInt("aforoDisponible");
+
+                listaEventos.add(new Evento(nombre,lugar,ldFecha,ltHoraInicio,ltHoraFin,aforo,aforoDisponible));
+                System.out.println(listaEventos.toString());
+
             }
         }catch (Exception e){
-            System.out.println(e.getClass());
+            System.out.println(e.getClass()+ " Problemas con el select");
         }
        return listaEventos;
     }
