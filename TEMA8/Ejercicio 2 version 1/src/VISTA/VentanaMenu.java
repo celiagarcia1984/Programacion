@@ -19,7 +19,7 @@ public class VentanaMenu {
     private JMenuItem jmiAnadirEmp;
     private JMenuItem jmiBorrarEmp;
     private JMenuItem jmiModificarEmp;
-    private JMenu jmLugares;
+    private JMenu jmAsistentes;
     private JMenu jmPresupuestos;
     private JMenu jmCalendario;
     private JMenu jmPersonal;
@@ -27,9 +27,11 @@ public class VentanaMenu {
     private JButton bAnadirEv;
     private JButton bCancelarEv;
     private JButton bModificarEv;
-    private JButton button4;
-    private JButton button5;
+    private JButton bAñadirAsis;
+    private JButton bBajaAsistente;
     private JButton button6;
+    private JMenuItem miAñadirAsistente;
+    private JMenuItem miBajaAsistente;
 
 
     public VentanaMenu() {
@@ -55,12 +57,55 @@ public class VentanaMenu {
                 Main.abrirVentanaEliminarEvento();
             }
         });
-
+        jmiCancelarEv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
+                System.out.println("Estoy en la ventanaMenu y se a pulsado añadir");
+                Main.abrirVentanaEliminarEvento();
+            }
+        });
+        jmiModificarEv.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
+                System.out.println("Estoy en la ventanaMenu y se a pulsado añadir");
+                Main.ventanaModificar();
+            }
+        });
 
         bModificarEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.ventanaModificar();
+            }
+        });
+        bAñadirAsis.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.abrirVentanaAltaAsistente();
+            }
+        });
+        miAñadirAsistente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
+                System.out.println("Estoy en la ventanaMenu y se a pulsado añadirAsistente");
+                Main.abrirVentanaAltaAsistente();
+            }
+        });
+        bBajaAsistente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        miBajaAsistente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
+                System.out.println("Estoy en la ventanaMenu y se a pulsado eliminar asistente");
+
             }
         });
     }

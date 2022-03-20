@@ -45,7 +45,7 @@ public class VentanaModificar extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         /*Llenar ComboBox. No puedo traerme un objeto Evento.*/
-        Main.obtenerDatosParaLaVentanaModificar();
+        Main.obtenerDatosEventos();
         llenarComboBox();
         cbEventos.setSelectedIndex(-1);
         System.out.println("Probado hasta aqui llena el combo");

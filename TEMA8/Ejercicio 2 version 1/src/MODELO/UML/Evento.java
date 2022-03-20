@@ -2,6 +2,7 @@ package MODELO.UML;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class Evento {
     String nombre;
@@ -11,6 +12,7 @@ public class Evento {
     LocalTime horaFin;
     int aforo;
     int aforoDisponible;
+    ArrayList<Persona>listaPersonasAsistentes = new ArrayList<>();
 
     public Evento(String nombre, String lugar, LocalDate fecha, LocalTime horaInicio,
                   LocalTime horaFin, int aforo, int aforoDisponible) {

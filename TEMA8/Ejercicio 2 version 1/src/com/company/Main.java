@@ -1,8 +1,12 @@
 package com.company;
 
 import MODELO.BASEDEDATOS.BD;
+import MODELO.BASEDEDATOS.EmpresaDAO;
 import MODELO.BASEDEDATOS.EventoDAO;
+import MODELO.BASEDEDATOS.PersonaDAO;
+import MODELO.UML.Empresa;
 import MODELO.UML.Evento;
+import MODELO.UML.Persona;
 import VISTA.*;
 
 import javax.swing.*;
@@ -17,11 +21,16 @@ public class Main {
     /*Lo que necesito para establecer la conexion*/
     private static BD bd;
     private static EventoDAO evenDao;
+    /*Para la parte 5 y 6 del ejercicio. Creo dos clases DAO mas*/
+    private static PersonaDAO persDao;
+    private static EmpresaDAO empDao;
     /**/
     static JFrame vp;
     static Evento evento;
     static Dialog dgEl;
+    static Dialog dgAAs;
     private static ArrayList<Evento>listaEventos = new ArrayList<>();
+    private static ArrayList<Empresa> listaEmpresas = new ArrayList<>();
     static boolean eventoEncontrado =false;
 
 
@@ -31,10 +40,13 @@ public class Main {
         bd.abrirConexion();
     /*Objeto eventoDao*/
         evenDao = new EventoDAO(bd.getCon()); /*No entiendo muy bien el porque de esto*/
+        persDao = new PersonaDAO(bd.getCon());
+        empDao = new EmpresaDAO(bd.getCon());
     /*Ahora tengo que abrir la ventanaMenu*/
         abrirVentanaPrincipal();
 
     }
+    /*Estas son las funciones de operacion de la bbdd*/
     public static Evento getDatos(String nombre, String lugar, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin,
                                   int aforo, int aforoDisponible){
         boolean filaInsertada;
@@ -77,6 +89,17 @@ public class Main {
 
         return borrado;
     }
+    public static boolean HacerUpdate(){
+        boolean updateHecho=false;
+        try{
+            updateHecho= evenDao.updateEvento(evento);
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return updateHecho;
+    }
+
+    /*Estas funciones las utilizo para confirmar las transacciones de la bbdd*/
     public static Evento eventoSeleccionado(){
         if(!evenDao.confirmarSelect()){
             eventoEncontrado =false;
@@ -96,6 +119,8 @@ public class Main {
         }
         return insertado;
     }
+
+    /*Estas funciones abren las diferentes ventanas*/
     public static void abrirVentanaConfirmacion(){
         try{
             dgEl.dispose();
@@ -146,13 +171,35 @@ public class Main {
         dialog.pack();
         dialog.setVisible(true);
     }
-    public static void obtenerDatosParaLaVentanaModificar(){
+    public static void abrirVentanaAltaAsistente(){
+        dgAAs = new VentanaAltaAsistente();
+        dgAAs.pack();
+        dgAAs.setVisible(true);
+
+    }
+
+    /*Esta funcion hace el select * de la tabla eventos*/
+    public static void obtenerDatosEventos(){
         try{
             listaEventos = evenDao.selectTodos();
             System.out.println("Ya tengo el array con la lista de eventos");
         }catch (Exception e){
             System.out.println(e.getClass());
         }
+    }
+    public static void obtenerDatosEmpresas(){
+        try{
+            listaEmpresas = empDao.selectTodos();
+        }catch (Exception e){System.out.println(e.getClass());}
+    }
+    public static ArrayList<String> obtenerNombreEmpresas(){
+        ArrayList<String>listaNombresEmpresas = new ArrayList<>();
+        try{
+        for(int i=0;i<listaEmpresas.size();i++){
+            listaNombresEmpresas.add(listaEmpresas.get(i).getNombre());
+        }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return listaNombresEmpresas;
     }
     public static ArrayList<String> llenaCombo(){
         ArrayList<String>listaNombres= new ArrayList<>();
@@ -165,10 +212,13 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return listaNombres;
     }
+
     /*Recoge el evento que se ha seleccionado*/
     public static void eventoElegidoEnElCombo(int posicion){
         evento = listaEventos.get(posicion);
     }
+    /*Estos metodos get guardan en una variable String el dato para darselos a la vista y que los saque en los tf.
+    * De esta forma evito pasarle el objeto a la vista directamente*/
     public static String getLugar(){
         String lugar="";
         try{
@@ -216,6 +266,7 @@ public class Main {
     }
     public static boolean tenNuevoEvento(String sNombre, String lugar, LocalDate fecha, LocalTime horaInicio,
                                          LocalTime horaFin, int aforo, int aforoDisponible){
+        /*Recibe los datos que necesita para crear un objeto con los datos modificados*/
         boolean updateHecho =false;
         try{
 
@@ -226,13 +277,6 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return updateHecho;
     }
-    public static boolean HacerUpdate(){
-        boolean updateHecho=false;
-        try{
-            updateHecho= evenDao.updateEvento(evento);
-        }catch (Exception e){
-            System.out.println(e.getClass());
-        }
-        return updateHecho;
-}
+
+
 }

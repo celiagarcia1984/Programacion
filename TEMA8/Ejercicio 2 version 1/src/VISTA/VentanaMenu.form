@@ -81,14 +81,32 @@
                   </component>
                 </children>
               </grid>
-              <grid id="afecc" class="javax.swing.JMenu" binding="jmLugares" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+              <grid id="afecc" class="javax.swing.JMenu" binding="jmAsistentes" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints/>
                 <properties>
-                  <label value="Lugares"/>
+                  <label value="Asistentes"/>
                 </properties>
                 <border type="none"/>
-                <children/>
+                <children>
+                  <component id="91af6" class="javax.swing.JMenuItem" binding="miAñadirAsistente">
+                    <constraints/>
+                    <properties>
+                      <label value="Añadir asistentes"/>
+                    </properties>
+                  </component>
+                  <hspacer id="1f9f0">
+                    <constraints/>
+                  </hspacer>
+                  <vspacer id="a44e9">
+                    <constraints/>
+                  </vspacer>
+                  <component id="bdc71" class="javax.swing.JMenuItem" binding="miBajaAsistente">
+                    <constraints/>
+                    <properties>
+                      <label value="Dar de baja asistentes"/>
+                    </properties>
+                  </component>
+                </children>
               </grid>
               <grid id="5accf" class="javax.swing.JMenu" binding="jmPresupuestos" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
@@ -160,16 +178,17 @@
                   <text value="Modificar Evento"/>
                 </properties>
               </component>
-              <component id="33396" class="javax.swing.JButton" binding="button4" default-binding="true">
+              <component id="33396" class="javax.swing.JButton" binding="bAñadirAsis">
                 <constraints/>
                 <properties>
-                  <text value="Button"/>
+                  <text value="Añadir asistente"/>
                 </properties>
               </component>
-              <component id="effbb" class="javax.swing.JButton" binding="button5" default-binding="true">
+              <component id="effbb" class="javax.swing.JButton" binding="bBajaAsistente">
                 <constraints/>
                 <properties>
-                  <text value="Button"/>
+                  <label value="Baja asistente"/>
+                  <text value="Baja asistente"/>
                 </properties>
               </component>
               <component id="5245f" class="javax.swing.JButton" binding="button6" default-binding="true">
