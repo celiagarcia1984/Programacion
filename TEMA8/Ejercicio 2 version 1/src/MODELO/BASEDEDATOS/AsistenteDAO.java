@@ -25,10 +25,17 @@ public class AsistenteDAO {
             String plantilla = "select * from asistentes";
             PreparedStatement ps = conexion.prepareStatement(plantilla);
             ResultSet rs = ps.executeQuery();
-            while (rs)
+            while (rs.next()){
+                listaAsistentes.add(new Asistente(rs.getString("idAsistente"), rs.getString("dniPersona"),rs.getString("nombreEvento")));
+            }
+            System.out.println("imprimo listaAsistentes: "+ listaAsistentes.toString());
+            if(!rs.next()){
+                System.out.println("No hay asistentes");
+            }
         } catch (Exception e) {
             System.out.println(e.getClass());
         }
         return listaAsistentes;
     }
+
 }

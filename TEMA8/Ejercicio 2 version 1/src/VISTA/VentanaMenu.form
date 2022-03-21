@@ -181,7 +181,7 @@
               <component id="33396" class="javax.swing.JButton" binding="bAñadirAsis">
                 <constraints/>
                 <properties>
-                  <text value="Añadir asistente"/>
+                  <text value="Añadir persona"/>
                 </properties>
               </component>
               <component id="effbb" class="javax.swing.JButton" binding="bBajaAsistente">

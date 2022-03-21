@@ -31,8 +31,10 @@ public class Main {
 
     private static ArrayList<Evento>listaEventos = new ArrayList<>();
     private static ArrayList<Empresa> listaEmpresas = new ArrayList<>();
-    private static ArrayList<Asistente> listaAsistentes = new ArrayList<>();
+    private static ArrayList<Persona> listaPersonas = new ArrayList<>();
+    private static Persona pers;
     static boolean eventoEncontrado =false;
+    private static int posicionPersona;
 
 
     public static void main(String[] args) {
@@ -173,11 +175,18 @@ public class Main {
         dialog.pack();
         dialog.setVisible(true);
     }
-    public static void abrirVentanaAltaAsistente(){
-        dgAAs = new VentanaAltaAsistente();
+    public static void abrirVentanaAltaPersona(){
+        dgAAs = new VentanaAltaPersona();
         dgAAs.pack();
         dgAAs.setVisible(true);
 
+    }
+    public static void abrirVentanaNuevaEmpresa(){
+        try{
+            VentanaNuevaEmpresa dialog = new VentanaNuevaEmpresa();
+            dialog.pack();
+            dialog.setVisible(true);
+        }catch (Exception e){System.out.println(e.getClass());}
     }
 
     /*Esta funcion hace el select * de la tabla eventos*/
@@ -214,12 +223,41 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return listaNombres;
     }
-    public static boolean buscarAsistente(String dni,int posicion){
-        boolean asistenteEncontrado=false;
+    public static Persona buscarDni(String dni){
+        pers = new Persona();
         try{
-            listaAsistentes = asisDao.selectTodosAsistentes();
-        }catch (Exception e){System.out.println(e.getClass()+" Problema al encontrar el asistente");}
-        return asistenteEncontrado;
+            pers = persDao.getDatosPersona(dni);
+            System.out.println(listaPersonas.toString()+ "Estoy imprimiendo la lista de personas");
+        }catch (Exception e){System.out.println(e.getClass());}
+        return pers;
+    }
+    public static String getNombre(){
+        String nombre="";
+        try{
+            nombre = pers.getNombre();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return nombre;
+    }
+    public static String getApellido(){
+        String apellido="";
+        try{
+        apellido = pers.getApellido();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return apellido;
+    }
+    public static boolean comprobarIdEmpresa(String idEmpresa){
+        boolean idValido=false;
+        try{
+            idValido = empDao.comprobarId(idEmpresa);
+            if(idValido){
+                idValido=true;
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+       return idValido;
     }
 
     /*Recoge el evento que se ha seleccionado*/

@@ -3,6 +3,7 @@ package MODELO.UML;
 public class Persona {
     String dni;
     String nombre;
+    String apellido;
     String nombreEvento;
     String idEmpresa;
 
@@ -10,9 +11,14 @@ public class Persona {
     * personas que van a asistir a un evento, relacion UNIDIRECCIONAL esta puesto un array de personas
     * en la clase evento*/
 
-    public Persona(String dni, String nombre, String nombreEvento, String idEmpresa) {
+    public Persona() {
+    }
+
+
+    public Persona(String dni, String nombre, String apellido, String nombreEvento, String idEmpresa) {
         this.dni = dni;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.nombreEvento = nombreEvento;
         this.idEmpresa = idEmpresa;
     }
@@ -22,9 +28,18 @@ public class Persona {
         return "Persona{" +
                 "dni='" + dni + '\'' +
                 ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
                 ", nombreEvento='" + nombreEvento + '\'' +
                 ", idEmpresa='" + idEmpresa + '\'' +
                 '}';
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getDni() {

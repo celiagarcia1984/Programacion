@@ -30,4 +30,25 @@ public class EmpresaDAO {
         }catch (Exception e){System.out.println(e.getClass());}
         return listaEmpresas;
     }
+    public boolean comprobarId(String idEmpresa){
+        boolean idValido = false;
+        String nombre="";
+        try{
+            String plantilla= "select nombre from empresa where idEmpresa=?";
+            PreparedStatement ps = conexionEm.prepareStatement(plantilla);
+            ps.setString(1,idEmpresa);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                nombre = rs.getString("nombre");
+                System.out.println("Ya hay una empresa con ese id. nombre: "+nombre);
+            }
+            else{
+                idValido=true;
+            }
+
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return idValido;
+    }
 }
