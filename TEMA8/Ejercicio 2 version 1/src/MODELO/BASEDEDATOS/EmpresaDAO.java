@@ -19,14 +19,14 @@ public class EmpresaDAO {
     public ArrayList selectTodos(){
         ArrayList<Empresa>listaEmpresas = new ArrayList<>();
         try{
-            String plantilla = "select * from empresa";
+            String plantilla= "select * from empresa";
             PreparedStatement ps = conexionEm.prepareStatement(plantilla);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
+            while(rs.next()){
                 listaEmpresas.add(new Empresa(rs.getString("idEmpresa"),rs.getString("nombre"),
                         rs.getString("direccion"),rs.getString("telefono")));
             }
-            System.out.println("estoy creando un arraylist de empresas "+ listaEmpresas.toString());
+            System.out.println("estoy llenando el array de empresas "+ listaEmpresas.toString());
         }catch (Exception e){System.out.println(e.getClass());}
         return listaEmpresas;
     }

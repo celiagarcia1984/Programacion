@@ -5,6 +5,8 @@ import com.company.Main;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VentanaAltaAsistente extends JDialog {
     private JPanel contentPane;
@@ -26,6 +28,7 @@ public class VentanaAltaAsistente extends JDialog {
     private JRadioButton rbOtra;
     private ArrayList<String>listaNombresEventos;
     private ArrayList<String>listaNombresEmpresas;
+    private int posicionEvento;
 
     public VentanaAltaAsistente() {
         setContentPane(contentPane);
@@ -39,7 +42,6 @@ public class VentanaAltaAsistente extends JDialog {
         Main.obtenerDatosEmpresas();
         llenarComboBoxEmpresas();
         cbEmpresa.setSelectedIndex(-1);
-
 
 
         buttonOK.addActionListener(new ActionListener() {
@@ -68,11 +70,29 @@ public class VentanaAltaAsistente extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        cbEvento.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                /*Voy a validar el dni y si es correcto, busco el dni en la base de datos, si está cargo los datos,
+            y doy de alta al asistente.Lo añado al array de personas de ese evento*/
+                /*1ª Al seleccionar el evento. Cojo la posicion del evento para consultar el dni en el arrayEventos que
+                 * ya tengo usando la funcion obtenerDatoSeventos*/
+                posicionEvento = cbEvento.getSelectedIndex(); /*tengo la posicion del evento*/
+                /*Necesito una funcion en el main que consulte la tabla asistentes y si no encuentra añadirlo*/
+
+            }
+        });
     }
 
     private void onOK() {
-        // add your code here
-        dispose();
+        /*Validar datos*/
+        boolean asistenteEncontrado =false;
+        if(validarDniAsistente()){
+           asistenteEncontrado= Main.buscarAsistente(tfDni.getText(),posicionEvento);
+        }
+
+
+       // dispose();
     }
 
     private void onCancel() {
@@ -111,5 +131,28 @@ public class VentanaAltaAsistente extends JDialog {
             }
 
         }catch (Exception e){System.out.println(e.getClass());}
+    }
+    private boolean validarDniAsistente(){
+        boolean dniValido=false;
+        try{
+            if(!tfDni.getText().isEmpty()){
+                Pattern patronNombre= Pattern.compile("^[0-9]{8}[A-Za-z]$");
+                Matcher mat = patronNombre.matcher(tfDni.getText());
+                if(mat.matches()){
+                    dniValido =true;
+                    System.out.println("El dni es valido");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"El formato de DNI no es valido");
+                    tfDni.setText("");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"El campo DNI es obligatorio");
+
+            }
+
+        }catch (Exception e){System.out.println(e.getClass()+" Problemas al validar el idEmpresa");}
+        return dniValido;
     }
 }

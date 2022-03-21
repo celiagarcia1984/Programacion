@@ -1,9 +1,7 @@
 package com.company;
 
-import MODELO.BASEDEDATOS.BD;
-import MODELO.BASEDEDATOS.EmpresaDAO;
-import MODELO.BASEDEDATOS.EventoDAO;
-import MODELO.BASEDEDATOS.PersonaDAO;
+import MODELO.BASEDEDATOS.*;
+import MODELO.UML.Asistente;
 import MODELO.UML.Empresa;
 import MODELO.UML.Evento;
 import MODELO.UML.Persona;
@@ -24,13 +22,16 @@ public class Main {
     /*Para la parte 5 y 6 del ejercicio. Creo dos clases DAO mas*/
     private static PersonaDAO persDao;
     private static EmpresaDAO empDao;
+    private static AsistenteDAO asisDao;
     /**/
     static JFrame vp;
     static Evento evento;
     static Dialog dgEl;
     static Dialog dgAAs;
+
     private static ArrayList<Evento>listaEventos = new ArrayList<>();
     private static ArrayList<Empresa> listaEmpresas = new ArrayList<>();
+    private static ArrayList<Asistente> listaAsistentes = new ArrayList<>();
     static boolean eventoEncontrado =false;
 
 
@@ -42,6 +43,7 @@ public class Main {
         evenDao = new EventoDAO(bd.getCon()); /*No entiendo muy bien el porque de esto*/
         persDao = new PersonaDAO(bd.getCon());
         empDao = new EmpresaDAO(bd.getCon());
+        asisDao = new AsistenteDAO(bd.getCon());
     /*Ahora tengo que abrir la ventanaMenu*/
         abrirVentanaPrincipal();
 
@@ -211,6 +213,13 @@ public class Main {
             }
         }catch (Exception e){System.out.println(e.getClass());}
         return listaNombres;
+    }
+    public static boolean buscarAsistente(String dni,int posicion){
+        boolean asistenteEncontrado=false;
+        try{
+            listaAsistentes = asisDao.selectTodosAsistentes();
+        }catch (Exception e){System.out.println(e.getClass()+" Problema al encontrar el asistente");}
+        return asistenteEncontrado;
     }
 
     /*Recoge el evento que se ha seleccionado*/

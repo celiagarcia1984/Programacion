@@ -35,6 +35,18 @@ public class Evento {
         this.aforo = aforo;
     }
 
+    public Evento(String nombre, String lugar, LocalDate fecha, LocalTime horaInicio, LocalTime horaFin, int aforo,
+                  int aforoDisponible, ArrayList<Persona> listaPersonasAsistentes) {
+        this.nombre = nombre;
+        this.lugar = lugar;
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.aforo = aforo;
+        this.aforoDisponible = aforoDisponible;
+        this.listaPersonasAsistentes = listaPersonasAsistentes;
+    }
+
     public Evento() {
     }
 
