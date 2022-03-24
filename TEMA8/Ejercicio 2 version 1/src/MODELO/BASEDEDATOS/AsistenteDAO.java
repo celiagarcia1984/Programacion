@@ -37,5 +37,23 @@ public class AsistenteDAO {
         }
         return listaAsistentes;
     }
+    public boolean insertAsistente(String dni, String evento){
+        boolean insertHecho=false;
+        try{
+            String plantilla="insert into asistente values(null,?,?)";
+            PreparedStatement ps = conexion.prepareStatement(plantilla);
+            ps.setString(1,dni);
+            ps.setString(2,evento);
+            int res = ps.executeUpdate();
+            if(res==1){
+                insertHecho=true;
+                System.out.println("Se ha hecho el insert");
+            }
+            else{
+                System.out.println("no se ha hecho el insert");
+            }
 
+        }catch (Exception e){System.out.println(e.getClass());}
+        return insertHecho;
+    }
 }

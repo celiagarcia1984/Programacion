@@ -30,9 +30,10 @@ public class VentanaNuevaEmpresa extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                validarIdEmpresa();
-                validarNombreEmpresa();
-                onOK();
+                if(validarIdEmpresa()&&validarNombreEmpresa()&&validarTelefono()&&validarDireccion()){
+                    Main.insertEmpresa(tfIdEmpresa.getText(),tfnombre.getText(),tfDireccion.getText(),tfTelefono.getText());
+                }
+                dispose();
             }
         });
 
@@ -72,7 +73,7 @@ public class VentanaNuevaEmpresa extends JDialog {
         VentanaNuevaEmpresa dialog = new VentanaNuevaEmpresa();
         dialog.pack();
         dialog.setVisible(true);
-        System.exit(0);
+
     }
     public boolean validarIdEmpresa(){
         boolean idValido=false;
@@ -81,10 +82,28 @@ public class VentanaNuevaEmpresa extends JDialog {
                 if(tfIdEmpresa.getText().length()==4){
                     /*Comprobar si el id existe en la tabla empresa*/
                   idValido = Main.comprobarIdEmpresa(tfIdEmpresa.getText());
+                  if(!idValido){
+                      llenarDatosVentana();
+                      JOptionPane.showConfirmDialog(null,"La empresa ya existe. Desea modificarla?");
+                      /*Aqui tengo que programar el update de la empresa. Al hacer click en si, se cierran las dos ventanas. ARREGLARLO*/
+                  }
                 }
             }
         }catch (Exception e){System.out.println();}
         return idValido;
+    }
+    public void llenarDatosVentana(){
+        try{
+            System.out.println("Estoy llenando los input de la ventana");
+            tfnombre.setText(Main.getNombreEmpresa());
+            tfDireccion.setText(Main.getDireccionEmpresa());
+            tfTelefono.setText(Main.getTelefonoEmpresa());
+            tfnombre.setEditable(false);
+            tfTelefono.setEditable(false);
+            tfDireccion.setEditable(false);
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
     }
     public boolean validarNombreEmpresa(){
         boolean nombreValido=false;
@@ -109,7 +128,9 @@ public class VentanaNuevaEmpresa extends JDialog {
     public boolean validarTelefono(){
         boolean telefonoValido=false;
         try{
-            if()
+            if(!tfTelefono.getText().isEmpty()){
+                telefonoValido=true;
+            }
         }catch (Exception e){System.out.println(e.getClass());}
         return telefonoValido;
     }

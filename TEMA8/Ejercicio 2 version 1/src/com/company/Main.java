@@ -35,6 +35,8 @@ public class Main {
     private static Persona pers;
     static boolean eventoEncontrado =false;
     private static int posicionPersona;
+    private static Empresa empresaEncontrada;
+    private static Empresa emp;
 
 
     public static void main(String[] args) {
@@ -101,6 +103,21 @@ public class Main {
             System.out.println(e.getClass());
         }
         return updateHecho;
+    }
+    public static boolean insertEmpresa(String idEmpresa,String nombre, String direccion, String telefono){
+        boolean empresaInsertada = false;
+        try{
+            emp=new Empresa(idEmpresa,nombre,direccion,telefono);
+            empresaInsertada = empDao.insertEmpresa(emp);
+        }catch (Exception e){System.out.println(e.getClass());}
+        return empresaInsertada;
+    }
+    public static boolean insertAsistente(String dni, String evento){
+        boolean insertHecho=false;
+        try{
+            insertHecho = asisDao.insertAsistente(dni,evento);
+        }catch (Exception e){System.out.println(e.getClass());}
+        return insertHecho;
     }
 
     /*Estas funciones las utilizo para confirmar las transacciones de la bbdd*/
@@ -223,13 +240,19 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return listaNombres;
     }
-    public static Persona buscarDni(String dni){
+    public static boolean buscarDni(String dni){
+        boolean dniExiste=false;
         pers = new Persona();
         try{
             pers = persDao.getDatosPersona(dni);
-            System.out.println(listaPersonas.toString()+ "Estoy imprimiendo la lista de personas");
+            if(pers.getNombre()!=null){
+                dniExiste = true;
+            }
+
+            System.out.println(pers.toString()+ "Estoy imprimiendo la lista de personas");
         }catch (Exception e){System.out.println(e.getClass());}
-        return pers;
+
+        return dniExiste;
     }
     public static String getNombre(){
         String nombre="";
@@ -249,15 +272,48 @@ public class Main {
         }
         return apellido;
     }
+    /*Para la ventana de nueva Empresa*/
     public static boolean comprobarIdEmpresa(String idEmpresa){
+
         boolean idValido=false;
         try{
             idValido = empDao.comprobarId(idEmpresa);
             if(idValido){
                 idValido=true;
             }
+            else{
+                empresaEncontrada = empDao.getEmpresaEncontrada();
+            }
         }catch (Exception e){System.out.println(e.getClass());}
        return idValido;
+    }
+    public static String getNombreEmpresa(){
+        String nombreEmpresa="";
+        try{
+            nombreEmpresa = empresaEncontrada.getNombre();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return nombreEmpresa;
+    }
+    public static String getDireccionEmpresa(){
+        String direccionEmpresa ="";
+        try{
+            direccionEmpresa= empresaEncontrada.getDireccion();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return direccionEmpresa;
+    }
+    public static String getIdEmpresa(){
+        String idEmpresa="";
+        try{
+            idEmpresa=empresaEncontrada.getIdEmpresa();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return idEmpresa;
+    }
+    public static String getTelefonoEmpresa(){
+        String telefonoEmpresa="";
+            telefonoEmpresa=empresaEncontrada.getTelefono();
+        return telefonoEmpresa;
     }
 
     /*Recoge el evento que se ha seleccionado*/

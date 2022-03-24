@@ -23,9 +23,12 @@ public class VentanaAltaPersona extends JDialog {
     private JComboBox cbEmpresa;
     private JLabel lEmpresa;
     private JRadioButton rbOtra;
+    private JComboBox cbEvento;
+    private JPanel jpEvento;
     private ArrayList<String>listaNombresEventos;
     private ArrayList<String>listaNombresEmpresas;
     private int posicionEvento;
+    private String eventoSeleccionado;
 
     public VentanaAltaPersona() {
         setContentPane(contentPane);
@@ -36,8 +39,11 @@ public class VentanaAltaPersona extends JDialog {
         Main.obtenerDatosEventos();
         Main.obtenerDatosEmpresas();
         llenarComboBoxEmpresas();
+        llenarComboEventos();
         cbEmpresa.setSelectedIndex(-1);
-
+        if(rbOtra.isSelected()){
+            Main.abrirVentanaNuevaEmpresa();
+        }
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -60,6 +66,17 @@ public class VentanaAltaPersona extends JDialog {
         });
 
         // call onCancel() on ESCAPE
+
+        tfDni.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                if(validarDniPersona()){/*Si el dni tiene el formato correcto*/
+
+
+                }
+            }
+        });
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -69,39 +86,49 @@ public class VentanaAltaPersona extends JDialog {
         rbOtra.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaNuevaEmpresa();
+                if(rbOtra.isSelected()){
+                    Main.abrirVentanaNuevaEmpresa();
+                }
             }
         });
+
     }
 
     private void onOK() {
-        /*Validar datos*/
-        boolean asistenteEncontrado =false;
-        if(validarDniPersona()){
-           Main.buscarDni(tfDni.getText());
-           tfNombre.setText(Main.getNombre());
-           tfNombre.setEditable(false);
-           tfApellido.setText(Main.getApellido());
-           tfApellido.setEditable(false);
-
+        if(buscarDni()){ /*Si la persona esta dada de alta, se carga su nombre y apellido y habilita el combo
+                   de eventos.*/
+            tfNombre.setText(Main.getNombre());
+            tfNombre.setEditable(false);
+            tfApellido.setText(Main.getApellido());
+            tfApellido.setEditable(false);
+            jpEvento.setVisible(true);
+            /*Cojo la posicion del evento para buscarlo en el array de eventos*/
+            posicionEvento = cbEvento.getSelectedIndex();
+            eventoSeleccionado = listaNombresEventos.get(posicionEvento);
+            Main.insertAsistente(tfDni.getText(),eventoSeleccionado);
         }
-
 
        // dispose();
     }
-
+/*Si el dni es valido, carga datos de la persona y hace visible comboEvento. Con El dni y el evento, lo paso al main para
+* hacer un insert en asistente*/
+    private boolean buscarDni(){
+        boolean dniExiste=false;
+        try{
+           dniExiste = Main.buscarDni(tfDni.getText());/*Esta funcion mira si ese dni esta dado de alta*/
+        }catch (Exception e){System.out.println(e.getClass());}
+        return dniExiste;
+    }
     private void onCancel() {
         // add your code here if necessary
         dispose();
     }
-
     public static void main(String[] args) {
         VentanaAltaPersona dialog = new VentanaAltaPersona();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
     }
-
     private void llenarComboBoxEmpresas(){
         listaNombresEmpresas = new ArrayList<>();
         System.out.println("imprimo listaNombreEmpresas");
@@ -109,6 +136,16 @@ public class VentanaAltaPersona extends JDialog {
             listaNombresEmpresas = Main.obtenerNombreEmpresas();
             for(int i=0;i<listaNombresEmpresas.size();i++){
                 cbEmpresa.addItem(listaNombresEmpresas.get(i));
+            }
+
+        }catch (Exception e){System.out.println(e.getClass());}
+    }
+    private void llenarComboEventos(){
+        listaNombresEventos = Main.llenaCombo();
+        try{
+            for(int i=0;i<listaNombresEventos.size();i++){
+                cbEvento.addItem(listaNombresEventos.get(i));
+                cbEvento.setSelectedIndex(-1);
             }
 
         }catch (Exception e){System.out.println(e.getClass());}
@@ -134,5 +171,14 @@ public class VentanaAltaPersona extends JDialog {
 
         }catch (Exception e){System.out.println(e.getClass()+" Problemas al validar el idEmpresa");}
         return dniValido;
+    }
+    private boolean validarNombre(){
+        boolean nombreValido=false;
+        try{
+            if(!tfNombre.getText().isEmpty()){
+                nombreValido=true;
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return nombreValido;
     }
 }
