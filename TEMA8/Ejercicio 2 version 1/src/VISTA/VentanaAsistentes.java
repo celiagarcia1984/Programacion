@@ -49,8 +49,6 @@ public class VentanaAsistentes {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-
-
                 dniValido = validarDni();
                 if(dniValido){
                     /*Buscar en la bbdd si existe el dni*/
@@ -58,9 +56,11 @@ public class VentanaAsistentes {
 
                     if(dniEncontrado){
                         /*Al darle al ok si no se esta a falso, manda los datos al main para crear un objeto e insertarlo*/
+                        tfNombre.setText(Main.getNombre());
+                        tfApellido.setText(Main.getApellido());
+
                     }
                 }
-
             }
         });
 
@@ -111,15 +111,20 @@ public class VentanaAsistentes {
         });
 
         bOk.addActionListener(new ActionListener() {
-            @Override
+            @Override/*Si no se encuentra la empresa ni el dni*/
             public void actionPerformed(ActionEvent e) {
                 /*Cuando hacen ok ya estan todos los datos validados. si el dni no ha sido encontrado...le da los
                 * datos al main para hacer el insert*/
+                boolean personaInsertada=false;
+                boolean empresaInsertada=false;
                 if(!empresaEncontrada){
-                    Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
+                  empresaInsertada = Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
                 }
                 if(!dniEncontrado){
-                    Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText());
+                   personaInsertada = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText());
+                }
+                if(personaInsertada&&empresaInsertada){
+                    /*Si se hace el insert bien. Ahora muestro la parte de la ventana para escoger evento*/
                 }
 
             }

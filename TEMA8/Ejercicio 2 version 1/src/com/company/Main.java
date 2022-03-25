@@ -33,7 +33,7 @@ public class Main {
     private static Persona pers;
     static boolean eventoEncontrado =false;
     private static int posicionPersona;
-    private static Empresa empresaEncontrada;
+
     private static Empresa emp;
 
 
@@ -70,7 +70,7 @@ public class Main {
         }
         return evento;
     }
-    public static String getNombre(String tfnombre){
+    public static String buscaNombre(String tfnombre){
         String nombre="";
         try{
             System.out.println("Estoy en get nombre. Le doy el nombre de un evento para que me saque datos. Me voy a la funcion eventodao.selectnOMBRE");
@@ -221,7 +221,7 @@ public class Main {
         try{
            pers = persDao.buscaPersona(dni);
 
-           if(pers.getNombre()!=null){
+           if(pers.getNombre()!= null){
                dniEncontrado=true;
            }
         }catch (Exception e){System.out.println(e.getClass());}
@@ -243,6 +243,7 @@ public class Main {
         String nombre="";
         try{
             nombre = pers.getNombre();
+
         }catch (Exception e){
             System.out.println(e.getClass());
         }
@@ -257,19 +258,48 @@ public class Main {
         }
         return apellido;
     }
-    public static void creaNuevaPersona(String dni, String nombre, String apellido){
-
+    /*Metodos para añadir persona. Primero creo una empresa, luego una persona*/
+    public static boolean creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
+        boolean empresaInsertada=false;
+        try{
+            emp = new Empresa(nombreEmpresa,direccion,telefono);
+            insertEmpresa();
+        }catch (Exception e){System.out.println(e.getClass());}
+       return empresaInsertada;
     }
-    public static void creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
-        emp = new Empresa(nombreEmpresa,direccion,telefono);
-        boolean insertHecho = empDao.insertEmpresa(emp);
+    public static boolean creaNuevaPersona(String dni, String nombre, String apellido){
+        boolean personaInsertada=false;
+        try{
+
+            pers = new Persona(dni,nombre,apellido,emp);
+            System.out.println("He creado un objeto persona");
+            personaInsertada = insertPersona();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return personaInsertada;
+    }
+    /* ********************************************************************************************************/
+    public static boolean insertEmpresa(){
+        boolean insertHecho=false;
+        try{
+            insertHecho = empDao.insertEmpresa(emp);
+        }catch (Exception e){
+            System.out.println(e.getClass());}
+        return insertHecho;
+    }
+    public static boolean insertPersona(){
+        boolean insertHecho=false;
+        try{
+            insertHecho = persDao.insertPersona(pers);
+        }catch (Exception e){
+            System.out.println(e.getClass());}
+        return insertHecho;
     }
     /*Para la ventana de nueva Empresa*/
 
     public static String getNombreEmpresa(){
         String nombreEmpresa="";
         try{
-            nombreEmpresa = empresaEncontrada.getNombre();
+            nombreEmpresa = emp.getNombre();
         }catch (Exception e){
             System.out.println(e.getClass());
         }
@@ -278,16 +308,16 @@ public class Main {
     public static String dameDireccion(){
         String direccionEmpresa ="";
         try{
-            direccionEmpresa= empresaEncontrada.getDireccion();
+            direccionEmpresa= emp.getDireccion();
         }catch (Exception e){System.out.println(e.getClass());}
         return direccionEmpresa;
     }
     public static String dameTelefono(){
         String telefonoEmpresa="";
-            telefonoEmpresa=empresaEncontrada.getTelefono();
+            telefonoEmpresa=emp.getTelefono();
         return telefonoEmpresa;
     }
-
+    
     /*Recoge el evento que se ha seleccionado*/
     public static void eventoElegidoEnElCombo(int posicion){
         evento = listaEventos.get(posicion);

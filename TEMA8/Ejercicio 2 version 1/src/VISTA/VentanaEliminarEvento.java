@@ -58,7 +58,7 @@ public class VentanaEliminarEvento extends JDialog {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                if(validarNombre() ) {
-                  Main.getNombre(tfNombre.getText());
+                  Main.buscaNombre(tfNombre.getText());
 
                /*   if(!Main.eventoNoEncontrado()){
                       JOptionPane.showMessageDialog(null,"Evento no encontrado","Error",JOptionPane.ERROR_MESSAGE);
