@@ -1,45 +1,32 @@
 package MODELO.UML;
 
+import java.util.ArrayList;
+
 public class Persona {
     String dni;
     String nombre;
     String apellido;
-    String nombreEvento;
-    String idEmpresa;
-
-    /*No me interesa saber los eventos a los que va a asistir una persona sino las
-    * personas que van a asistir a un evento, relacion UNIDIRECCIONAL esta puesto un array de personas
-    * en la clase evento*/
+    Empresa empresa;/*no. Tiene que ser objeto Empresa y arraylist eventos*/
+    ArrayList<Evento> listaEventos;
 
     public Persona() {
     }
 
-
-    public Persona(String dni, String nombre, String apellido, String nombreEvento, String idEmpresa) {
+    public Persona(String dni, String nombre, String apellido, Empresa empresa, ArrayList<Evento> listaEventos) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.nombreEvento = nombreEvento;
-        this.idEmpresa = idEmpresa;
+
+        this.empresa = empresa;
+        this.listaEventos = listaEventos;
     }
 
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "dni='" + dni + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", nombreEvento='" + nombreEvento + '\'' +
-                ", idEmpresa='" + idEmpresa + '\'' +
-                '}';
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
+    public Persona(String dni, String nombre, String apellido, Empresa empresa) {
+        this.dni = dni;
+        this.nombre = nombre;
         this.apellido = apellido;
+
+        this.empresa = empresa;
     }
 
     public String getDni() {
@@ -58,19 +45,28 @@ public class Persona {
         this.nombre = nombre;
     }
 
-    public String getNombreEvento() {
-        return nombreEvento;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setNombreEvento(String nombreEvento) {
-        this.nombreEvento = nombreEvento;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getIdEmpresa() {
-        return idEmpresa;
+
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setIdEmpresa(String idEmpresa) {
-        this.idEmpresa = idEmpresa;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public ArrayList<Evento> getListaEventos() {
+        return listaEventos;
+    }
+
+    public void setListaEventos(ArrayList<Evento> listaEventos) {
+        this.listaEventos = listaEventos;
     }
 }

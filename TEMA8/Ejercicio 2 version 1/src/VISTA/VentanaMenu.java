@@ -12,24 +12,15 @@ public class VentanaMenu {
     private JPanel jpMenu;
     private JMenuBar jmbMenu;
     private JMenu jmEventos;
-    private JMenu jmEmpresas;
     private JMenuItem jmiAnadirEv;
     private JMenuItem jmiCancelarEv;
     private JMenuItem jmiModificarEv;
-    private JMenuItem jmiAnadirEmp;
-    private JMenuItem jmiBorrarEmp;
-    private JMenuItem jmiModificarEmp;
     private JMenu jmAsistentes;
-    private JMenu jmPresupuestos;
-    private JMenu jmCalendario;
-    private JMenu jmPersonal;
-    private JMenu jmClientes;
     private JButton bAnadirEv;
     private JButton bCancelarEv;
     private JButton bModificarEv;
     private JButton bAñadirAsis;
     private JButton bBajaAsistente;
-    private JButton button6;
     private JMenuItem miAñadirAsistente;
     private JMenuItem miBajaAsistente;
 
@@ -80,32 +71,12 @@ public class VentanaMenu {
                 Main.ventanaModificar();
             }
         });
+
+
         bAñadirAsis.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.abrirVentanaAltaPersona();
-            }
-        });
-        miAñadirAsistente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
-                System.out.println("Estoy en la ventanaMenu y se a pulsado añadirAsistente");
-                Main.abrirVentanaAltaPersona();
-            }
-        });
-        bBajaAsistente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        miBajaAsistente.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
-                System.out.println("Estoy en la ventanaMenu y se a pulsado eliminar asistente");
-
+                Main.ventanaAsistentes();
             }
         });
     }

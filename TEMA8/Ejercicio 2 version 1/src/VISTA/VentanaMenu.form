@@ -7,14 +7,14 @@
     </constraints>
     <properties>
       <minimumSize width="324" height="324"/>
-      <preferredSize width="524" height="324"/>
+      <preferredSize width="624" height="524"/>
     </properties>
     <border type="none"/>
     <children>
       <grid id="1c5f0" binding="jpMenu" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -53,34 +53,6 @@
                   </component>
                 </children>
               </grid>
-              <grid id="2dc04" class="javax.swing.JMenu" binding="jmEmpresas" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-                <constraints/>
-                <properties>
-                  <inheritsPopupMenu value="false"/>
-                  <label value="Empresas"/>
-                </properties>
-                <border type="none"/>
-                <children>
-                  <component id="5d42d" class="javax.swing.JMenuItem" binding="jmiAnadirEmp">
-                    <constraints/>
-                    <properties>
-                      <label value="Añadir"/>
-                    </properties>
-                  </component>
-                  <component id="92ca5" class="javax.swing.JMenuItem" binding="jmiBorrarEmp">
-                    <constraints/>
-                    <properties>
-                      <label value="Eliminar"/>
-                    </properties>
-                  </component>
-                  <component id="61d34" class="javax.swing.JMenuItem" binding="jmiModificarEmp">
-                    <constraints/>
-                    <properties>
-                      <label value="Modificar datos"/>
-                    </properties>
-                  </component>
-                </children>
-              </grid>
               <grid id="afecc" class="javax.swing.JMenu" binding="jmAsistentes" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
                 <constraints/>
                 <properties>
@@ -108,42 +80,6 @@
                   </component>
                 </children>
               </grid>
-              <grid id="5accf" class="javax.swing.JMenu" binding="jmPresupuestos" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties>
-                  <label value="Presupuestos"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
-              <grid id="cad28" class="javax.swing.JMenu" binding="jmCalendario" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties>
-                  <label value="Calendario"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
-              <grid id="9b553" class="javax.swing.JMenu" binding="jmPersonal" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties>
-                  <label value="Personal"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
-              <grid id="d8585" class="javax.swing.JMenu" binding="jmClientes" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
-                <constraints/>
-                <properties>
-                  <label value="Clientes"/>
-                </properties>
-                <border type="none"/>
-                <children/>
-              </grid>
             </children>
           </grid>
           <vspacer id="e7016">
@@ -153,7 +89,7 @@
           </vspacer>
           <toolbar id="d71e9">
             <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
                 <preferred-size width="-1" height="20"/>
               </grid>
             </constraints>
@@ -181,20 +117,7 @@
               <component id="33396" class="javax.swing.JButton" binding="bAñadirAsis">
                 <constraints/>
                 <properties>
-                  <text value="Añadir persona"/>
-                </properties>
-              </component>
-              <component id="effbb" class="javax.swing.JButton" binding="bBajaAsistente">
-                <constraints/>
-                <properties>
-                  <label value="Baja asistente"/>
-                  <text value="Baja asistente"/>
-                </properties>
-              </component>
-              <component id="5245f" class="javax.swing.JButton" binding="button6" default-binding="true">
-                <constraints/>
-                <properties>
-                  <text value="Button"/>
+                  <text value="Añadir Asistente"/>
                 </properties>
               </component>
             </children>

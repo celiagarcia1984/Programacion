@@ -1,7 +1,6 @@
 package com.company;
 
 import MODELO.BASEDEDATOS.*;
-import MODELO.UML.Asistente;
 import MODELO.UML.Empresa;
 import MODELO.UML.Evento;
 import MODELO.UML.Persona;
@@ -9,7 +8,6 @@ import VISTA.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -104,21 +102,7 @@ public class Main {
         }
         return updateHecho;
     }
-    public static boolean insertEmpresa(String idEmpresa,String nombre, String direccion, String telefono){
-        boolean empresaInsertada = false;
-        try{
-            emp=new Empresa(idEmpresa,nombre,direccion,telefono);
-            empresaInsertada = empDao.insertEmpresa(emp);
-        }catch (Exception e){System.out.println(e.getClass());}
-        return empresaInsertada;
-    }
-    public static boolean insertAsistente(String dni, String evento){
-        boolean insertHecho=false;
-        try{
-            insertHecho = asisDao.insertAsistente(dni,evento);
-        }catch (Exception e){System.out.println(e.getClass());}
-        return insertHecho;
-    }
+
 
     /*Estas funciones las utilizo para confirmar las transacciones de la bbdd*/
     public static Evento eventoSeleccionado(){
@@ -192,18 +176,12 @@ public class Main {
         dialog.pack();
         dialog.setVisible(true);
     }
-    public static void abrirVentanaAltaPersona(){
-        dgAAs = new VentanaAltaPersona();
-        dgAAs.pack();
-        dgAAs.setVisible(true);
-
-    }
-    public static void abrirVentanaNuevaEmpresa(){
-        try{
-            VentanaNuevaEmpresa dialog = new VentanaNuevaEmpresa();
-            dialog.pack();
-            dialog.setVisible(true);
-        }catch (Exception e){System.out.println(e.getClass());}
+    public static void ventanaAsistentes(){
+        JFrame frame = new JFrame("VentanaAsistentes");
+        frame.setContentPane(new VentanaAsistentes().getJpPrincipal());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
     }
 
     /*Esta funcion hace el select * de la tabla eventos*/
@@ -215,11 +193,7 @@ public class Main {
             System.out.println(e.getClass());
         }
     }
-    public static void obtenerDatosEmpresas(){
-        try{
-            listaEmpresas = empDao.selectTodos();
-        }catch (Exception e){System.out.println(e.getClass());}
-    }
+
     public static ArrayList<String> obtenerNombreEmpresas(){
         ArrayList<String>listaNombresEmpresas = new ArrayList<>();
         try{
@@ -240,20 +214,31 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return listaNombres;
     }
-    public static boolean buscarDni(String dni){
-        boolean dniExiste=false;
-        pers = new Persona();
+
+    public static boolean compruebaDni(String dni){
+
+        boolean dniEncontrado=false;
         try{
-            pers = persDao.getDatosPersona(dni);
-            if(pers.getNombre()!=null){
-                dniExiste = true;
-            }
+           pers = persDao.buscaPersona(dni);
 
-            System.out.println(pers.toString()+ "Estoy imprimiendo la lista de personas");
+           if(pers.getNombre()!=null){
+               dniEncontrado=true;
+           }
         }catch (Exception e){System.out.println(e.getClass());}
-
-        return dniExiste;
+        return dniEncontrado;
     }
+    public static boolean compruebaEmpresa(String nombreEmpresa){
+       boolean empresaEncontrada=false;
+       try{
+           emp = empDao.buscarEmpresa(nombreEmpresa);
+           if(emp.getDireccion()!=null){
+               empresaEncontrada=true;
+           }
+
+       }catch (Exception e){System.out.println(e.getClass());}
+       return empresaEncontrada;
+    }
+
     public static String getNombre(){
         String nombre="";
         try{
@@ -272,21 +257,15 @@ public class Main {
         }
         return apellido;
     }
-    /*Para la ventana de nueva Empresa*/
-    public static boolean comprobarIdEmpresa(String idEmpresa){
+    public static void creaNuevaPersona(String dni, String nombre, String apellido){
 
-        boolean idValido=false;
-        try{
-            idValido = empDao.comprobarId(idEmpresa);
-            if(idValido){
-                idValido=true;
-            }
-            else{
-                empresaEncontrada = empDao.getEmpresaEncontrada();
-            }
-        }catch (Exception e){System.out.println(e.getClass());}
-       return idValido;
     }
+    public static void creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
+        emp = new Empresa(nombreEmpresa,direccion,telefono);
+        boolean insertHecho = empDao.insertEmpresa(emp);
+    }
+    /*Para la ventana de nueva Empresa*/
+
     public static String getNombreEmpresa(){
         String nombreEmpresa="";
         try{
@@ -296,21 +275,14 @@ public class Main {
         }
         return nombreEmpresa;
     }
-    public static String getDireccionEmpresa(){
+    public static String dameDireccion(){
         String direccionEmpresa ="";
         try{
             direccionEmpresa= empresaEncontrada.getDireccion();
         }catch (Exception e){System.out.println(e.getClass());}
         return direccionEmpresa;
     }
-    public static String getIdEmpresa(){
-        String idEmpresa="";
-        try{
-            idEmpresa=empresaEncontrada.getIdEmpresa();
-        }catch (Exception e){System.out.println(e.getClass());}
-        return idEmpresa;
-    }
-    public static String getTelefonoEmpresa(){
+    public static String dameTelefono(){
         String telefonoEmpresa="";
             telefonoEmpresa=empresaEncontrada.getTelefono();
         return telefonoEmpresa;

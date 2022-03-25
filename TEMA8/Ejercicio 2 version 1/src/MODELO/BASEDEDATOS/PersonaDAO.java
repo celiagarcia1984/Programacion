@@ -17,27 +17,26 @@ public class PersonaDAO {
     public PersonaDAO(Connection conexion) {
         this.conexion = conexion;
     }
-    public Persona getDatosPersona(String dni){
-        Persona persona = new Persona();
-        String nombre= "";
-        String nombreEvento = "";
-        String idEmpresa = "";
-        String apellido="";
-        try {
-            String plantilla = "select * from persona where dni =?";
-            PreparedStatement ps = conexion.prepareStatement(plantilla);
+    /*Buscar un dni. Devuelvo objeto persona al main*/
+    public Persona buscaPersona(String dni){
+        Persona pers = new Persona();
+        try{
+            String plantilla= "select * from persona where dni =?";
+            PreparedStatement ps =conexion.prepareStatement(plantilla);
             ps.setString(1,dni);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()){
-                nombre= rs.getString("nombre");
-                nombreEvento = rs.getString("nombreEvento");
-                idEmpresa = rs.getString("idEmpresa");
-                apellido =rs.getString("apellido");
-                persona = new Persona(dni,nombre,apellido,nombreEvento,idEmpresa);
+            while(rs.next()){
+                pers.setDni(rs.getString("dni"));
+                pers.setNombre(rs.getString("nombre"));
+                pers.setApellido(rs.getString("apellido"));
             }
 
-        }catch (Exception e){System.out.println(e.getClass());}
-        return persona;
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return pers;
     }
 
-}
+    }
+
+
