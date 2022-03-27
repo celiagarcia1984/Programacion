@@ -26,7 +26,7 @@ public class VentanaMenu {
 
 
     public VentanaMenu() {
-        /*PARTE DEL INSERT*/
+/* ***************************************INSERT EVENTO*************************************************************/
         jmiAnadirEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,7 +41,7 @@ public class VentanaMenu {
                 Main.ventanaAñadirEvento();
             }
         });
-        /*PARTE DEL DELETE*/
+/* *******************************************DELETE EVENTO**********************************************************/
         bCancelarEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -56,6 +56,7 @@ public class VentanaMenu {
                 Main.abrirVentanaEliminarEvento();
             }
         });
+ /* ***************************************UPDATE EVENTO**************************************************************/
         jmiModificarEv.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,7 +72,7 @@ public class VentanaMenu {
                 Main.ventanaModificar();
             }
         });
-
+/* *************************************INSERT ASISTENTE*************************************************************/
 
         bAñadirAsis.addActionListener(new ActionListener() {
             @Override

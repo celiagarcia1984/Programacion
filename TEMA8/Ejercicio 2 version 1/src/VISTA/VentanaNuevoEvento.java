@@ -47,7 +47,6 @@ public class VentanaNuevoEvento extends JDialog {
         getRootPane().setDefaultButton(buttonOK);
 
 
-
         /*Esta parte es para añadir evento*/
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -88,25 +87,16 @@ public class VentanaNuevoEvento extends JDialog {
 
 
     }
-
-     private void onOK() {
-        // add your code here
-        dispose();
-    }
-     private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
      public void main(String[] args) {
 
         VentanaNuevoEvento dialog = new VentanaNuevoEvento();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
-    }
+    } /*Copia pega en el Main*/
      private void llenarComboBox() {
         try {
-            System.out.println("Estoy en la funcion llenar ComboBox.");
+            System.out.println("f(x)llenarComboBox de eventos.");
             cbLugar.addItem("Artium");
             cbLugar.addItem("Europa");
             cbLugar.addItem("Canciller");
@@ -118,7 +108,18 @@ public class VentanaNuevoEvento extends JDialog {
             System.out.println("Hay un problema al llenar el combo"+e.getClass());
 
         }
+    } /*Lo primero que se hace al abrir la ventana*/
+
+     private void onOK() {
+        // add your code here
+        dispose();
     }
+     private void onCancel() {
+        // add your code here if necessary
+        dispose();
+    }
+
+     /* ***********************FUNCIONES PARA VALIDAR DATOS DEL EVENTO**********************************************/
      private boolean validarDatos() {
         boolean datosValidos = false;
 
@@ -289,4 +290,6 @@ public class VentanaNuevoEvento extends JDialog {
             }
             return nombreValido;
         }
+
+
     }

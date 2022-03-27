@@ -25,7 +25,7 @@ public class EventoDAO {
         boolean filaInsertada=false;
         try {
             /*FALTA HACER EL INSERT. Hasta aqui funciona sin problemas. */
-            System.out.println("Estoy en la clase EVENTODAO, en la funcion insertEvento. Tengo un objeto evento " +
+            System.out.println("F(X)EVENTODAOinsertEvento.Recibe un objeto Evento " +
                     evento.toString());
             /*Preparo la plantilla*/
             String plantilla = "insert into evento values(?,?,?,?,?,?,?)";
@@ -61,7 +61,7 @@ public class EventoDAO {
         System.out.println("Devuelvo la confirmacion de si se ha insertado una fila. Me voy a la funcion Main.getDatos");
         return filaInsertada;
     }
-    /*Segundo Metodo. Select nombre*/
+    /*Segundo Metodo. Select nombre. Devuelve un objeto evento a partir del nombre que recibe*/
     public Evento selectNombre(String nombre){
         try{
             System.out.println("Estoy en la funcion SelectNombre.");

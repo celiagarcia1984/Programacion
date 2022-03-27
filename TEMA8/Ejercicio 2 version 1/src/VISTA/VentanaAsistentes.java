@@ -27,16 +27,20 @@ public class VentanaAsistentes {
     private JPanel jpBotones;
     private JButton bOk;
     private JButton bCancelar;
+    private JPanel jpElegirEvento;
+    private JLabel lnombreEvento;
+    private JComboBox cbEvento;
     private boolean dniValido;
     private boolean dniEncontrado=false;
     private boolean empresaEncontrada=false;
 
     public static void main(String[] args) {
+
         JFrame frame = new JFrame("VentanaAsistentes");
         frame.setContentPane(new VentanaAsistentes().jpPrincipal);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
 
     public JPanel getJpPrincipal() {
@@ -53,12 +57,10 @@ public class VentanaAsistentes {
                 if(dniValido){
                     /*Buscar en la bbdd si existe el dni*/
                    dniEncontrado = Main.compruebaDni(tfDni.getText());
-
                     if(dniEncontrado){
                         /*Al darle al ok si no se esta a falso, manda los datos al main para crear un objeto e insertarlo*/
                         tfNombre.setText(Main.getNombre());
                         tfApellido.setText(Main.getApellido());
-
                     }
                 }
             }
@@ -125,8 +127,13 @@ public class VentanaAsistentes {
                 }
                 if(personaInsertada&&empresaInsertada){
                     /*Si se hace el insert bien. Ahora muestro la parte de la ventana para escoger evento*/
+                    cbEvento.setEnabled(true);
+                    cbEvento.setSelectedIndex(-1);
                 }
-
+                if(empresaEncontrada&&dniEncontrado){
+                    cbEvento.setEnabled(true);
+                    cbEvento.setSelectedIndex(-1);
+                }
             }
         });
     }
@@ -213,4 +220,5 @@ public class VentanaAsistentes {
         }catch (Exception e){System.out.println(e.getClass());}
         return nombreValido;
     }
+
 }

@@ -114,7 +114,7 @@ public class VentanaModificar extends JDialog {
         try {
             /*Llamo a una funcion del Main que me va a dar los datos para llenarlo. Lo tengo que llenar en el MAIN con funciones que llamo aqui*/
             System.out.println("llamo a la funcion llenaCombo DEL MAIN");
-            listaNombres = Main.llenaCombo();
+            listaNombres = Main.llenarCombo();
             for (int i = 0; i < listaNombres.size(); i++) {
                 cbEventos.addItem(listaNombres.get(i));
                 System.out.println("estoy llenando el combobox");

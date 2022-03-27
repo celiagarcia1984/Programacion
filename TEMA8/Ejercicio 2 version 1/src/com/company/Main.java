@@ -33,6 +33,7 @@ public class Main {
     private static Persona pers;
     static boolean eventoEncontrado =false;
     private static int posicionPersona;
+    private static int posicionEmpresa;
 
     private static Empresa emp;
 
@@ -47,7 +48,7 @@ public class Main {
         empDao = new EmpresaDAO(bd.getCon());
         asisDao = new AsistenteDAO(bd.getCon());
     /*Ahora tengo que abrir la ventanaMenu*/
-        abrirVentanaPrincipal();
+        abrirVentanaMenu();
 
     }
     /*Estas son las funciones de operacion de la bbdd*/
@@ -55,11 +56,13 @@ public class Main {
                                   int aforo, int aforoDisponible){
         boolean filaInsertada;
         try{
-            System.out.println("Estoy en el Main en la funcion getDatos");
+            System.out.println("f(x)MainGetDatos. Con los datos que recibe crea un objeto evento y se lo pasa a " +
+                    "EVENTODAO para hacer el insert");
             evento = new Evento(nombre, lugar, fecha, horaInicio,horaFin,aforo,aforoDisponible);
             System.out.println(evento + " Estos son los datos que se han guardado en evento" );
             System.out.println("Llamo a la funcion evenDao.insertEvento. Me voy a EventoDAO");
            filaInsertada =  evenDao.insertEvento(evento);
+
            if(filaInsertada){
                System.out.println("Estoy en el Main.Recibo la confirmacion de fila insertada. Llamo a la funcion getConfirmacion de esta clase");
                getConfirmacion();
@@ -69,7 +72,8 @@ public class Main {
             System.out.println(e.getClass());
         }
         return evento;
-    }
+    } /*funcion para hacer el insert de eventos nuevos*/
+
     public static String buscaNombre(String tfnombre){
         String nombre="";
         try{
@@ -82,7 +86,7 @@ public class Main {
             System.out.println(e.getClass());
         }
         return nombre;
-    }
+    } /*funcion para buscar el nombre de un evento */
     public static boolean deleteEvento(Evento evento){
         boolean borrado =false;
         try{
@@ -92,7 +96,8 @@ public class Main {
         }
 
         return borrado;
-    }
+    } /*Dentro de la ventana Confirmacion. Al dar OK*/
+
     public static boolean HacerUpdate(){
         boolean updateHecho=false;
         try{
@@ -102,7 +107,6 @@ public class Main {
         }
         return updateHecho;
     }
-
 
     /*Estas funciones las utilizo para confirmar las transacciones de la bbdd*/
     public static Evento eventoSeleccionado(){
@@ -126,20 +130,10 @@ public class Main {
     }
 
     /*Estas funciones abren las diferentes ventanas*/
-    public static void abrirVentanaConfirmacion(){
-        try{
-            dgEl.dispose();
-            VentanaConfirmacion dialog = new VentanaConfirmacion();
-            dialog.pack();
-            dialog.setVisible(true);
-        }catch (Exception  e){
-            System.out.println(e.getClass());
-        }
-    }
-    public static void abrirVentanaPrincipal(){
+    public static void abrirVentanaMenu(){
         try{
 
-            System.out.println("Abro la ventana Principal. Esta funcion esta en el Main");
+            System.out.println("FUNCION MAIN.VENTANAMENU: Abro la ventana Principal. Esta funcion esta en el Main");
             JFrame vp = new JFrame("VentanaMenu");
             vp.setContentPane(new VentanaMenu().getJpPrincipal());
             vp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -148,13 +142,13 @@ public class Main {
             vp.setLocationRelativeTo(null);
 
         }catch (Exception e){
-             System.out.println(e.getClass());
+            System.out.println(e.getClass());
         }
-    }
+    } /* 1. Primera ventana que se abre. VentanaMenu*/
     public static void ventanaAñadirEvento(){
         try{
             /*Main de la ventana Añadir Evento*/
-            System.out.println("Estoy en la funcion ventanaAñadir Evento. En el Main. Me voy a la ventanaNuevoEvento");
+            System.out.println("F(X) MAINventanaAñadirEvento. Me voy a la ventanaNuevoEvento");
             VentanaNuevoEvento dialog = new VentanaNuevoEvento();
             dialog.pack();
             dialog.setVisible(true);
@@ -164,12 +158,25 @@ public class Main {
         }catch (Exception e){
             System.out.println(e.getClass());
         }
-    }
+    } /*2. OPCION AÑADIR EVENTO*/
     public static void abrirVentanaEliminarEvento(){
         dgEl = new VentanaEliminarEvento();
         dgEl.pack();
         dgEl.setVisible(true);
-    }
+    }/*3. OPCION ELIMINAR EVENTO*/
+    public static void abrirVentanaConfirmacion(){
+        try{
+            dgEl.dispose();
+            VentanaConfirmacion dialog = new VentanaConfirmacion();
+            dialog.pack();
+            dialog.setVisible(true);
+        }catch (Exception  e){
+            System.out.println(e.getClass());
+        }
+    } /*4. OPCION MUESTRA LOS DATOS DEL EVENTO QUE SE VA A BORRAR Y
+    CONFIRMA EL DELETE*/
+
+
     public static void ventanaModificar(){
         System.out.println("abro ventana modificar");
         VentanaModificar dialog = new VentanaModificar();
@@ -184,62 +191,12 @@ public class Main {
         frame.setVisible(true);
     }
 
-    /*Esta funcion hace el select * de la tabla eventos*/
-    public static void obtenerDatosEventos(){
-        try{
-            listaEventos = evenDao.selectTodos();
-            System.out.println("Ya tengo el array con la lista de eventos");
-        }catch (Exception e){
-            System.out.println(e.getClass());
-        }
-    }
 
-    public static ArrayList<String> obtenerNombreEmpresas(){
-        ArrayList<String>listaNombresEmpresas = new ArrayList<>();
-        try{
-        for(int i=0;i<listaEmpresas.size();i++){
-            listaNombresEmpresas.add(listaEmpresas.get(i).getNombre());
-        }
-        }catch (Exception e){System.out.println(e.getClass());}
-        return listaNombresEmpresas;
-    }
-    public static ArrayList<String> llenaCombo(){
-        ArrayList<String>listaNombres= new ArrayList<>();
-        String nombre="";
-        try{
-            System.out.println("Esoy en la funcion llenaCombo en el main");
-            for (int i=0;i<listaEventos.size();i++){
-               listaNombres.add(listaEventos.get(i).getNombre());
-            }
-        }catch (Exception e){System.out.println(e.getClass());}
-        return listaNombres;
-    }
-
-    public static boolean compruebaDni(String dni){
-
-        boolean dniEncontrado=false;
-        try{
-           pers = persDao.buscaPersona(dni);
-
-           if(pers.getNombre()!= null){
-               dniEncontrado=true;
-           }
-        }catch (Exception e){System.out.println(e.getClass());}
-        return dniEncontrado;
-    }
-    public static boolean compruebaEmpresa(String nombreEmpresa){
-       boolean empresaEncontrada=false;
-       try{
-           emp = empDao.buscarEmpresa(nombreEmpresa);
-           if(emp.getDireccion()!=null){
-               empresaEncontrada=true;
-           }
-
-       }catch (Exception e){System.out.println(e.getClass());}
-       return empresaEncontrada;
-    }
-
+/* ************************************CARGAR DATOS EN LAS VENTANAS******************************************** */
+    /*DATOS PERSONA*/
     public static String getNombre(){
+        System.out.println("F(X): MAIN.GETNOMBRE: Devuelve un String que uso en las ventanas para cargar el " +
+                "nombre de la persona");
         String nombre="";
         try{
             nombre = pers.getNombre();
@@ -250,6 +207,8 @@ public class Main {
         return nombre;
     }
     public static String getApellido(){
+        System.out.println("F(X): MAIN.GETAPELLIDO: Devuelve un String que uso en las ventanas para cargar el " +
+                "apellido de la persona");
         String apellido="";
         try{
         apellido = pers.getApellido();
@@ -258,6 +217,151 @@ public class Main {
         }
         return apellido;
     }
+    public static boolean compruebaDni(String dni){
+    System.out.println("f(x) Main.CompruebaDni: devuelve booleano para confirmar si se ha encontrado o no." +
+            "llena el objeto pers con los datos de exa persona. Se llama en la ventana asistentes");
+        boolean dniEncontrado=false;
+        try{
+            pers = persDao.buscaPersona(dni);
+
+            if(pers.getNombre()!= null){
+                dniEncontrado=true;
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return dniEncontrado;
+    }
+    /*DATOS EVENTOS*/
+    /*Estos metodos get guardan en una variable String el dato para darselos a la vista y que los saque en los tf.
+     * De esta forma evito pasarle el objeto a la vista directamente*/
+    public static String getLugar(){
+        System.out.println("F(X): MAIN.GETLUGAR: Devuelve un String que uso en las ventanas para cargar el " +
+                "nlugar del evento");
+        String lugar="";
+        try{
+            lugar = evento.getLugar();
+        }catch (Exception e){System.out.println(e.getClass());}
+
+        return lugar;
+    }
+    public static String getFecha(){
+        System.out.println("F(X): MAIN.GETfecha: Devuelve un String que uso en las ventanas para cargar el " +
+                "fecha del evento");
+        String fecha ="";
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try{
+            LocalDate ldFecha = evento.getFecha();
+
+        }catch (Exception e){System.out.println(e.getClass());}
+        return evento.getFecha().format(formato);
+    }
+    public static String getHoraInicio(){
+        System.out.println("F(X): MAIN.GETHoraInicio: Devuelve un String que uso en las ventanas para cargar la " +
+                "horaI del evento");
+        String horaInicio ="";
+        try{
+            horaInicio = evento.getHoraInicio().toString();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return horaInicio;
+    }
+    public static String getHoraFin(){
+        System.out.println("F(X): MAIN.GETHoraFin: Devuelve un String que uso en las ventanas para cargar la " +
+                "horaF del evento");
+        String horaFin ="";
+        try{
+            horaFin = evento.getHoraFin().toString();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return horaFin;
+    }
+    public static String getAforo(){
+        System.out.println("F(X): MAIN.GETaforo: Devuelve un String que uso en las ventanas para cargar el " +
+                "aforo del evento");
+        String aforo ="";
+        try{
+            aforo = String.valueOf(evento.getAforo());
+        }catch (Exception e){System.out.println(e.getClass());}
+        return aforo;
+    }
+    public static String getAforoDisponible(){
+        System.out.println("F(X): MAIN.GETaforodisponible: Devuelve un String que uso en las ventanas para cargar el " +
+                "aforo disponible del evento");
+        String aforoDisponible ="";
+        try{
+            aforoDisponible = String.valueOf(evento.getAforoDisponible());
+        }catch (Exception e){System.out.println(e.getClass());}
+        return aforoDisponible;
+    }
+    /*PARA LLENAR EL COMBOX DE EVENTOS*/
+    public static void obtenerDatosEventos(){
+        System.out.println("F(X):MAIN.OBTENERDATOSEVENTOS: consulta en eventoDAO los eventos y los guarda en un array" +
+                "de eventos para llenar el combobox de eventos, ventana evento");
+        try{
+            listaEventos = evenDao.selectTodos();
+            System.out.println("Ya tengo el array con la lista de eventos");
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+    }
+    public static ArrayList<String> llenarCombo(){
+        ArrayList<String>listaNombres= new ArrayList<>();
+        String nombre="";
+        try{
+            obtenerDatosEventos();
+            System.out.println("Esoy en la funcion llenaCombo en el main");
+            for (Evento listaEvento : listaEventos) {
+                listaNombres.add(listaEvento.getNombre());
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return listaNombres;
+    }
+
+
+
+    /*DATOS EMPRESA*/
+    public static void datosEmpresas(){
+        boolean empresaEncontrada=false;
+        try{
+            listaEmpresas = empDao.buscarEmpresa();
+
+        }catch (Exception e){System.out.println(e.getClass());}
+
+    }
+    public static boolean compruebaEmpresa(String nombreEmpresa){
+        boolean empresaEncontrada=false;
+        try{
+            datosEmpresas();
+            int i;
+            if(listaEmpresas.size()!=0){
+                for(i=0; i<listaEmpresas.size() && !listaEmpresas.get(i).getNombre().equalsIgnoreCase(nombreEmpresa);i++){}
+                if(i<listaEmpresas.size()){
+                    empresaEncontrada=true;
+                    posicionEmpresa = i;
+                }
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return empresaEncontrada;
+    }
+    public static String getNombreEmpresa(){
+        String nombreEmpresa="";
+        try{
+            nombreEmpresa = listaEmpresas.get(posicionEmpresa).getNombre();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return nombreEmpresa;
+    }
+    public static String dameDireccion(){
+        String direccionEmpresa ="";
+        try{
+            direccionEmpresa= listaEmpresas.get(posicionEmpresa).getDireccion();
+        }catch (Exception e){System.out.println(e.getClass());}
+        return direccionEmpresa;
+    }
+    public static String dameTelefono(){
+        String telefonoEmpresa="";
+        telefonoEmpresa=listaEmpresas.get(posicionEmpresa).getTelefono();
+        return telefonoEmpresa;
+    }
+    /* **************************************PERSONA******************************************************************/
     /*Metodos para añadir persona. Primero creo una empresa, luego una persona*/
     public static boolean creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
         boolean empresaInsertada=false;
@@ -265,7 +369,7 @@ public class Main {
             emp = new Empresa(nombreEmpresa,direccion,telefono);
             insertEmpresa();
         }catch (Exception e){System.out.println(e.getClass());}
-       return empresaInsertada;
+        return empresaInsertada;
     }
     public static boolean creaNuevaPersona(String dni, String nombre, String apellido){
         boolean personaInsertada=false;
@@ -277,7 +381,6 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return personaInsertada;
     }
-    /* ********************************************************************************************************/
     public static boolean insertEmpresa(){
         boolean insertHecho=false;
         try{
@@ -294,81 +397,12 @@ public class Main {
             System.out.println(e.getClass());}
         return insertHecho;
     }
-    /*Para la ventana de nueva Empresa*/
-
-    public static String getNombreEmpresa(){
-        String nombreEmpresa="";
-        try{
-            nombreEmpresa = emp.getNombre();
-        }catch (Exception e){
-            System.out.println(e.getClass());
-        }
-        return nombreEmpresa;
-    }
-    public static String dameDireccion(){
-        String direccionEmpresa ="";
-        try{
-            direccionEmpresa= emp.getDireccion();
-        }catch (Exception e){System.out.println(e.getClass());}
-        return direccionEmpresa;
-    }
-    public static String dameTelefono(){
-        String telefonoEmpresa="";
-            telefonoEmpresa=emp.getTelefono();
-        return telefonoEmpresa;
-    }
-    
+    /* *************************************EVENTOS*************************************************************/
     /*Recoge el evento que se ha seleccionado*/
     public static void eventoElegidoEnElCombo(int posicion){
         evento = listaEventos.get(posicion);
     }
-    /*Estos metodos get guardan en una variable String el dato para darselos a la vista y que los saque en los tf.
-    * De esta forma evito pasarle el objeto a la vista directamente*/
-    public static String getLugar(){
-        String lugar="";
-        try{
-           lugar = evento.getLugar();
-        }catch (Exception e){System.out.println(e.getClass());}
 
-        return lugar;
-    }
-    public static String getFecha(){
-        String fecha ="";
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        try{
-            LocalDate ldFecha = evento.getFecha();
-
-        }catch (Exception e){System.out.println(e.getClass());}
-        return evento.getFecha().format(formato);
-    }
-    public static String getHoraInicio(){
-        String horaInicio ="";
-        try{
-            horaInicio = evento.getHoraInicio().toString();
-        }catch (Exception e){System.out.println(e.getClass());}
-        return horaInicio;
-    }
-    public static String getHoraFin(){
-        String horaFin ="";
-        try{
-            horaFin = evento.getHoraFin().toString();
-        }catch (Exception e){System.out.println(e.getClass());}
-        return horaFin;
-    }
-    public static String getAforo(){
-        String aforo ="";
-        try{
-            aforo = String.valueOf(evento.getAforo());
-        }catch (Exception e){System.out.println(e.getClass());}
-        return aforo;
-    }
-    public static String getAforoDisponible(){
-        String aforoDisponible ="";
-        try{
-            aforoDisponible = String.valueOf(evento.getAforoDisponible());
-        }catch (Exception e){System.out.println(e.getClass());}
-        return aforoDisponible;
-    }
     public static boolean tenNuevoEvento(String sNombre, String lugar, LocalDate fecha, LocalTime horaInicio,
                                          LocalTime horaFin, int aforo, int aforoDisponible){
         /*Recibe los datos que necesita para crear un objeto con los datos modificados*/

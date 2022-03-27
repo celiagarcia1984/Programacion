@@ -21,7 +21,8 @@ public class VentanaConfirmacion extends JDialog {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
-        evento= Main.eventoSeleccionado();
+        evento= Main.eventoSeleccionado(); /*Recibe los datos del evento y los muestra en el text area.
+        No deberia pasar el objeto sino un String. */
         taEvento.setText(evento.toString());
 
         buttonOK.addActionListener(new ActionListener() {
@@ -53,7 +54,7 @@ public class VentanaConfirmacion extends JDialog {
     }
 
     private void onOK() {
-        /*Aqui empieza el delete*/
+        /*Aqui empieza el delete. Cuando hace click en OK*/
         if(Main.deleteEvento(evento)){
             JOptionPane.showMessageDialog(null,"El evento se ha eliminado");
         }

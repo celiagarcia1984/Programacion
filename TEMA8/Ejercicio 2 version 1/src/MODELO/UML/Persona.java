@@ -6,7 +6,7 @@ public class Persona {
     String dni;
     String nombre;
     String apellido;
-    Empresa empresa;/*no. Tiene que ser objeto Empresa y arraylist eventos*/
+    Empresa empresa;/* Tiene que ser objeto Empresa y arraylist eventos*/
     ArrayList<Evento> listaEventos;
 
     public Persona() {

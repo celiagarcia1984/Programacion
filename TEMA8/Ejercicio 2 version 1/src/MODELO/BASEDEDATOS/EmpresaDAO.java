@@ -16,18 +16,19 @@ public class EmpresaDAO {
     public EmpresaDAO(Connection conexionEm) {
         this.conexionEm = conexionEm;
     }
-    public Empresa buscarEmpresa(String nombre){
+    public ArrayList<Empresa>  buscarEmpresa(){
+        ArrayList<Empresa> listaEmpresas=new ArrayList<>();
         try{
-            String plantilla= "select * from empresa where nombre=?";
+            String plantilla= "select * from empresa";
             PreparedStatement ps = conexionEm.prepareStatement(plantilla);
-            ps.setString(1,nombre);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 empresaEncontrada = new Empresa(rs.getString("nombre"),rs.getString("direccion"),
                         rs.getString("telefono"));
+                listaEmpresas.add(empresaEncontrada);
             }
         }catch (Exception e){System.out.println(e.getClass());}
-        return empresaEncontrada;
+        return listaEmpresas;
     }
     public boolean insertEmpresa(Empresa emp){
         boolean insertHecho=false;
