@@ -156,8 +156,8 @@ public class EventoDAO {
                plazasOcupadas =  AsistenteDAO.consultarPlazasLibres(rs.getString("nombre"));
                if(plazasOcupadas < rs.getInt("aforo")){
                    listaEventos.add(new Evento(rs.getString("nombre"),rs.getString("lugar"),
-                           rs.getDate("fecha"), rs.getInt("horaInicio"),
-                           rs.getTime("horaFin"),rs.getInt("aforo"), rs.getInt("aforoDispobible")));
+                           rs.getDate("fecha").toLocalDate(), rs.getTime("horaInicio").toLocalTime(),
+                           rs.getTime("horaFin").toLocalTime(),rs.getInt("aforo"), rs.getInt("aforoDisponible")));
                }
 
             }

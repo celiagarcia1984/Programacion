@@ -3,10 +3,7 @@ package VISTA;
 import com.company.Main;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -33,8 +30,8 @@ public class VentanaAsistentes {
     private JComboBox cbEvento;
     private boolean dniValido;
     private boolean dniEncontrado=false;
-    private boolean empresaEncontrada=false;
     private  ArrayList<String>  listaNombres = new ArrayList<>();
+    private int posicionEvento;
 
     public static void main(String[] args) {
 
@@ -51,7 +48,7 @@ public class VentanaAsistentes {
 
     public VentanaAsistentes() {
         llenarComboBox();
-
+        cbEvento.setSelectedIndex(-1);
 
         tfDni.addFocusListener(new FocusAdapter() {
             @Override
@@ -64,9 +61,10 @@ public class VentanaAsistentes {
                     if(dniEncontrado){
                         cargarDatosPersona();
                         /*Al darle al ok si no se esta a falso, manda los datos al main para crear un objeto e insertarlo*/
-
                         /*Si encuentra el dni, carga los datos de la persona y abre una ventana o habilita la seleccion de evento*/
-
+                    }
+                    else{
+                        System.out.println("La persona no existe, tengo que crearla");
                     }
                 }
             }
@@ -92,13 +90,6 @@ public class VentanaAsistentes {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
 
-                if(validarNombreEmpresa()){
-                    empresaEncontrada= Main.compruebaEmpresa(tfNombreEmpresa.getText());
-                }
-                if(empresaEncontrada){
-                    tfDireccion.setText(Main.dameDireccion());
-                    tfTelefono.setText(Main.dameTelefono());
-                }
             }
         });
 
@@ -123,30 +114,36 @@ public class VentanaAsistentes {
             public void actionPerformed(ActionEvent e) {
                 /*Cuando hacen ok ya estan todos los datos validados. si el dni no ha sido encontrado...le da los
                 * datos al main para hacer el insert*/
-                boolean personaInsertada=false;
-                boolean empresaInsertada=false;
-                if(!empresaEncontrada){
-                  empresaInsertada = Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
+
+                if(dniEncontrado){
+                    /*crear objeto empresa y objeto persona*/
+                    Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
+
+                    boolean insertOk = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),
+                            dniEncontrado,posicionEvento);
+                    if(insertOk){
+                        JOptionPane.showMessageDialog(null, "Se ha añadido un asistente al evento " + cbEvento.getItemAt(posicionEvento).toString() );
+                    }
+
                 }
-                if(!dniEncontrado){
-                   personaInsertada = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText());
-                }
-                if(personaInsertada&&empresaInsertada){
-                    /*Si se hace el insert bien. Ahora muestro la parte de la ventana para escoger evento*/
-                    cbEvento.setEnabled(true);
-                    cbEvento.setSelectedIndex(-1);
-                }
-                if(empresaEncontrada&&dniEncontrado){
-                    cbEvento.setEnabled(true);
-                    cbEvento.setSelectedIndex(-1);
-                }
+            }
+        });
+        cbEvento.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                posicionEvento = cbEvento.getSelectedIndex();
+
             }
         });
     }
     public void cargarDatosPersona(){
         tfNombre.setText(Main.getNombre());
         tfApellido.setText(Main.getApellido());
+        tfNombreEmpresa.setText(Main.getNombreEmpresa());
+        tfDireccion.setText(Main.getDireccionEmpresa());
+        tfTelefono.setText(Main.getTelefonoEmpresa());
     }
+
     public boolean validarDni(){
         boolean dniValido=false;
         try{
@@ -164,7 +161,7 @@ public class VentanaAsistentes {
             }
         }catch (Exception e){System.out.println(e.getClass());}
         return dniValido;
-    }
+    }/*Faltaria hacer la validacion buena del dni.*/
     public boolean validarNombre(){
         boolean nombreValido=false;
         try{
@@ -245,6 +242,7 @@ public class VentanaAsistentes {
         } catch (Exception e) {
             System.out.println(e.getClass() + " algo va mal en llenarComboBox. VentanaModificar");
         }
+
     }
 
 

@@ -23,6 +23,8 @@ public class VentanaMenu {
     private JButton bBajaAsistente;
     private JMenuItem miAñadirAsistente;
     private JMenuItem miBajaAsistente;
+    private JPanel jpBoton;
+    private JButton bSalir;
 
 
     public VentanaMenu() {
@@ -78,6 +80,13 @@ public class VentanaMenu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.ventanaAsistentes();
+            }
+        });
+        bSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.cerrarConexion();
+
             }
         });
     }

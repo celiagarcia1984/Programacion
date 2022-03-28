@@ -5,30 +5,37 @@ import MODELO.UML.Empresa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.sql.Date;
 
 public class EmpresaDAO {
 
-    private Connection conexionEm;
-    private Empresa empresaEncontrada;
+    private static Connection conexionEm;
 
     public EmpresaDAO(Connection conexionEm) {
-        this.conexionEm = conexionEm;
+        EmpresaDAO.conexionEm = conexionEm;
     }
-    public ArrayList<Empresa>  buscarEmpresa(){
-        ArrayList<Empresa> listaEmpresas=new ArrayList<>();
+    public static Empresa buscarEmpresa(String nombre){
+        Empresa empresa =null;
         try{
-            String plantilla= "select * from empresa";
+            String plantilla = "select * from empresa where nombre = ?";
             PreparedStatement ps = conexionEm.prepareStatement(plantilla);
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-                empresaEncontrada = new Empresa(rs.getString("nombre"),rs.getString("direccion"),
-                        rs.getString("telefono"));
-                listaEmpresas.add(empresaEncontrada);
-            }
+            ps.setString(1,nombre);
+            ResultSet rs= ps.executeQuery();
+            rs.next();
+
+            empresa = crearObjetoEmpresa(empresa,rs);
+
         }catch (Exception e){System.out.println(e.getClass());}
-        return listaEmpresas;
+        return empresa;
+    }
+    public static Empresa crearObjetoEmpresa(Empresa emp,ResultSet rs){
+        Empresa empr = null;
+        try{
+            String nombre= rs.getString("nombre");
+            String direccion=rs.getString("direccion");
+            String telefono =rs.getString("telefono");
+            empr = new Empresa(nombre,direccion,telefono);
+        }catch (Exception e){System.out.println(e.getClass());}
+        return empr;
     }
     public boolean insertEmpresa(Empresa emp){
         boolean insertHecho=false;

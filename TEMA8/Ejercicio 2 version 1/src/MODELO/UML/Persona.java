@@ -7,7 +7,7 @@ public class Persona {
     String nombre;
     String apellido;
     Empresa empresa;/* Tiene que ser objeto Empresa y arraylist eventos*/
-    ArrayList<Evento> listaEventos;
+    ArrayList<Evento> listaEventos = new ArrayList<>();
 
     public Persona() {
     }
@@ -25,7 +25,6 @@ public class Persona {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
-
         this.empresa = empresa;
     }
 

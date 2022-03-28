@@ -28,12 +28,8 @@ public class Main {
     static Dialog dgAAs;
 
     private static ArrayList<Evento>listaEventos = new ArrayList<>();
-    private static ArrayList<Empresa> listaEmpresas = new ArrayList<>();
-    private static ArrayList<Persona> listaPersonas = new ArrayList<>();
     private static Persona pers;
-    static boolean eventoEncontrado =false;
-    private static int posicionPersona;
-    private static int posicionEmpresa;
+    static boolean eventoEncontrado = false;
 
     private static Empresa emp;
 
@@ -217,6 +213,39 @@ public class Main {
         }
         return apellido;
     }
+    public static String getNombreEmpresa(){
+        System.out.println("F(X): MAIN.GETAPELLIDO: Devuelve un String que uso en las ventanas para cargar el " +
+                "apellido de la persona");
+        String nombreEmpresa="";
+        try{
+            nombreEmpresa = pers.getEmpresa().getNombre();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return nombreEmpresa;
+    }
+    public static String getDireccionEmpresa(){
+        System.out.println("F(X): MAIN.GETAPELLIDO: Devuelve un String que uso en las ventanas para cargar el " +
+                "apellido de la persona");
+        String direccionEmpresa="";
+        try{
+            direccionEmpresa = pers.getEmpresa().getDireccion();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return direccionEmpresa;
+    }
+    public static String getTelefonoEmpresa(){
+        System.out.println("F(X): MAIN.GETAPELLIDO: Devuelve un String que uso en las ventanas para cargar el " +
+                "apellido de la persona");
+        String telefonoEmpresa="";
+        try{
+            telefonoEmpresa = pers.getEmpresa().getTelefono();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return telefonoEmpresa;
+    }
     public static boolean compruebaDni(String dni){
     System.out.println("f(x) Main.CompruebaDni: devuelve booleano para confirmar si se ha encontrado o no." +
             "llena el objeto pers con los datos de exa persona. Se llama en la ventana asistentes");
@@ -314,70 +343,26 @@ public class Main {
         return listaNombres;
     }
 
-
-
-    /*DATOS EMPRESA*/
-    public static void datosEmpresas(){
-        boolean empresaEncontrada=false;
-        try{
-            listaEmpresas = empDao.buscarEmpresa();
-
-        }catch (Exception e){System.out.println(e.getClass());}
-
-    }
-    public static boolean compruebaEmpresa(String nombreEmpresa){
-        boolean empresaEncontrada=false;
-        try{
-            datosEmpresas();
-            int i;
-            if(listaEmpresas.size()!=0){
-                for(i=0; i<listaEmpresas.size() && !listaEmpresas.get(i).getNombre().equalsIgnoreCase(nombreEmpresa);i++){}
-                if(i<listaEmpresas.size()){
-                    empresaEncontrada=true;
-                    posicionEmpresa = i;
-                }
-            }
-        }catch (Exception e){System.out.println(e.getClass());}
-        return empresaEncontrada;
-    }
-    public static String getNombreEmpresa(){
-        String nombreEmpresa="";
-        try{
-            nombreEmpresa = listaEmpresas.get(posicionEmpresa).getNombre();
-        }catch (Exception e){
-            System.out.println(e.getClass());
-        }
-        return nombreEmpresa;
-    }
-    public static String dameDireccion(){
-        String direccionEmpresa ="";
-        try{
-            direccionEmpresa= listaEmpresas.get(posicionEmpresa).getDireccion();
-        }catch (Exception e){System.out.println(e.getClass());}
-        return direccionEmpresa;
-    }
-    public static String dameTelefono(){
-        String telefonoEmpresa="";
-        telefonoEmpresa=listaEmpresas.get(posicionEmpresa).getTelefono();
-        return telefonoEmpresa;
-    }
     /* **************************************PERSONA******************************************************************/
     /*Metodos para añadir persona. Primero creo una empresa, luego una persona*/
     public static boolean creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
         boolean empresaInsertada=false;
         try{
             emp = new Empresa(nombreEmpresa,direccion,telefono);
-            insertEmpresa();
         }catch (Exception e){System.out.println(e.getClass());}
         return empresaInsertada;
     }
-    public static boolean creaNuevaPersona(String dni, String nombre, String apellido){
+    public static boolean creaNuevaPersona(String dni, String nombre, String apellido,boolean dniEncontrado, int posicionEvento){
         boolean personaInsertada=false;
         try{
-
             pers = new Persona(dni,nombre,apellido,emp);
             System.out.println("He creado un objeto persona");
-            personaInsertada = insertPersona();
+            if(dniEncontrado){
+
+              personaInsertada = insertAsistente(posicionEvento);
+            }
+
+
         }catch (Exception e){System.out.println(e.getClass());}
         return personaInsertada;
     }
@@ -416,6 +401,22 @@ public class Main {
         }catch (Exception e){System.out.println(e.getClass());}
         return updateHecho;
     }
+    /* **************************************ASISTENTES********************************************************/
+    public static boolean insertAsistente(int posicionEvento){
+        boolean insertOk=false;
+        try{
+            Evento evento = listaEventos.get(posicionEvento);
+            pers.getListaEventos().add(evento); /*Añado a la persona el evento al que va a asistir*/
+            String nombreEvento = listaEventos.get(posicionEvento).getNombre();
+            String dni = pers.getDni();
 
+           insertOk = AsistenteDAO.insertAsistente(dni, nombreEvento);
 
+        }catch (Exception e){System.out.println(e.getClass());}
+        return insertOk;
+    }
+
+    public static void cerrarConexion(){
+        bd.cerrarConexion();
+    }
 }
