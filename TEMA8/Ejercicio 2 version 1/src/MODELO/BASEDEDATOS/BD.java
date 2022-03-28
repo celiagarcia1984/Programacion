@@ -11,14 +11,14 @@ public class BD {
     private String url ="jdbc:mysql://localhost:3306/ejer2";
 
     /*Creo un objeto conexion*/
-    private Connection conexion;
+    private static Connection conexion;
 
     /*Creo un constructor vacio*/
 
     public BD() {
     }
 /*Solo pongo el getter y setter de la conexion porque no voy a usar los demas*/
-    public Connection getCon() {
+    public static Connection getCon() {
         return conexion;
     }
 

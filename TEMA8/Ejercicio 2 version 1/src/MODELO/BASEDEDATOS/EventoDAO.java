@@ -137,28 +137,28 @@ public class EventoDAO {
         return updateHecho;
     }
     /*Cuarto Metodo. Select todos los los eventos*/
-    public ArrayList<Evento> selectTodos(){
+    public ArrayList<Evento> selectEventosLibres(){
         ArrayList<Evento>listaEventos = new ArrayList<>();
+        int plazasOcupadas =0;
         try{
             System.out.println("Estoy en el metodo select Todos en la ventana EventoDao. llamado del main");
             /*Tengo que hacer un select de todos los eventos e ir creando objetos evento y guardandolos en el array*/
-            String plantilla = "Select * from evento";
+            String plantilla = "Select * from evento where fecha > ?";
             PreparedStatement ps = conexion.prepareStatement(plantilla);
+            LocalDate fechaHoy = LocalDate.now();
+            Date dFechaHoy = java.sql.Date.valueOf(LocalDate.now());
+            ps.setDate(1,dFechaHoy);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
-                String nombre= rs.getString("nombre");
-                String lugar = rs.getString("lugar");
-                Date fecha = rs.getDate("fecha");
-                LocalDate ldFecha = fecha.toLocalDate();
-                Time horaInicio = rs.getTime("horaInicio");
-                LocalTime ltHoraInicio = horaInicio.toLocalTime();
-                Time horaFin = rs.getTime("horaFin");
-                LocalTime ltHoraFin= horaFin.toLocalTime();
-                int aforo =rs.getInt("aforo");
-                int aforoDisponible = rs.getInt("aforoDisponible");
-
-                listaEventos.add(new Evento(nombre,lugar,ldFecha,ltHoraInicio,ltHoraFin,aforo,aforoDisponible));
-                System.out.println(listaEventos.toString());
+               /*He buscado eventos que son posteriores a hoy. Ahora tengo que buscar aquellos que tienen plazas libres.
+               * Tengo que hacer una consulta a Asistentes.contar las veces que aparece el nombre de un evento. Desde aqui llamo a una
+               * consulta en asistenteDAO*/
+               plazasOcupadas =  AsistenteDAO.consultarPlazasLibres(rs.getString("nombre"));
+               if(plazasOcupadas < rs.getInt("aforo")){
+                   listaEventos.add(new Evento(rs.getString("nombre"),rs.getString("lugar"),
+                           rs.getDate("fecha"), rs.getInt("horaInicio"),
+                           rs.getTime("horaFin"),rs.getInt("aforo"), rs.getInt("aforoDispobible")));
+               }
 
             }
         }catch (Exception e){

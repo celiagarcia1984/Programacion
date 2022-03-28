@@ -33,7 +33,7 @@ public class EmpresaDAO {
     public boolean insertEmpresa(Empresa emp){
         boolean insertHecho=false;
         try{
-<<<<<<< Updated upstream
+
             String plantilla="insert into empresa values(?,?,?)";
             PreparedStatement ps = conexionEm.prepareStatement(plantilla);
             ps.setString(1,emp.getNombre());
@@ -44,8 +44,7 @@ public class EmpresaDAO {
                 System.out.println("insert hecho");
                 insertHecho = true;
             }
-=======
->>>>>>> Stashed changes
+
 
         }catch (Exception e){System.out.println(e.getClass());}
         return insertHecho;

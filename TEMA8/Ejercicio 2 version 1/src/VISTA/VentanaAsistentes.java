@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +34,7 @@ public class VentanaAsistentes {
     private boolean dniValido;
     private boolean dniEncontrado=false;
     private boolean empresaEncontrada=false;
+    private  ArrayList<String>  listaNombres = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -48,6 +50,8 @@ public class VentanaAsistentes {
     }
 
     public VentanaAsistentes() {
+        llenarComboBox();
+
 
         tfDni.addFocusListener(new FocusAdapter() {
             @Override
@@ -58,9 +62,11 @@ public class VentanaAsistentes {
                     /*Buscar en la bbdd si existe el dni*/
                    dniEncontrado = Main.compruebaDni(tfDni.getText());
                     if(dniEncontrado){
+                        cargarDatosPersona();
                         /*Al darle al ok si no se esta a falso, manda los datos al main para crear un objeto e insertarlo*/
-                        tfNombre.setText(Main.getNombre());
-                        tfApellido.setText(Main.getApellido());
+
+                        /*Si encuentra el dni, carga los datos de la persona y abre una ventana o habilita la seleccion de evento*/
+
                     }
                 }
             }
@@ -136,6 +142,10 @@ public class VentanaAsistentes {
                 }
             }
         });
+    }
+    public void cargarDatosPersona(){
+        tfNombre.setText(Main.getNombre());
+        tfApellido.setText(Main.getApellido());
     }
     public boolean validarDni(){
         boolean dniValido=false;
@@ -220,5 +230,22 @@ public class VentanaAsistentes {
         }catch (Exception e){System.out.println(e.getClass());}
         return nombreValido;
     }
+    private void llenarComboBox() {
+        System.out.println("Estoy en la funcion LLenarComboBOx de la ventanaModificar");
+        listaNombres = new ArrayList<>();
+        try {
+            /*Llamo a una funcion del Main que me va a dar los datos para llenarlo. Lo tengo que llenar en el MAIN con funciones que llamo aqui*/
+            System.out.println("llamo a la funcion llenaCombo DEL MAIN");
+            listaNombres = Main.llenarComboInscripcion();
+            for (int i = 0; i < listaNombres.size(); i++) {
+                cbEvento.addItem(listaNombres.get(i));
+                System.out.println("estoy llenando el combobox");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getClass() + " algo va mal en llenarComboBox. VentanaModificar");
+        }
+    }
+
 
 }

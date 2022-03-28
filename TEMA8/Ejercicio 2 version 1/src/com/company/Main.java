@@ -295,13 +295,13 @@ public class Main {
         System.out.println("F(X):MAIN.OBTENERDATOSEVENTOS: consulta en eventoDAO los eventos y los guarda en un array" +
                 "de eventos para llenar el combobox de eventos, ventana evento");
         try{
-            listaEventos = evenDao.selectTodos();
+            listaEventos = evenDao.selectEventosLibres();
             System.out.println("Ya tengo el array con la lista de eventos");
         }catch (Exception e){
             System.out.println(e.getClass());
         }
     }
-    public static ArrayList<String> llenarCombo(){
+    public static ArrayList<String> llenarComboInscripcion(){
         ArrayList<String>listaNombres= new ArrayList<>();
         String nombre="";
         try{
