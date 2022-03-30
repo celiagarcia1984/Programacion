@@ -32,6 +32,7 @@ public class VentanaAsistentes {
     private boolean dniEncontrado=false;
     private  ArrayList<String>  listaNombres = new ArrayList<>();
     private int posicionEvento;
+    private  boolean empresaExiste = false;
 
     public static void main(String[] args) {
 
@@ -89,7 +90,11 @@ public class VentanaAsistentes {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-
+                empresaExiste = Main.comprobarEmpresa(tfNombreEmpresa.getText());
+                if(empresaExiste){
+                    tfDireccion.setText(Main.tenDireccionEmpresa());
+                    tfTelefono.setText(Main.tenTelefonoEmpresa());
+                }
             }
         });
 
@@ -123,6 +128,24 @@ public class VentanaAsistentes {
                             dniEncontrado,posicionEvento);
                     if(insertOk){
                         JOptionPane.showMessageDialog(null, "Se ha añadido un asistente al evento " + cbEvento.getItemAt(posicionEvento).toString() );
+                    }
+
+                }
+                if(!dniEncontrado){
+                    boolean insertHecho = false;
+
+                    if(!empresaExiste){
+                       insertHecho = Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
+                        if(insertHecho){
+                            JOptionPane.showMessageDialog(null, "Se ha añadido una nueva empresa");
+                            empresaExiste = true;
+                        }
+                    }
+                    if(empresaExiste){
+                       insertHecho = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),dniEncontrado,posicionEvento);
+                       if(insertHecho){
+                           JOptionPane.showMessageDialog(null, "Se ha añadido una nueva persona");
+                       }
                     }
 
                 }

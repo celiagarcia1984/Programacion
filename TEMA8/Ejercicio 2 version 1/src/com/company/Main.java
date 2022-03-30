@@ -187,7 +187,6 @@ public class Main {
         frame.setVisible(true);
     }
 
-
 /* ************************************CARGAR DATOS EN LAS VENTANAS******************************************** */
     /*DATOS PERSONA*/
     public static String getNombre(){
@@ -345,6 +344,34 @@ public class Main {
 
     /* **************************************PERSONA******************************************************************/
     /*Metodos para añadir persona. Primero creo una empresa, luego una persona*/
+    public static boolean comprobarEmpresa(String nombreEmpresa){
+        boolean empresaEncontrada = false;
+        try{
+            emp = empDao.buscarEmpresa(nombreEmpresa);
+            if(emp.getNombre()!=null){
+                empresaEncontrada=true;
+            }
+        }catch (Exception e){System.out.println(e.getClass());}
+        return empresaEncontrada;
+    }
+    public static String tenDireccionEmpresa(){
+        String direccionEmpresa="";
+        try{
+            direccionEmpresa = emp.getDireccion();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return direccionEmpresa;
+    }
+    public static String tenTelefonoEmpresa(){
+        String telefonoEmpresa="";
+        try{
+            telefonoEmpresa = emp.getTelefono();
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return telefonoEmpresa;
+    }
     public static boolean creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
         boolean empresaInsertada=false;
         try{
@@ -361,7 +388,6 @@ public class Main {
 
               personaInsertada = insertAsistente(posicionEvento);
             }
-
 
         }catch (Exception e){System.out.println(e.getClass());}
         return personaInsertada;
