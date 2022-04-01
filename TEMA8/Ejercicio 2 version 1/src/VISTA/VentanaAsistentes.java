@@ -33,6 +33,7 @@ public class VentanaAsistentes {
     private  ArrayList<String>  listaNombres = new ArrayList<>();
     private int posicionEvento;
     private  boolean empresaExiste = false;
+    private boolean datoValido =false;
 
     public static void main(String[] args) {
 
@@ -68,86 +69,75 @@ public class VentanaAsistentes {
                         System.out.println("La persona no existe, tengo que crearla");
                     }
                 }
-            }
-        });
 
-        tfNombre.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                validarNombre();
-            }
-        });
 
-        tfApellido.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                validarApellido();
             }
         });
         tfNombreEmpresa.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                empresaExiste = Main.comprobarEmpresa(tfNombreEmpresa.getText());
-                if(empresaExiste){
-                    tfDireccion.setText(Main.tenDireccionEmpresa());
-                    tfTelefono.setText(Main.tenTelefonoEmpresa());
+
+                    datoValido = validarNombreEmpresa();
+
+                if(!datoValido){
+                    tfNombreEmpresa.requestFocus();
+                }else{
+                    empresaExiste = Main.comprobarEmpresa(tfNombreEmpresa.getText());
+                    if(empresaExiste){
+                        tfDireccion.setText(Main.tenDireccionEmpresa());
+                        tfTelefono.setText(Main.tenTelefonoEmpresa());
+                    }
                 }
+
             }
         });
 
-        tfDireccion.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                validarDireccion();
-            }
-        });
-
-        tfTelefono.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                super.focusLost(e);
-                validarTelefonoEmpresa();
-            }
-        });
 
         bOk.addActionListener(new ActionListener() {
             @Override/*Si no se encuentra la empresa ni el dni*/
             public void actionPerformed(ActionEvent e) {
                 /*Cuando hacen ok ya estan todos los datos validados. si el dni no ha sido encontrado...le da los
                 * datos al main para hacer el insert*/
+                if (validarDatos()) {
+                    if(dniEncontrado){
+                        /*crear objeto empresa y objeto persona*/
+                        Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
 
-                if(dniEncontrado){
-                    /*crear objeto empresa y objeto persona*/
-                    Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
-
-                    boolean insertOk = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),
-                            dniEncontrado,posicionEvento);
-                    if(insertOk){
-                        JOptionPane.showMessageDialog(null, "Se ha añadido un asistente al evento " + cbEvento.getItemAt(posicionEvento).toString() );
-                    }
-
-                }
-                if(!dniEncontrado){
-                    boolean insertHecho = false;
-
-                    if(!empresaExiste){
-                       insertHecho = Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
-                        if(insertHecho){
-                            JOptionPane.showMessageDialog(null, "Se ha añadido una nueva empresa");
-                            empresaExiste = true;
+                        boolean insertOk = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),
+                                dniEncontrado,posicionEvento);
+                        if(insertOk){
+                            JOptionPane.showMessageDialog(null, "Se ha añadido un asistente al evento " + cbEvento.getItemAt(posicionEvento).toString() );
                         }
                     }
-                    if(empresaExiste){
-                       insertHecho = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),dniEncontrado,posicionEvento);
-                       if(insertHecho){
-                           JOptionPane.showMessageDialog(null, "Se ha añadido una nueva persona");
-                       }
-                    }
+                    else{ /*Si la persona no existe*/
+                        /*Si la empresa no existe*/
+                        boolean empresaCreadaEinsertada = false;
+                        boolean personaCreada=false;
+                        boolean empresaInsertada=false;
+                        boolean asistenteInsertado=false;
+                        if(!empresaExiste){
+                            empresaCreadaEinsertada = Main.creaNuevaEmpresa(tfNombreEmpresa.getText(),tfDireccion.getText(),tfTelefono.getText());
 
+                            if(empresaCreadaEinsertada){
+                                JOptionPane.showMessageDialog(null, "Se ha añadido una nueva empresa");
+                                empresaExiste = true;
+                                personaCreada = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),dniEncontrado,posicionEvento);
+                                if(personaCreada){
+                                    asistenteInsertado = Main.insertAsistente(posicionEvento);
+                                    if(asistenteInsertado){
+                                        JOptionPane.showMessageDialog(null, "Se ha añadido un nuevo asistente");
+                                    }
+                                }
+                            }
+                        }
+                        else{ /*SI LA EMPRESA EXISTE*/
+                            personaCreada = Main.creaNuevaPersona(tfDni.getText(),tfNombre.getText(),tfApellido.getText(),dniEncontrado,posicionEvento);
+                            if(personaCreada){
+                                JOptionPane.showMessageDialog(null, "Se ha añadido una nueva persona");
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -155,7 +145,6 @@ public class VentanaAsistentes {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 posicionEvento = cbEvento.getSelectedIndex();
-
             }
         });
     }
@@ -182,6 +171,11 @@ public class VentanaAsistentes {
                     tfDni.requestFocus();
                 }
             }
+            else{
+                JOptionPane.showMessageDialog(null,"El dni no es correcto");
+                tfDni.requestFocus();
+
+            }
         }catch (Exception e){System.out.println(e.getClass());}
         return dniValido;
     }/*Faltaria hacer la validacion buena del dni.*/
@@ -194,6 +188,7 @@ public class VentanaAsistentes {
             else{
                 JOptionPane.showMessageDialog(null,"El nombre es un campo obligatorio");
                 tfNombre.requestFocus();
+
             }
         }catch (Exception e){System.out.println(e.getClass());}
         return nombreValido;
@@ -219,6 +214,7 @@ public class VentanaAsistentes {
             }
             else{
                 JOptionPane.showMessageDialog(null,"El nombre de la empresa es un campo obligatorio");
+                datoValido = false;
                 tfNombreEmpresa.requestFocus();
             }
         }catch (Exception e){System.out.println(e.getClass());}
@@ -267,6 +263,21 @@ public class VentanaAsistentes {
         }
 
     }
+    private boolean validarDatos() {
+        boolean datosValidos = false;
 
+        try {
+            if (validarDni() &&validarNombre() &&  validarApellido() && validarNombreEmpresa() && validarDireccion() &&
+                    validarTelefonoEmpresa()){
+                datosValidos = true;
+
+            }
+            return datosValidos;
+
+        } catch (Exception e) {
+            System.out.println(e.getClass());
+        }
+        return datosValidos;
+    }
 
 }

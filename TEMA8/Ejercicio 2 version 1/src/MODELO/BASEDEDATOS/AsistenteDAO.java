@@ -39,7 +39,7 @@ public class AsistenteDAO {
             if(resultado == 1){
                 insertOk = true;
             }
-        }catch (Exception e){System.out.println();}
+        }catch (Exception e){System.out.println(e.getClass());}
         return insertOk;
     }
 

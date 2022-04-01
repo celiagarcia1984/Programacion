@@ -57,11 +57,15 @@ public class VentanaEliminarEvento extends JDialog {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
+                String nombreEvento="";
                if(validarNombre() ) {
-                  Main.buscaNombre(tfNombre.getText());/*Le da al MAIN el nombre del evento que se quiere borrar*/
+                 nombreEvento = Main.buscaNombre(tfNombre.getText());/*Le da al MAIN el nombre del evento que se quiere borrar*/
+                   if(!nombreEvento.isEmpty()){
+                       Main.abrirVentanaConfirmacion();
+                   }
+                   tfNombre.setText(" ");
                }
 
-                Main.abrirVentanaConfirmacion();
             }
         });
 

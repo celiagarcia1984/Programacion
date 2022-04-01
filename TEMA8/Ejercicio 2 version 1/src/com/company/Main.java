@@ -373,21 +373,23 @@ public class Main {
         return telefonoEmpresa;
     }
     public static boolean creaNuevaEmpresa(String nombreEmpresa,String direccion, String telefono){
-        boolean empresaInsertada=false;
+        boolean empresaCreada=false;
         try{
             emp = new Empresa(nombreEmpresa,direccion,telefono);
+            if(emp!=null){
+                empresaCreada =true;
+                insertEmpresa();
+            }
         }catch (Exception e){System.out.println(e.getClass());}
-        return empresaInsertada;
+        return empresaCreada;
     }
     public static boolean creaNuevaPersona(String dni, String nombre, String apellido,boolean dniEncontrado, int posicionEvento){
         boolean personaInsertada=false;
         try{
+
             pers = new Persona(dni,nombre,apellido,emp);
             System.out.println("He creado un objeto persona");
-            if(dniEncontrado){
-
-              personaInsertada = insertAsistente(posicionEvento);
-            }
+            personaInsertada = insertPersona();
 
         }catch (Exception e){System.out.println(e.getClass());}
         return personaInsertada;

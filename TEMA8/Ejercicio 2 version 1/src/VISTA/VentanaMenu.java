@@ -82,6 +82,15 @@ public class VentanaMenu {
                 Main.ventanaAsistentes();
             }
         });
+        miAñadirAsistente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                /*Cuando selecciona Añadir evento se abre una ventana nueva*/
+                System.out.println("Estoy en la ventanaMenu y se a pulsado añadir");
+                Main.ventanaAsistentes();
+            }
+        });
+ /* ***************************************SALIR*********************************************************************/
         bSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
