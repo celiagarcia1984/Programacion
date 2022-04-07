@@ -77,6 +77,7 @@ public class DInsertar extends JDialog {
 
     private void onOK() {
         // Validar datos de entrada y enviar al controlador.
+        String mensaje ="";
         try
         {
             validarNombre();
@@ -84,8 +85,14 @@ public class DInsertar extends JDialog {
             validarFecha();
             validarHoras();
             validarAforo();
-            Main.getDatosEvento(tfNombre.getText(),tfLugar.getText(),fecha,horaI,horaF,aforo);
-            JOptionPane.showMessageDialog(null,"Acontecimiento insertado");
+            mensaje = Main.getDatosEvento(tfNombre.getText(),tfLugar.getText(),fecha,horaI,horaF,aforo);
+            if(mensaje.equalsIgnoreCase("ok")){
+                JOptionPane.showMessageDialog(null,"Acontecimiento insertado");
+            }
+            else{
+                throw new Exception(mensaje);
+            }
+
             dispose();
         }
         catch(Exception e)

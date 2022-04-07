@@ -20,9 +20,23 @@ public class Main {
 
     }
 /*INSERTAR ACONTENCIMIENTO*/
-    public static void getDatosEvento(String n, String l, LocalDate f, LocalTime hi, LocalTime hf, int af){
+    public static String getDatosEvento(String n, String l, LocalDate f, LocalTime hi, LocalTime hf, int af){
+
         evento = new EventoEntity(n,l,java.sql.Date.valueOf(f),java.sql.Time.valueOf(hi),java.sql.Time.valueOf(hf),af);
         String mensaje = EventoDAO.altaEvento(evento);
+        return mensaje;
+    }
+/*ELIMINAR EVENTO*/
+    public static String cancelarEvento(String  nombreEventoBorrar){
+        String datosEvento ="";
+        try{
+
+            evento = EventoDAO.consultar(nombreEventoBorrar);
+
+        }catch (Exception e){
+            System.out.println(e.getClass());
+        }
+        return datosEvento;
     }
     /*ABRIR VENTANAS************************************************************************************************/
     public static void mostrarVentanaPrincipal()

@@ -6,9 +6,9 @@ import java.sql.Time;
 import java.util.Objects;
 
 @Entity
-@Table(name = "evento", schema = "ejer2", catalog = "")
+@Table(name = "evento", schema = "ejer2")
 public class EventoEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "nombre")
     private String nombre;
