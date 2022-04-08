@@ -7,9 +7,10 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "evento", schema = "ejer2")
+@NamedQuery(name = "EventoEntity.todos", query = "select e from EventoEntity e")
+
 public class EventoEntity {
   //  @GeneratedValue(strategy = GenerationType.IDENTITY)
-   // @NamedQuery()
     @Id
     @Column(name = "nombre")
     private String nombre;
