@@ -9,6 +9,7 @@ import java.util.Objects;
 @Table(name = "evento", schema = "ejer2")
 public class EventoEntity {
   //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @NamedQuery()
     @Id
     @Column(name = "nombre")
     private String nombre;
@@ -30,6 +31,15 @@ public class EventoEntity {
     @Basic
     @Column(name = "aforoDisponible")
     private int aforoDisponible;
+
+    public EventoEntity() {
+
+    }
+
+    @Override
+    public String toString() {
+        return getNombre() +", "+ getLugar()+", "+getFecha()+", "+ getHoraInicio() + ", "+ getHoraFin() +", "+ getAforo();
+    }
 
     public String getNombre() {
         return nombre;
@@ -102,7 +112,7 @@ public class EventoEntity {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.aforo = aforo;
-        this.aforoDisponible = aforoDisponible;
+
     }
 
     @Override
